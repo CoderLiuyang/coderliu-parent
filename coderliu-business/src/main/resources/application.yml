@@ -1,0 +1,17 @@
+server:
+  port: 10010
+
+spring:
+  application:
+    name: coderliu-business
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.42.128:8848
+        cluster-name: ly
+        namespace: e174206d-c874-4973-babe-065958e62a6e
+        #元数据
+#        metadata:
+#          abd: 123
+#          daf: 123
+
