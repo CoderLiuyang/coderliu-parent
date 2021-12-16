@@ -11,6 +11,13 @@
         <relativePath/>
     </parent>
 
+    <modules>
+        <module>coderliu-admin</module>
+        <module>coderliu-common</module>
+        <module>coderliu-gateway</module>
+        <module>coderliu-common/coderliu-common-redis</module>
+    </modules>
+
     <groupId>cn.coderliu</groupId>
     <artifactId>coderliu-parent</artifactId>
     <version>1.0</version>
@@ -19,8 +26,13 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-        <spring.cloud-version>Hoxton.RELEASE</spring.cloud-version>
-        <spring.cloudalibaba-version>2.2.0.RELEASE</spring.cloudalibaba-version>
+        <spring-cloud.version>Hoxton.RELEASE</spring-cloud.version>
+        <spring-cloudalibaba.version>2.2.0.RELEASE</spring-cloudalibaba.version>
+        <hutool.version>5.7.16</hutool.version>
+        <fastjson.version>1.2.78</fastjson.version>
+        <lombok.version>1.18.22</lombok.version>
+        <mysql-connector-java.version>8.0.22</mysql-connector-java.version>
+        <mybatis-plus-boot-starter.version>3.4.0</mybatis-plus-boot-starter.version>
     </properties>
 
     <dependencyManagement>
@@ -28,14 +40,14 @@
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-                <version>${spring.cloudalibaba-version}</version>
+                <version>${spring-cloudalibaba.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring.cloud-version}</version>
+                <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -43,18 +55,28 @@
             <dependency>
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
-                <version>5.7.16</version>
+                <version>${hutool.version}</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
-                <version>1.2.78</version>
+                <version>${fastjson.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
-                <version>1.18.22</version>
+                <version>${lombok.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql-connector-java.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus-boot-starter.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
