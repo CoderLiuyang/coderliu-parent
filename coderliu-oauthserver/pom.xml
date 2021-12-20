@@ -10,7 +10,7 @@
     <artifactId>coderliu-oauthserver</artifactId>
     <version>1.0</version>
     <name>coderliu-oauthserver</name>
-    <description>coderliu-oauthserver</description>
+    <description>验证服务</description>
     <properties>
         <java.version>1.8</java.version>
     </properties>
