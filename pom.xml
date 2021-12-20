@@ -16,7 +16,7 @@
         <module>coderliu-business</module>
         <module>coderliu-common</module>
         <module>coderliu-gateway</module>
-        <module>coderliu-common/coderliu-common-redis</module>
+        <module>coderliu-oauthserver</module>
     </modules>
 
     <groupId>cn.coderliu</groupId>
