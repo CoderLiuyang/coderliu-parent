@@ -18,6 +18,9 @@ import java.nio.charset.Charset;
  * @author ruoyi
  */
 public class FastJson2JsonRedisSerializer<T> implements RedisSerializer<T> {
+
+
+
     @SuppressWarnings("unused")
     private ObjectMapper objectMapper = new ObjectMapper();
 

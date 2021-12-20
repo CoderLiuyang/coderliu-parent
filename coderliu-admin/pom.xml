@@ -70,6 +70,20 @@
             <artifactId>ribbon-core</artifactId>
             <version>2.3.0</version>
         </dependency>
+
+
+
+        <dependency>
+            <groupId>cn.coderliu</groupId>
+            <artifactId>coderliu-common-db</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.coderliu</groupId>
+            <artifactId>coderliu-common-redis</artifactId>
+            <version>1.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>
