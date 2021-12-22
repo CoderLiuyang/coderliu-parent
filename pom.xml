@@ -17,6 +17,7 @@
         <module>coderliu-common</module>
         <module>coderliu-gateway</module>
         <module>coderliu-oauthserver</module>
+        <module>coderliu-generator</module>
     </modules>
 
     <groupId>cn.coderliu</groupId>
