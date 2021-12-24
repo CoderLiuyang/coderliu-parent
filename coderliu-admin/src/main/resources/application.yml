@@ -51,6 +51,8 @@ ribbon:
 logging:
   level:
     cn.coderliu.client.BusinessFeignClient: debug
+    org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker: WARN
+
 feign:
   client:
   httpclient:
