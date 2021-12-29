@@ -1,0 +1,66 @@
+server:
+  port: 10020
+
+spring:
+  application:
+    name: coderliu-oauth2server
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.42.128:8848
+        cluster-name: ly
+        namespace: e174206d-c874-4973-babe-065958e62a6e
+    sentinel:
+      transport:
+        #指定控制台的地址
+        dashboard: 192.168.42.128:8080
+  datasource:
+    username: root
+    password: Hbky2021!
+    url: jdbc:mysql://192.168.42.128:3306/hbky-app?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&useSSL=false&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 15
+      idle-timeout: 30000
+      auto-commit: true
+      pool-name: HikariCP
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+  redis:
+    host: 192.168.42.128
+    port: 6379
+    password: 123456
+    database: 0
+    timeout: 6000
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0
+      shutdown-timeout: 100
+
+
+ribbon:
+  eager-load:
+    clients: coderliu-business
+
+logging:
+  level:
+    cn.coderliu.client.BusinessFeignClient: debug
+    org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker: WARN
+
+feign:
+  client:
+  httpclient:
+    config:
+      #全局配置
+      default:
+        loggerLevel: basic
+    max-connections: 200
+    #单个路径
+    max-connections-per-route: 50
+    enabled: true

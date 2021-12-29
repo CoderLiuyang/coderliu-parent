@@ -18,6 +18,7 @@
         <module>coderliu-gateway</module>
         <module>coderliu-oauthserver</module>
         <module>coderliu-generator</module>
+        <module>coderliu-common</module>
     </modules>
 
     <groupId>cn.coderliu</groupId>
@@ -30,7 +31,6 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <spring-cloud.version>Hoxton.SR6</spring-cloud.version>
-        <mysql-connector.version>5.1.47</mysql-connector.version>
         <hutool.version>5.3.10</hutool.version>
         <fastjson.version>1.2.54</fastjson.version>
         <lombok.version>1.18.12</lombok.version>
@@ -112,11 +112,6 @@
                 <version>${security-oauth2.version}</version>
             </dependency>
             <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-                <version>${mysql-connector-java.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>${mybatis-plus-boot-starter.version}</version>
@@ -171,6 +166,10 @@
                 <artifactId>aliyun-java-sdk-dysmsapi</artifactId>
                 <version>${alismsDomain.version}</version>
             </dependency>
+<!--            <dependency>-->
+<!--                <groupId>com.alibaba.cloud</groupId>-->
+<!--                <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>-->
+<!--            </dependency>-->
         </dependencies>
     </dependencyManagement>
 </project>

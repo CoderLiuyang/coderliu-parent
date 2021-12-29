@@ -18,7 +18,7 @@ spring:
     username: root
     password: Hbky2021!
     url: jdbc:mysql://192.168.42.128:3306/hbky-app?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&useSSL=false&serverTimezone=Asia/Shanghai
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: com.mysql.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
       minimum-idle: 5

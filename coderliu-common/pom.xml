@@ -19,6 +19,7 @@
         <module>coderliu-common-db</module>
         <module>coderliu-common-redis</module>
         <module>coderliu-common-auth</module>
+        <module>coderliu-common-api</module>
 
     </modules>
 
