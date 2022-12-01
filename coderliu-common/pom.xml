@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>cn.coderliu</groupId>
+        <artifactId>coderliu-parent</artifactId>
+        <version>0.0.1</version>
+    </parent>
+
+
+    <artifactId>coderliu-common</artifactId>
+    <version>0.0.1</version>
+    <description>common组件包</description>
+    <packaging>pom</packaging>
+
+
+    <modules>
+        <module>coderliu-common-core</module>
+        <module>coderliu-common-db</module>
+        <module>coderliu-common-redis</module>
+    </modules>
+
+
+</project>
