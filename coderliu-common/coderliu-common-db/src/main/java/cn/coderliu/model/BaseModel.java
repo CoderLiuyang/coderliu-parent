@@ -45,7 +45,7 @@ public class BaseModel {
     /**
      * 是否删除
      */
-    private Boolean isDel;
+    private Boolean delFlag;
 
     /**
      * 乐观锁
