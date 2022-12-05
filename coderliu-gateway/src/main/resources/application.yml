@@ -7,5 +7,22 @@ spring:
     nacos:
       discovery:
         server-addr: 192.168.42.130:8848
+    gateway:
+      discovery:
+        locator:
+          #通过服务发现组建找到服务
+          enabled: true
   application:
     name: coderliu-gateway
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        exclude: '*'
+  endpoint:
+    health:
+      show-details: always
+
+
