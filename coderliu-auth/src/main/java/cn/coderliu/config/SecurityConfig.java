@@ -15,10 +15,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.oauth2.core.oidc.OidcScopes;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.server.authorization.client.InMemoryRegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration;
+import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings;
 import org.springframework.security.oauth2.server.authorization.settings.ClientSettings;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
@@ -33,6 +35,7 @@ import java.util.UUID;
 public class SecurityConfig {
     /**
      * 端点的 Spring Security 过滤器链
+     *
      * @param http
      * @return
      * @throws Exception
@@ -53,6 +56,7 @@ public class SecurityConfig {
 
     /**
      * 用于身份验证的 Spring Security 过滤器链
+     *
      * @param http
      * @return
      * @throws Exception
@@ -73,6 +77,7 @@ public class SecurityConfig {
 
     /**
      * 配置UserDetails
+     *
      * @return
      */
     @Bean
@@ -89,6 +94,7 @@ public class SecurityConfig {
 
     /**
      * 返回注册客户端资源，注意这里采用的是内存模式，后续可以改成jdbc模式。RegisteredClientRepository用于管理客户端的实例。
+     *
      * @return
      */
     @Bean
@@ -113,6 +119,7 @@ public class SecurityConfig {
 
     /**
      * 生成jwk资源,com.nimbusds.jose.jwk.source.JWKSource用于签署访问令牌的实例。
+     *
      * @return
      */
     @Bean
@@ -130,6 +137,7 @@ public class SecurityConfig {
 
     /**
      * 生成密钥对,启动时生成的带有密钥的实例java.security.KeyPair用于创建JWKSource上述内容
+     *
      * @return
      */
     private static KeyPair generateRsaKey() {
@@ -138,19 +146,20 @@ public class SecurityConfig {
             KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
             keyPairGenerator.initialize(2048);
             keyPair = keyPairGenerator.generateKeyPair();
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             throw new IllegalStateException(ex);
         }
         return keyPair;
     }
 
-    /**
-     * ProviderSettings配置 Spring Authorization Server的实例
-     * @return
-     */
-//    @Bean
-//    public ProviderSettings providerSettings() {
-//        return ProviderSettings.builder().build();
-//    }
+
+    @Bean
+    public JwtDecoder jwtDecoder(JWKSource<SecurityContext> jwkSource) {
+        return OAuth2AuthorizationServerConfiguration.jwtDecoder(jwkSource);
+    }
+
+    @Bean
+    public AuthorizationServerSettings authorizationServerSettings() {
+        return AuthorizationServerSettings.builder().build();
+    }
 }
