@@ -6,13 +6,14 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 业务对象的基类
  */
 @Data
-public class BaseModel {
+public class BaseModel implements Serializable {
 
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
@@ -22,25 +23,25 @@ public class BaseModel {
      * 创建人
      */
     @TableField(fill = FieldFill.INSERT)
-    private String createdBy;
+    private String createBy;
 
     /**
      * 创建时间
      */
     @TableField(fill = FieldFill.INSERT)
-    private Date createdTime;
+    private Date createTime;
 
     /**
      * 更新人
      */
     @TableField(fill = FieldFill.UPDATE)
-    private String updatedBy;
+    private String updateBy;
 
     /**
      * 更新时间
      */
     @TableField(fill = FieldFill.UPDATE)
-    private Date updatedTime;
+    private Date updateTime;
 
     /**
      * 是否删除
