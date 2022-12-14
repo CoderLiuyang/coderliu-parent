@@ -7,15 +7,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication
 @EnableFeignClients
 public class CoderliuAdminApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(CoderliuAdminApplication.class, args);
     }
-
-
-
-
-
-
-
 }
