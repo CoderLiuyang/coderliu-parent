@@ -1,6 +1,7 @@
 package cn.coderliu.config;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -13,27 +14,32 @@ import org.springframework.security.web.SecurityFilterChain;
 public class DefaultSecurityConfig {
 
     /**
-     * 用于身份验证的 Spring Security 过滤器链
+     * spring security 默认的安全策略
+     * @param http security注入点
+     * @return SecurityFilterChain
+     * @throws Exception
      */
     @Bean
-    public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests((authorize) -> authorize.anyRequest().authenticated())
-                //表单登录处理从授权服务器过滤器链
-                .formLogin(Customizer.withDefaults());
+    SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
+        http.authorizeRequests(authorizeRequests -> authorizeRequests.antMatchers("/token/*").permitAll()// 开放自定义的部分端点
+                        .anyRequest().authenticated()).headers().frameOptions().sameOrigin()// 避免iframe同源无法登录
+//                .and()
+//                .apply(new FormIdentityLoginConfigurer())
+        ; // 表单登录个性化
+        // 处理 UsernamePasswordAuthenticationToken
+  //      http.authenticationProvider(new PigDaoAuthenticationProvider());
         return http.build();
     }
 
     /**
-     * 配置UserDetails
+     * 暴露静态资源
      */
     @Bean
-    public InMemoryUserDetailsManager userDetailsService() {
-        //这里用固定的用户，后续改成从数据库查询
-        UserDetails userDetails = User.withDefaultPasswordEncoder()
-                .username("admin")
-                .password("111111")
-                .roles("USER").build();
-
-        return new InMemoryUserDetailsManager(userDetails);
+    @Order(0)
+    SecurityFilterChain resources(HttpSecurity http) throws Exception {
+        http.requestMatchers((matchers) -> matchers.antMatchers("/actuator/**", "/css/**", "/error"))
+                .authorizeHttpRequests((authorize) -> authorize.anyRequest().permitAll()).requestCache().disable()
+                .securityContext().disable().sessionManagement().disable();
+        return http.build();
     }
 }
