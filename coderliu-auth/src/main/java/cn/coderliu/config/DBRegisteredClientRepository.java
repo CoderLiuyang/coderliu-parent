@@ -1,11 +1,17 @@
 package cn.coderliu.config;
 
 
+import cn.coderliu.constants.SecurityConstants;
+import cn.coderliu.model.SysOauthClientDetails;
+import cn.coderliu.utils.OAuthClientException;
 import cn.hutool.core.util.BooleanUtil;
 import cn.hutool.core.util.StrUtil;
+import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
@@ -23,6 +29,7 @@ import java.util.Optional;
  * 注册客户端仓库查询的实现方式
  */
 @Configuration
+@RequiredArgsConstructor
 public class DBRegisteredClientRepository implements RegisteredClientRepository {
 
     /**
@@ -35,86 +42,60 @@ public class DBRegisteredClientRepository implements RegisteredClientRepository 
      */
     private final static int accessTokenValiditySeconds = 60 * 60 * 12;
 
-//    private final RemoteClientDetailsService clientDetailsService;
+    private final JdbcTemplate jdbcTemplate;
 
-    /**
-     * Saves the registered client.
-     *
-     * <p>
-     * IMPORTANT: Sensitive information should be encoded externally from the
-     * implementation, e.g. {@link RegisteredClient#getClientSecret()}
-     *
-     * @param registeredClient the {@link RegisteredClient}
-     */
     @Override
     public void save(RegisteredClient registeredClient) {
         throw new UnsupportedOperationException();
     }
 
-    /**
-     * Returns the registered client identified by the provided {@code id}, or
-     * {@code null} if not found.
-     *
-     * @param id the registration identifier
-     * @return the {@link RegisteredClient} if found, otherwise {@code null}
-     */
     @Override
     public RegisteredClient findById(String id) {
         throw new UnsupportedOperationException();
     }
 
-    /**
-     * Returns the registered client identified by the provided {@code clientId}, or
-     * {@code null} if not found.
-     * @param clientId the client identifier
-     * @return the {@link RegisteredClient} if found, otherwise {@code null}
-     */
 
     /**
-     * 重写原生方法支持redis缓存
-     *
-     * @param clientId
-     * @return
+     * 重写查询client方法
      */
     @Override
     @SneakyThrows
     public RegisteredClient findByClientId(String clientId) {
 
-//        SysOauthClientDetails clientDetails = RetOps.of(clientDetailsService.getClientDetailsById(clientId)).getData()
-//                .orElseThrow(() -> new OAuthClientException("客户端查询异常，请检查数据库链接"));
-//
-//        RegisteredClient.Builder builder = RegisteredClient.withId(clientDetails.getClientId())
-//                .clientId(clientDetails.getClientId())
-//                .clientSecret(SecurityConstants.NOOP + clientDetails.getClientSecret())
-//                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC);
+        SysOauthClientDetails clientDetails = jdbcTemplate
+                .queryForObject("select * from sys_oauth_client_details where client_id = " + clientId, SysOauthClientDetails.class);
 
-//        // 授权模式
-//        Optional.ofNullable(clientDetails.getAuthorizedGrantTypes())
-//                .ifPresent(grants -> StringUtils.commaDelimitedListToSet(grants)
-//                        .forEach(s -> builder.authorizationGrantType(new AuthorizationGrantType(s))));
-//        // 回调地址
-//        Optional.ofNullable(clientDetails.getWebServerRedirectUri()).ifPresent(redirectUri -> Arrays
-//                .stream(redirectUri.split(StrUtil.COMMA)).filter(StrUtil::isNotBlank).forEach(builder::redirectUri));
-//
-//        // scope
-//        Optional.ofNullable(clientDetails.getScope()).ifPresent(
-//                scope -> Arrays.stream(scope.split(StrUtil.COMMA)).filter(StrUtil::isNotBlank).forEach(builder::scope));
-//
-//        return builder
-//                .tokenSettings(TokenSettings.builder().accessTokenFormat(OAuth2TokenFormat.REFERENCE)
-//                        .accessTokenTimeToLive(Duration.ofSeconds(Optional
-//                                .ofNullable(clientDetails.getAccessTokenValidity()).orElse(accessTokenValiditySeconds)))
-//                        .refreshTokenTimeToLive(
-//                                Duration.ofSeconds(Optional.ofNullable(clientDetails.getRefreshTokenValidity())
-//                                        .orElse(refreshTokenValiditySeconds)))
-//                        .build())
-//                .clientSettings(ClientSettings.builder()
-//                        .requireAuthorizationConsent(!BooleanUtil.toBoolean(clientDetails.getAutoapprove())).build())
-//                .build();
-        return RegisteredClient.withId("clientDetails.getClientId()")
-                .clientId("clientDetails.getClientId()")
-                .clientSecret("SecurityConstants.NOOP + clientDetails.getClientSecret()")
-                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC).build();
+        if (clientDetails == null) {
+            throw new OAuthClientException("客户端查询异常，请检查数据库链接");
+        }
+        RegisteredClient.Builder builder = RegisteredClient.withId(clientDetails.getClientId())
+                .clientId(clientDetails.getClientId())
+                .clientSecret(SecurityConstants.NOOP + clientDetails.getClientSecret())
+                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC);
 
+        // 授权模式
+        Optional.ofNullable(clientDetails.getAuthorizedGrantTypes())
+                .ifPresent(grants -> StringUtils.commaDelimitedListToSet(grants)
+                        .forEach(s -> builder.authorizationGrantType(new AuthorizationGrantType(s))));
+
+        // 回调地址
+        Optional.ofNullable(clientDetails.getWebServerRedirectUri()).ifPresent(redirectUri -> Arrays
+                .stream(redirectUri.split(StrUtil.COMMA)).filter(StrUtil::isNotBlank).forEach(builder::redirectUri));
+
+        // scope
+        Optional.ofNullable(clientDetails.getScope()).ifPresent(
+                scope -> Arrays.stream(scope.split(StrUtil.COMMA)).filter(StrUtil::isNotBlank).forEach(builder::scope));
+
+        return builder
+                .tokenSettings(TokenSettings.builder().accessTokenFormat(OAuth2TokenFormat.REFERENCE)
+                        .accessTokenTimeToLive(Duration.ofSeconds(Optional
+                                .ofNullable(clientDetails.getAccessTokenValidity()).orElse(accessTokenValiditySeconds)))
+                        .refreshTokenTimeToLive(
+                                Duration.ofSeconds(Optional.ofNullable(clientDetails.getRefreshTokenValidity())
+                                        .orElse(refreshTokenValiditySeconds)))
+                        .build())
+                .clientSettings(ClientSettings.builder()
+                        .requireAuthorizationConsent(!BooleanUtil.toBoolean(clientDetails.getAutoapprove())).build())
+                .build();
     }
 }

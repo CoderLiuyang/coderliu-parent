@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
-@EnableWebSecurity
+@EnableWebSecurity(debug = true)
 public class DefaultSecurityConfig {
 
     /**

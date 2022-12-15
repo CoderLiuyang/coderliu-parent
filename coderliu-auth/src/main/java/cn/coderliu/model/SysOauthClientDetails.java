@@ -1,11 +1,9 @@
 package cn.coderliu.model;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 @Data
-public class SysOauthClientDetails extends BaseModel{
+public class SysOauthClientDetails {
 
     /**
      * 客户端ID
