@@ -30,4 +30,10 @@ public class SecurityConstants {
      * {noop} 加密的特征码
      */
     public static String NOOP = "{noop}";
+
+
+    /**
+     * 授权码模式confirm
+     */
+    public static String CUSTOM_CONSENT_PAGE_URI = "/token/confirm_access";
 }

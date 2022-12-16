@@ -52,8 +52,8 @@ public class AuthSecurityConfig {
                             .errorResponseHandler(new CustomAuthenticationFailureEventHandler());// 登录失败处理器
                 }).clientAuthentication(oAuth2ClientAuthenticationConfigurer -> // 个性化客户端认证
                         oAuth2ClientAuthenticationConfigurer.errorResponseHandler(new CustomAuthenticationFailureEventHandler()))// 处理客户端认证异常
-//                .authorizationEndpoint(authorizationEndpoint -> authorizationEndpoint// 授权码端点个性化confirm页面
-//                        .consentPage(SecurityConstants.CUSTOM_CONSENT_PAGE_URI))
+                .authorizationEndpoint(authorizationEndpoint -> authorizationEndpoint// 授权码端点个性化confirm页面
+                        .consentPage(SecurityConstants.CUSTOM_CONSENT_PAGE_URI))
         );
 
         RequestMatcher endpointsMatcher = authorizationServerConfigurer.getEndpointsMatcher();
