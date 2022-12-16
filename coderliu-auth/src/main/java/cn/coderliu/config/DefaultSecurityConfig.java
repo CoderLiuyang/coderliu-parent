@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
-@EnableWebSecurity
+@EnableWebSecurity(debug = true)
 public class DefaultSecurityConfig {
 
     /**
@@ -21,10 +21,17 @@ public class DefaultSecurityConfig {
      */
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeRequests(authorizeRequests -> authorizeRequests.antMatchers("/token/*").permitAll()// 开放自定义的部分端点
-                        .anyRequest().authenticated()).headers().frameOptions().sameOrigin()// 避免iframe同源无法登录
-//                .and()
-//                .apply(new FormIdentityLoginConfigurer())
+        http.authorizeRequests(authorizeRequests -> authorizeRequests
+                .antMatchers("/token/*").permitAll()// 开放自定义的部分端点
+                        .anyRequest()
+                .authenticated())
+                .csrf().disable()
+                .headers()
+                .frameOptions()
+                .sameOrigin()// 避免iframe同源无法登录
+
+                .and()
+                .apply(new FormIdentityLoginConfigurer())
         ; // 表单登录个性化
         // 处理 UsernamePasswordAuthenticationToken
   //      http.authenticationProvider(new PigDaoAuthenticationProvider());
