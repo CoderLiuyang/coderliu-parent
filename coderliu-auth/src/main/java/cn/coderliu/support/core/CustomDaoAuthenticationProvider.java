@@ -1,6 +1,7 @@
 package cn.coderliu.support.core;
 
 import cn.coderliu.constants.SecurityConstants;
+import cn.coderliu.service.CustomUserDetailsService;
 import cn.coderliu.utils.WebUtils;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.servlet.ServletUtil;
@@ -59,7 +60,7 @@ public class CustomDaoAuthenticationProvider extends AbstractUserDetailsAuthenti
 
     public CustomDaoAuthenticationProvider() {
         //国际化
-       	setMessageSource(SpringUtil.getBean("securityMessageSource"));
+        setMessageSource(SpringUtil.getBean("securityMessageSource"));
         setPasswordEncoder(PasswordEncoderFactories.createDelegatingPasswordEncoder());
     }
 
@@ -103,26 +104,25 @@ public class CustomDaoAuthenticationProvider extends AbstractUserDetailsAuthenti
             clientId = basicConvert.convert(request).getName();
         }
 
-//		Map<String, PigUserDetailsService> userDetailsServiceMap = SpringUtil
-//				.getBeansOfType(PigUserDetailsService.class);
-//
-//		String finalClientId = clientId;
-//		Optional<PigUserDetailsService> optional = userDetailsServiceMap.values().stream()
-//				.filter(service -> service.support(finalClientId, grantType))
-//				.max(Comparator.comparingInt(Ordered::getOrder));
+        Map<String, CustomUserDetailsService> userDetailsServiceMap = SpringUtil
+                .getBeansOfType(CustomUserDetailsService.class);
 
-//		if (!optional.isPresent()) {
-//			throw new InternalAuthenticationServiceException("UserDetailsService error , not register");
-//		}
+        String finalClientId = clientId;
+        Optional<CustomUserDetailsService> optional = userDetailsServiceMap.values().stream()
+                .filter(service -> service.support(finalClientId, grantType))
+                .max(Comparator.comparingInt(Ordered::getOrder));
+
+        if (!optional.isPresent()) {
+            throw new InternalAuthenticationServiceException("UserDetailsService error , not register");
+        }
 
         try {
-//			UserDetails loadedUser = optional.get().loadUserByUsername(username);
-//			if (loadedUser == null) {
-//				throw new InternalAuthenticationServiceException(
-//						"UserDetailsService returned null, which is an interface contract violation");
-//			}
-            //	return loadedUser;
-            return null;
+            UserDetails loadedUser = optional.get().loadUserByUsername(username);
+            if (loadedUser == null) {
+                throw new InternalAuthenticationServiceException(
+                        "UserDetailsService returned null, which is an interface contract violation");
+            }
+            return loadedUser;
         } catch (UsernameNotFoundException ex) {
             mitigateAgainstTimingAttack(authentication);
             throw ex;

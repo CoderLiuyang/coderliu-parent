@@ -35,6 +35,10 @@ public class SecurityConstants {
      * 手机号登录
      */
     public static String APP = "app";
+    /**
+     * 手机号登录
+     */
+    public static String WEB = "web";
 
     /**
      * 短信登录 参数名称

@@ -30,6 +30,11 @@
             <version>0.0.1</version>
         </dependency>
         <dependency>
+            <groupId>cn.coderliu</groupId>
+            <artifactId>coderliu-api</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
@@ -49,10 +54,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
-        <!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-jdbc</artifactId>-->
-<!--        </dependency>-->
     </dependencies>
 
     <build>

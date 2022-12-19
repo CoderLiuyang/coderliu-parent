@@ -8,13 +8,19 @@
         <version>0.0.1</version>
     </parent>
     <artifactId>coderliu-api</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>coderliu-api</name>
-    <description>coderliu-api</description>
+    <description>api包</description>
 
     <dependencies>
-
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-openfeign-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
     </dependencies>
-
 
 </project>
