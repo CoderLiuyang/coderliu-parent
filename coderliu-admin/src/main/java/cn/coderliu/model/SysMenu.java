@@ -35,8 +35,8 @@ public class SysMenu extends BaseModel{
     /** 类型（M目录 C菜单 F按钮） */
     private String menuType;
 
-    /** 菜单状态（0显示 1隐藏） */
-    private String visible;
+    /** 菜单状态（1显示 0隐藏） */
+    private Boolean visible;
 
     /** 是否刷新（0刷新 1不刷新） */
     private String isRefresh;

@@ -26,9 +26,7 @@ public class SysUserController {
     @PostMapping("/getUserDetail")
     public ReturnData<GetUserDetailVo> getUserDetail(String userName) {
 
-
-
-        return ReturnData.succeed();
+        return ReturnData.succeed(sysUserService.getUserDetail(userName));
     }
 
 }

@@ -4,6 +4,11 @@ public class SecurityConstants {
 
 
     /**
+     * 角色前缀
+     */
+    public static String ROLE = "ROLE_";
+
+    /**
      * 协议字段
      */
     public static String DETAILS_LICENSE = "license";
