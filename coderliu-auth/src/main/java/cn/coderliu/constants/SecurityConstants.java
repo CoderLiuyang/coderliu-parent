@@ -31,7 +31,15 @@ public class SecurityConstants {
      */
     public static String NOOP = "{noop}";
 
+    /**
+     * 手机号登录
+     */
+    public static String APP = "app";
 
+    /**
+     * 短信登录 参数名称
+     */
+    public static String SMS_PARAMETER_NAME = "phone";
     /**
      * 授权码模式confirm
      */

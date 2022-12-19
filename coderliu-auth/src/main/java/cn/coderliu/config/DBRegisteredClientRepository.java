@@ -8,9 +8,8 @@ import cn.hutool.core.util.BooleanUtil;
 import cn.hutool.core.util.StrUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
-import org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
@@ -63,7 +62,8 @@ public class DBRegisteredClientRepository implements RegisteredClientRepository 
     public RegisteredClient findByClientId(String clientId) {
 
         SysOauthClientDetails clientDetails = jdbcTemplate
-                .queryForObject("select * from sys_oauth_client_details where client_id = " + clientId, SysOauthClientDetails.class);
+                .queryForObject("select * from sys_oauth_client_details where client_id = '" + clientId + "'", new BeanPropertyRowMapper<>(
+                        SysOauthClientDetails.class));
 
         if (clientDetails == null) {
             throw new OAuthClientException("客户端查询异常，请检查数据库链接");
