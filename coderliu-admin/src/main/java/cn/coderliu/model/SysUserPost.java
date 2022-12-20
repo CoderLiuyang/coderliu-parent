@@ -1,5 +1,6 @@
 package cn.coderliu.model;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,6 +17,7 @@ import java.util.Date;
 @Data
 public class SysUserPost  {
 
+   @TableId("user_id")
    private String userId;
 
    private String postId;

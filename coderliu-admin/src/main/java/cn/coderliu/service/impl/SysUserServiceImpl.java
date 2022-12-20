@@ -8,6 +8,8 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,25 +32,45 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         GetUserDetailVo getUserDetailVo = new GetUserDetailVo();
         SysUser sysUser = getOne(new LambdaQueryWrapper<SysUser>()
                 .eq(SysUser::getLoginName, userName));
+        getUserDetailVo.setId(sysUser.getId());
+        getUserDetailVo.setDeptId(sysUser.getDeptId());
+        getUserDetailVo.setPhone(sysUser.getPhone());
+        getUserDetailVo.setUserName(sysUser.getLoginName());
+        getUserDetailVo.setPassWord(sysUser.getPassword());
+        getUserDetailVo.setStatus(sysUser.getStatus());
+
+
         List<SysUserRole> sysUserRoles = sysUserRoleService.list(new LambdaQueryWrapper<SysUserRole>()
                 .eq(SysUserRole::getUserId, sysUser.getId()));
+        if (sysUserRoles.isEmpty()) {
+            return getUserDetailVo;
+        }
         List<SysRole> sysRoles = sysRoleService.list(new LambdaQueryWrapper<SysRole>()
                 .in(SysRole::getId, sysUserRoles.stream()
                         .map(SysUserRole::getRoleId).collect(Collectors.toList())));
+        getUserDetailVo.setRoles(sysRoles.stream()
+                .map(SysRole::getRoleKey).collect(Collectors.toList()));
+
         List<SysRoleMenu> sysRoleMenus = sysRoleMenuService.list(new LambdaQueryWrapper<SysRoleMenu>()
                 .in(SysRoleMenu::getRoleId, sysRoles.stream()
                         .map(SysRole::getId).collect(Collectors.toList())));
-
+        if (sysRoleMenus.isEmpty()) {
+            return getUserDetailVo;
+        }
         List<SysMenu> sysMenus = sysMenuService.list(new LambdaQueryWrapper<SysMenu>()
                 .in(SysMenu::getId, sysRoleMenus.stream()
                         .map(SysRoleMenu::getMenuId).collect(Collectors.toList())));
-
-        getUserDetailVo.setUserName(sysUser.getLoginName());
-        getUserDetailVo.setPassWord(sysUser.getPassword());
-        getUserDetailVo.setRoles(sysRoles.stream()
-                .map(SysRole::getRoleKey).collect(Collectors.toList()));
+        if (sysMenus.isEmpty()) {
+            return getUserDetailVo;
+        }
         getUserDetailVo.setPermissions(sysMenus.stream()
                 .map(SysMenu::getPerms).collect(Collectors.toList()));
         return getUserDetailVo;
+    }
+
+
+    public static void main(String[] args) {
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        System.out.println(passwordEncoder.encode("123456"));
     }
 }

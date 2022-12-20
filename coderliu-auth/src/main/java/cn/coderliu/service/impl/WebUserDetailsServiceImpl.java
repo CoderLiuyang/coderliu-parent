@@ -44,13 +44,14 @@ public class WebUserDetailsServiceImpl implements CustomUserDetailsService {
         //构建认证对象
         Collection<GrantedAuthority> authorities = AuthorityUtils
                 .createAuthorityList(dbAuthsSet.toArray(new String[0]));
-        return new LoginUser("", "", "", "", "", true, true, true,
-                true, authorities);
+        return new LoginUser(user.getId(), user.getDeptId(), username,
+                SecurityConstants.BCRYPT + user.getPassWord(), user.getPhone(), true, true, true,
+                user.getStatus(), authorities);
     }
 
 
     public boolean support(String clientId, String grantType) {
-        return SecurityConstants.WEB.equals(grantType);
+        return SecurityConstants.WEB.equals(clientId);
     }
 
 

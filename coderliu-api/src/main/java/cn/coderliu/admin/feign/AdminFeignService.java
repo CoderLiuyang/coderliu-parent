@@ -5,6 +5,7 @@ import cn.coderliu.common.R;
 import cn.coderliu.common.ServiceNameConstants;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * admin调用服务
@@ -19,6 +20,6 @@ public interface AdminFeignService {
      * @return
      */
     @PostMapping("/sysUser/getUserDetail")
-    R<GetUserDetailVo> getUserDetail(String userName);
+    R<GetUserDetailVo> getUserDetail(@RequestParam("userName") String userName);
 
 }

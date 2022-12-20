@@ -1,5 +1,7 @@
 package cn.coderliu.model;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Data;
 
 /**
@@ -11,6 +13,7 @@ import lombok.Data;
 @Data
 public class SysUserRole {
 
+    @TableId("user_id")
     private String userId;
 
     private String roleId;

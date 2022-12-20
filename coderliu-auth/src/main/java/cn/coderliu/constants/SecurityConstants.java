@@ -30,6 +30,7 @@ public class SecurityConstants {
      * {bcrypt} 加密的特征码
      */
     public static String BCRYPT = "{bcrypt}";
+    
 
     /**
      * {noop} 加密的特征码

@@ -1,6 +1,7 @@
 package cn.coderliu.config;
 
 import cn.coderliu.constants.SecurityConstants;
+import cn.coderliu.model.LoginUser;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenClaimsContext;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenClaimsSet;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenCustomizer;
@@ -24,8 +25,8 @@ public class CustomOAuth2TokenCustomizer implements OAuth2TokenCustomizer<OAuth2
 //            return;
 //        }
 
-//        PigUser pigUser = (PigUser) context.getPrincipal().getPrincipal();
-//        claims.claim(SecurityConstants.DETAILS_USER, pigUser);
+        LoginUser pigUser = (LoginUser) context.getPrincipal().getPrincipal();
+        claims.claim(SecurityConstants.DETAILS_USER, pigUser);
     }
 
 }

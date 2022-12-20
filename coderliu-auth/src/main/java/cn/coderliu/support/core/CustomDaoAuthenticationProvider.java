@@ -90,7 +90,6 @@ public class CustomDaoAuthenticationProvider extends AbstractUserDetailsAuthenti
 
     @SneakyThrows
     @Override
-
     protected final UserDetails retrieveUser(String username, UsernamePasswordAuthenticationToken authentication) {
         prepareTimingAttackProtection();
         HttpServletRequest request = WebUtils.getRequest().orElseThrow(

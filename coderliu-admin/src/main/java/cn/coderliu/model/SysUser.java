@@ -18,6 +18,7 @@ import java.util.Date;
 @Builder
 @Accessors(chain = true)
 @AllArgsConstructor
+@NoArgsConstructor
 public class SysUser extends BaseModel {
 
     /**
@@ -48,14 +49,12 @@ public class SysUser extends BaseModel {
      * 头像路径
      */
     private String avatar;
+
     /**
      * 密码
      */
     private String password;
-    /**
-     * 盐加密
-     */
-    private String salt;
+
     /**
      * 帐号状态（1正常 0停用）
      */

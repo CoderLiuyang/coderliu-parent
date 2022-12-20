@@ -51,5 +51,5 @@ public class BaseModel implements Serializable {
     /**
      * 乐观锁
      */
-    private Integer revision;
+    private Integer version;
 }

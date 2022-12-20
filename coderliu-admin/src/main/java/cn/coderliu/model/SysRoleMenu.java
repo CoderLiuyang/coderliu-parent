@@ -1,5 +1,6 @@
 package cn.coderliu.model;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 /**
@@ -7,7 +8,7 @@ import lombok.Data;
  */
 @Data
 public class SysRoleMenu {
-
+    @TableId("role_id")
     private String roleId;
 
     private String menuId;
