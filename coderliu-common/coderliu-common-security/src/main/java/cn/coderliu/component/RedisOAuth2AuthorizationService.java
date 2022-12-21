@@ -1,7 +1,6 @@
-package cn.coderliu.config;
+package cn.coderliu.component;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.lang.Nullable;
@@ -24,7 +23,6 @@ import java.util.concurrent.TimeUnit;
 /**
  * 重写认证service实现redis存储认证信息
  */
-@Configuration
 @RequiredArgsConstructor
 public class RedisOAuth2AuthorizationService implements OAuth2AuthorizationService {
     private final static Long TIMEOUT = 10L;

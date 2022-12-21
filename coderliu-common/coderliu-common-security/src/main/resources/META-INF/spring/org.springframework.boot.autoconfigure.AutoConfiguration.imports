@@ -1,0 +1,5 @@
+cn.coderliu.component.RedisOAuth2AuthorizationService
+cn.coderliu.component.RedisOAuth2AuthorizationConsentService
+cn.coderliu.component.SecurityInnerAspect
+cn.coderliu.component.CustomSecurityMessageSourceConfiguration
+cn.coderliu.config.RedisConfig

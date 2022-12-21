@@ -31,13 +31,16 @@
             <artifactId>coderliu-common-redis</artifactId>
             <version>0.0.1</version>
         </dependency>
-
         <dependency>
             <groupId>cn.coderliu</groupId>
             <artifactId>coderliu-api</artifactId>
             <version>0.0.1</version>
         </dependency>
-
+        <dependency>
+            <groupId>cn.coderliu</groupId>
+            <artifactId>coderliu-common-security</artifactId>
+            <version>0.0.1</version>
+        </dependency>
 
 
     </dependencies>

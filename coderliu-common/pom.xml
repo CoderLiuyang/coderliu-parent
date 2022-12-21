@@ -19,6 +19,7 @@
         <module>coderliu-common-core</module>
         <module>coderliu-common-db</module>
         <module>coderliu-common-redis</module>
+        <module>coderliu-common-security</module>
     </modules>
 
 
