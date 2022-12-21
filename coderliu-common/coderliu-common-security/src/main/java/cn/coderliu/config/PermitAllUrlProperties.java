@@ -16,6 +16,10 @@
 
 package cn.coderliu.config;
 
+import cn.coderliu.annotation.Inner;
+import cn.hutool.core.util.ReUtil;
+import cn.hutool.extra.spring.SpringUtil;
+import com.alibaba.fastjson2.util.AnnotationUtils;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -36,7 +40,11 @@ public class PermitAllUrlProperties implements InitializingBean {
 
     private static final Pattern PATTERN = Pattern.compile("\\{(.*?)\\}");
 
-    private static final String[] DEFAULT_IGNORE_URLS = new String[]{"/actuator/**", "/error", "/v3/api-docs"};
+    private static final String[] DEFAULT_IGNORE_URLS = new String[]{"/actuator/**",
+            "/error",
+            //获取用户详情放行
+            "/sysUser/getUserDetail"
+    };
 
     @Getter
     @Setter

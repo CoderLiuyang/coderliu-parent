@@ -108,8 +108,6 @@ public class RedisOAuth2AuthorizationService implements OAuth2AuthorizationServi
     @Override
     @Nullable
     public OAuth2Authorization findByToken(String token, @Nullable OAuth2TokenType tokenType) {
-        Assert.hasText(token, "token cannot be empty");
-        Assert.notNull(tokenType, "tokenType cannot be empty");
         redisTemplate.setValueSerializer(RedisSerializer.java());
         return (OAuth2Authorization) redisTemplate.opsForValue().get(buildKey(tokenType.getValue(), token));
     }

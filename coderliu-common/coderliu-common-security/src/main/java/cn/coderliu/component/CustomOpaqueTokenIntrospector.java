@@ -17,7 +17,7 @@ import java.util.Objects;
 
 @Slf4j
 @RequiredArgsConstructor
-public class CustomOpaqueTokenIntrospector  implements OpaqueTokenIntrospector {
+public class CustomOpaqueTokenIntrospector implements OpaqueTokenIntrospector {
     private final OAuth2AuthorizationService authorizationService;
 
     @Override
@@ -27,12 +27,16 @@ public class CustomOpaqueTokenIntrospector  implements OpaqueTokenIntrospector {
             throw new InvalidBearerTokenException(token);
         }
 
+        return new ClientCredentialsOAuth2AuthenticatedPrincipal(oldAuthorization.getAttributes(),
+                AuthorityUtils.NO_AUTHORITIES, oldAuthorization.getPrincipalName());
+
+
         // 客户端模式默认返回
-        if (AuthorizationGrantType.CLIENT_CREDENTIALS.equals(oldAuthorization.getAuthorizationGrantType())) {
-            return new ClientCredentialsOAuth2AuthenticatedPrincipal(oldAuthorization.getAttributes(),
-                    AuthorityUtils.NO_AUTHORITIES, oldAuthorization.getPrincipalName());
-        }
-        UserDetails userDetails = null;
+//        if (AuthorizationGrantType.CLIENT_CREDENTIALS.equals(oldAuthorization.getAuthorizationGrantType())) {
+//            return new ClientCredentialsOAuth2AuthenticatedPrincipal(oldAuthorization.getAttributes(),
+//                    AuthorityUtils.NO_AUTHORITIES, oldAuthorization.getPrincipalName());
+//        }
+//        UserDetails userDetails = null;
 //        Map<String, PigUserDetailsService> userDetailsServiceMap = SpringUtil
 //                .getBeansOfType(PigUserDetailsService.class);
 //
@@ -55,6 +59,5 @@ public class CustomOpaqueTokenIntrospector  implements OpaqueTokenIntrospector {
 //        catch (Exception ex) {
 //            log.error("资源服务器 introspect Token error {}", ex.getLocalizedMessage());
 //        }
-        return (LoginUser) userDetails;
     }
 }
