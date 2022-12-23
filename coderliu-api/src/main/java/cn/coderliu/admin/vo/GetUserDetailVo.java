@@ -1,5 +1,6 @@
 package cn.coderliu.admin.vo;
 
+import cn.coderliu.admin.vo.detail.RoleVo;
 import lombok.*;
 import lombok.experimental.Accessors;
 
@@ -30,9 +31,13 @@ public class GetUserDetailVo {
     private Boolean status;
 
 
-    private List<String> roles;
+    private List<RoleVo> roles;
+
+    private Boolean isAdmin;
 
     private List<String> permissions = new ArrayList<>();
 
     private List<String> post = new ArrayList<>();
+
+
 }

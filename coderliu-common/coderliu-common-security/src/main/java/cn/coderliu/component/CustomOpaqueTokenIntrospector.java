@@ -3,6 +3,7 @@ package cn.coderliu.component;
 import cn.coderliu.model.LoginUser;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
@@ -13,6 +14,7 @@ import org.springframework.security.oauth2.server.authorization.OAuth2TokenType;
 import org.springframework.security.oauth2.server.resource.InvalidBearerTokenException;
 import org.springframework.security.oauth2.server.resource.introspection.OpaqueTokenIntrospector;
 
+import java.security.Principal;
 import java.util.Objects;
 
 @Slf4j
@@ -26,9 +28,10 @@ public class CustomOpaqueTokenIntrospector implements OpaqueTokenIntrospector {
         if (Objects.isNull(oldAuthorization)) {
             throw new InvalidBearerTokenException(token);
         }
-
-        return new ClientCredentialsOAuth2AuthenticatedPrincipal(oldAuthorization.getAttributes(),
-                AuthorityUtils.NO_AUTHORITIES, oldAuthorization.getPrincipalName());
+        UsernamePasswordAuthenticationToken principal = (UsernamePasswordAuthenticationToken) Objects.requireNonNull(oldAuthorization).getAttributes().get(Principal.class.getName());
+        return (LoginUser) principal.getPrincipal();
+//        return new ClientCredentialsOAuth2AuthenticatedPrincipal(oldAuthorization.getAttributes(),
+//                AuthorityUtils.NO_AUTHORITIES, oldAuthorization.getPrincipalName());
 
 
         // 客户端模式默认返回

@@ -1,6 +1,7 @@
 cn.coderliu.config.JdkMapperRedisConfig
 cn.coderliu.component.RedisOAuth2AuthorizationService
 cn.coderliu.component.RedisOAuth2AuthorizationConsentService
-cn.coderliu.component.SecurityInnerAspect
+cn.coderliu.aspectj.SecurityInnerAspect
+cn.coderliu.aspectj.DataScopeAspect
 cn.coderliu.component.CustomSecurityMessageSourceConfiguration
 

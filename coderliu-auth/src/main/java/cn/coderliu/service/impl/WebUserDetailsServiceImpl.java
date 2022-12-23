@@ -15,10 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -37,7 +34,7 @@ public class WebUserDetailsServiceImpl implements CustomUserDetailsService {
         }
         Set<String> dbAuthsSet = new HashSet<>();
         if (ArrayUtil.isNotEmpty(user.getRoles())) {
-            user.getRoles().forEach(role -> dbAuthsSet.add(SecurityConstants.ROLE + role));
+            user.getRoles().forEach(role -> dbAuthsSet.add(SecurityConstants.ROLE + role.getRoleKey()));
             // 获取资源
             dbAuthsSet.addAll(user.getPermissions());
         }
@@ -45,7 +42,7 @@ public class WebUserDetailsServiceImpl implements CustomUserDetailsService {
         Collection<GrantedAuthority> authorities = AuthorityUtils
                 .createAuthorityList(dbAuthsSet.toArray(new String[0]));
         return new LoginUser(user.getId(), user.getDeptId(), username,
-                SecurityConstants.BCRYPT + user.getPassWord(), user.getPhone(), true, true, true,
+                SecurityConstants.BCRYPT + user.getPassWord(), user.getPhone(), true, new ArrayList<>(), true, true, true,
                 user.getStatus(), authorities);
     }
 

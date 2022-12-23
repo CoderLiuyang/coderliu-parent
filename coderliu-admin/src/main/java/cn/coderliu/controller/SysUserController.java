@@ -3,7 +3,9 @@ package cn.coderliu.controller;
 
 import cn.coderliu.admin.vo.GetUserDetailVo;
 import cn.coderliu.common.ReturnData;
+import cn.coderliu.model.LoginUser;
 import cn.coderliu.service.SysUserService;
+import cn.coderliu.utils.SecurityUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,6 +42,8 @@ public class SysUserController {
     @GetMapping("/test")
     @PreAuthorize("@pms.hasPermission('sys_role_perm')")
     public void test(String userName) {
+        final LoginUser user = SecurityUtils.getUser();
+        System.out.println(user);
         System.out.println("123123123");
     }
 

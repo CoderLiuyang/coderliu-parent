@@ -3,6 +3,8 @@ server:
 
 
 spring:
+  profiles:
+    active: dev
   cloud:
     nacos:
       discovery:

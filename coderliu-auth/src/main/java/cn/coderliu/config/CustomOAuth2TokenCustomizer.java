@@ -25,8 +25,8 @@ public class CustomOAuth2TokenCustomizer implements OAuth2TokenCustomizer<OAuth2
 //            return;
 //        }
 
-        LoginUser pigUser = (LoginUser) context.getPrincipal().getPrincipal();
-        claims.claim(SecurityConstants.DETAILS_USER, pigUser);
+        LoginUser loginUser = (LoginUser) context.getPrincipal().getPrincipal();
+        claims.claim(SecurityConstants.DETAILS_USER, loginUser);
     }
 
 }

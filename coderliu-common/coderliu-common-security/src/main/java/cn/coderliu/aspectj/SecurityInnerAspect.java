@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package cn.coderliu.component;
+package cn.coderliu.aspectj;
 
 import cn.coderliu.annotation.Inner;
 import cn.coderliu.constants.SecurityConstants;

@@ -1,6 +1,7 @@
 package cn.coderliu.service.impl;
 
 import cn.coderliu.admin.vo.GetUserDetailVo;
+import cn.coderliu.admin.vo.detail.RoleVo;
 import cn.coderliu.mapper.SysUserMapper;
 import cn.coderliu.model.*;
 import cn.coderliu.service.*;
@@ -49,7 +50,17 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
                 .in(SysRole::getId, sysUserRoles.stream()
                         .map(SysUserRole::getRoleId).collect(Collectors.toList())));
         getUserDetailVo.setRoles(sysRoles.stream()
-                .map(SysRole::getRoleKey).collect(Collectors.toList()));
+                .map(a -> RoleVo.builder()
+                        .id(a.getId())
+                        .roleKey(a.getRoleKey())
+                        .dataScope(a.getDataScope())
+                        .build()
+                ).collect(Collectors.toList()));
+
+        //判断是否是管理员
+        getUserDetailVo.setIsAdmin(sysRoles.stream()
+                .anyMatch(a -> a.getRoleKey().equals("admin")));
+
 
         List<SysRoleMenu> sysRoleMenus = sysRoleMenuService.list(new LambdaQueryWrapper<SysRoleMenu>()
                 .in(SysRoleMenu::getRoleId, sysRoles.stream()
