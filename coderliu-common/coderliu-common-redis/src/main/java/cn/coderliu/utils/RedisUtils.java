@@ -1,28 +1,14 @@
 package cn.coderliu.utils;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.data.redis.connection.RedisClusterNode;
-import org.springframework.data.redis.connection.RedisServerCommands;
-import org.springframework.data.redis.core.HashOperations;
-import org.springframework.data.redis.core.ListOperations;
-import org.springframework.data.redis.core.RedisCallback;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.*;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @ClassName: RedisRepository
- * @Description:
- * @Author: duc
- * @Date: 2020/9/9 11:26 上午
- * @Version: V1.0
+ * redis工具类
  **/
 @Slf4j
 public class RedisUtils {
@@ -30,356 +16,177 @@ public class RedisUtils {
      * Spring Redis Template
      */
     @Resource(name = "jsonMapperRedisTemplate")
-    private  RedisTemplate<String, Object> redisTemplate;
-
+    private RedisTemplate redisTemplate;
 
 
     /**
-     * 清空DB
+     * 缓存基本的对象，Integer、String、实体类等
      *
-     * @param node redis 节点
+     * @param key   缓存的键值
+     * @param value 缓存的值
+     * @return 缓存的对象
      */
-    public void flushDB(RedisClusterNode node) {
-        this.redisTemplate.opsForCluster().flushDb(node);
+    public <T> ValueOperations<String, T> setCacheObject(String key, T value) {
+        ValueOperations<String, T> operation = redisTemplate.opsForValue();
+        operation.set(key, value);
+        return operation;
     }
 
     /**
-     * 添加到带有 过期时间的  缓存
+     * 缓存基本的对象，Integer、String、实体类等
      *
-     * @param key   redis主键
-     * @param value 值
-     * @param time  过期时间(单位秒)
+     * @param key      缓存的键值
+     * @param value    缓存的值
+     * @param timeout  时间
+     * @param timeUnit 时间颗粒度
+     * @return 缓存的对象
      */
-    public void setExpire(final byte[] key, final byte[] value, final long time) {
-        redisTemplate.execute((RedisCallback<Long>) connection -> {
-            connection.setEx(key, time, value);
-            return 1L;
-        });
+    public <T> ValueOperations<String, T> setCacheObject(String key, T value, Integer timeout, TimeUnit timeUnit) {
+        ValueOperations<String, T> operation = redisTemplate.opsForValue();
+        operation.set(key, value, timeout, timeUnit);
+        return operation;
     }
 
     /**
-     * 添加到带有 过期时间的  缓存
-     *
-     * @param key   redis主键
-     * @param value 值
-     * @param time  过期时间(单位秒)
+     * 设置过期时间
      */
-    public void setExpire(final String key, final Object value, final long time) {
-        redisTemplate.opsForValue().set(key, value, time, TimeUnit.SECONDS);
+    public void expireKey(String key, long time, TimeUnit timeUnit) {
+        redisTemplate.expire(key, time, timeUnit);
     }
 
     /**
-     * 一次性添加数组到   过期时间的  缓存，不用多次连接，节省开销
+     * 获得缓存的基本对象。
      *
-     * @param keys   redis主键数组
-     * @param values 值数组
-     * @param time   过期时间(单位秒)
+     * @param key 缓存键值
+     * @return 缓存键值对应的数据
      */
-    public void setExpire(final String[] keys, final Object[] values, final long time) {
-        for (int i = 0; i < keys.length; i++) {
-            redisTemplate.opsForValue().set(keys[i], values[i], time, TimeUnit.SECONDS);
+    public <T> T getCacheObject(String key) {
+        ValueOperations<String, T> operation = redisTemplate.opsForValue();
+        return operation.get(key);
+    }
+
+    /**
+     * 删除单个对象
+     *
+     * @param key
+     */
+    public void deleteObject(String key) {
+        redisTemplate.delete(key);
+    }
+
+    /**
+     * 删除集合对象
+     *
+     * @param collection
+     */
+    public void deleteObject(Collection collection) {
+        redisTemplate.delete(collection);
+    }
+
+    /**
+     * 缓存List数据
+     *
+     * @param key      缓存的键值
+     * @param dataList 待缓存的List数据
+     * @return 缓存的对象
+     */
+    public <T> ListOperations<String, T> setCacheList(String key, List<T> dataList) {
+        ListOperations listOperation = redisTemplate.opsForList();
+        if (null != dataList) {
+            int size = dataList.size();
+            for (int i = 0; i < size; i++) {
+                listOperation.rightPush(key, dataList.get(i));
+            }
         }
+        return listOperation;
     }
 
-
     /**
-     * 一次性添加数组到   过期时间的  缓存，不用多次连接，节省开销
+     * 获得缓存的list对象
      *
-     * @param keys   the keys
-     * @param values the values
+     * @param key 缓存的键值
+     * @return 缓存键值对应的数据
      */
-    public void set(final String[] keys, final Object[] values) {
-        for (int i = 0; i < keys.length; i++) {
-            redisTemplate.opsForValue().set(keys[i], values[i]);
+    public <T> List<T> getCacheList(String key) {
+        List<T> dataList = new ArrayList<T>();
+        ListOperations<String, T> listOperation = redisTemplate.opsForList();
+        Long size = listOperation.size(key);
+
+        for (int i = 0; i < size; i++) {
+            dataList.add(listOperation.index(key, i));
         }
-    }
-
-
-    /**
-     * 添加到缓存
-     *
-     * @param key   the key
-     * @param value the value
-     */
-    public void set(final String key, final Object value) {
-        redisTemplate.opsForValue().set(key, value);
+        return dataList;
     }
 
     /**
-     * 查询在以keyPatten的所有  key
+     * 缓存Set
      *
-     * @param keyPatten the key patten
-     * @return the set
+     * @param key     缓存键值
+     * @param dataSet 缓存的数据
+     * @return 缓存数据的对象
      */
-    public Set<String> keys(final String keyPatten) {
-        return redisTemplate.keys(keyPatten + "*");
+    public <T> BoundSetOperations<String, T> setCacheSet(String key, Set<T> dataSet) {
+        BoundSetOperations<String, T> setOperation = redisTemplate.boundSetOps(key);
+        Iterator<T> it = dataSet.iterator();
+        while (it.hasNext()) {
+            setOperation.add(it.next());
+        }
+        return setOperation;
     }
 
     /**
-     * 根据key获取对象
+     * 获得缓存的set
      *
-     * @param key the key
-     * @return the byte [ ]
+     * @param key
+     * @return
      */
-    public byte[] get(final byte[] key) {
-        return redisTemplate.execute((RedisCallback<byte[]>) connection -> connection.get(key));
+    public <T> Set<T> getCacheSet(String key) {
+        Set<T> dataSet = new HashSet<T>();
+        BoundSetOperations<String, T> operation = redisTemplate.boundSetOps(key);
+        dataSet = operation.members();
+        return dataSet;
     }
 
     /**
-     * 根据key获取对象
+     * 缓存Map
      *
-     * @param key the key
-     * @return the string
+     * @param key
+     * @param dataMap
+     * @return
      */
-    public Object get(final String key) {
-        return redisTemplate.opsForValue().get(key);
+    public <T> HashOperations<String, String, T> setCacheMap(String key, Map<String, T> dataMap) {
+        HashOperations hashOperations = redisTemplate.opsForHash();
+        if (null != dataMap) {
+            for (Map.Entry<String, T> entry : dataMap.entrySet()) {
+                hashOperations.put(key, entry.getKey(), entry.getValue());
+            }
+        }
+        return hashOperations;
     }
 
     /**
-     * 根据key获取对象
+     * 获得缓存的Map
      *
-     * @param key the key
-     * @return the string
+     * @param key
+     * @return
      */
-    public <T> T get(final String key, T t) {
-        Object obj = redisTemplate.opsForValue().get(key);
-        return obj == null ? null : (T) obj;
-    }
-
-
-    /**
-     * Ops for hash hash operations.
-     *
-     * @return the hash operations
-     */
-    public HashOperations<String, String, Object> opsForHash() {
-        return redisTemplate.opsForHash();
+    public <T> Map<String, T> getCacheMap(String key) {
+        Map<String, T> map = redisTemplate.opsForHash().entries(key);
+        return map;
     }
 
     /**
-     * 对HashMap操作
+     * 获得缓存的基本对象列表
      *
-     * @param key       the key
-     * @param hashKey   the hash key
-     * @param hashValue the hash value
+     * @param pattern 字符串前缀
+     * @return 对象列表
      */
-    public void putHashValue(String key, String hashKey, Object hashValue) {
-        opsForHash().put(key, hashKey, hashValue);
+    public Collection<String> keys(String pattern) {
+        return redisTemplate.keys(pattern);
     }
 
-    /**
-     * 获取单个field对应的值
-     *
-     * @param key     the key
-     * @param hashKey the hash key
-     * @return the hash values
-     */
-    public Object getHashValues(String key, String hashKey) {
-        return opsForHash().get(key, hashKey);
-    }
-
-    /**
-     * 根据key值删除
-     *
-     * @param key      the key
-     * @param hashKeys the hash keys
-     */
-    public void delHashValues(String key, Object... hashKeys) {
-        opsForHash().delete(key, hashKeys);
-    }
-
-    /**
-     * key只匹配map
-     *
-     * @param key the key
-     * @return the hash value
-     */
-    public Map<String, Object> getHashValue(String key) {
-        return opsForHash().entries(key);
-    }
-
-    /**
-     * 批量添加
-     *
-     * @param key the key
-     * @param map the map
-     */
-    public void putHashValues(String key, Map<String, Object> map) {
-        opsForHash().putAll(key, map);
-    }
-
-    /**
-     * 集合数量
-     *
-     * @return the long
-     */
-    public long dbSize() {
-        return redisTemplate.execute(RedisServerCommands::dbSize);
-    }
-
-    /**
-     * 清空redis存储的数据
-     *
-     * @return the string
-     */
-    public String flushDB() {
-        return redisTemplate.execute((RedisCallback<String>) connection -> {
-            connection.flushDb();
-            return "ok";
-        });
-    }
-
-    /**
-     * 判断某个主键是否存在
-     *
-     * @param key the key
-     * @return the boolean
-     */
-    public boolean exists(final String key) {
+    public Boolean hasKey(String key) {
         return redisTemplate.hasKey(key);
     }
 
-
-    /**
-     * 删除key
-     *
-     * @param keys the keys
-     * @return the long
-     */
-    public boolean del(final String... keys) {
-        boolean result = false;
-        for (String key : keys) {
-            result = redisTemplate.delete(key);
-        }
-        return result;
-    }
-
-    /**
-     * 对某个主键对应的值加一,value值必须是全数字的字符串
-     *
-     * @param key the key
-     * @return the long
-     */
-    public long incr(final String key) {
-        return redisTemplate.opsForValue().increment(key);
-    }
-
-    /**
-     * redis List 引擎
-     *
-     * @return the list operations
-     */
-    public ListOperations<String, Object> opsForList() {
-        return redisTemplate.opsForList();
-    }
-
-    /**
-     * redis List数据结构 : 将一个或多个值 value 插入到列表 key 的表头
-     *
-     * @param key   the key
-     * @param value the value
-     * @return the long
-     */
-    public Long leftPush(String key, Object value) {
-        return opsForList().leftPush(key, value);
-    }
-
-    /**
-     * redis List数据结构 : 移除并返回列表 key 的头元素
-     *
-     * @param key the key
-     * @return the string
-     */
-    public Object leftPop(String key) {
-        return opsForList().leftPop(key);
-    }
-
-    /**
-     * redis List数据结构 :将一个或多个值 value 插入到列表 key 的表尾(最右边)。
-     *
-     * @param key   the key
-     * @param value the value
-     * @return the long
-     */
-    public Long in(String key, Object value) {
-        return opsForList().rightPush(key, value);
-    }
-
-    /**
-     * redis List数据结构 : 移除并返回列表 key 的末尾元素
-     *
-     * @param key the key
-     * @return the string
-     */
-    public Object rightPop(String key) {
-        return opsForList().rightPop(key);
-    }
-
-
-    /**
-     * redis List数据结构 : 返回列表 key 的长度 ; 如果 key 不存在，则 key 被解释为一个空列表，返回 0 ; 如果 key 不是列表类型，返回一个错误。
-     *
-     * @param key the key
-     * @return the long
-     */
-    public Long length(String key) {
-        return opsForList().size(key);
-    }
-
-
-    /**
-     * redis List数据结构 : 根据参数 i 的值，移除列表中与参数 value 相等的元素
-     *
-     * @param key   the key
-     * @param i     the
-     * @param value the value
-     */
-    public void remove(String key, long i, Object value) {
-        opsForList().remove(key, i, value);
-    }
-
-    /**
-     * redis List数据结构 : 将列表 key 下标为 index 的元素的值设置为 value
-     *
-     * @param key   the key
-     * @param index the index
-     * @param value the value
-     */
-    public void set(String key, long index, Object value) {
-        opsForList().set(key, index, value);
-    }
-
-    /**
-     * redis List数据结构 : 返回列表 key 中指定区间内的元素，区间以偏移量 start 和 end 指定。
-     *
-     * @param key   the key
-     * @param start the start
-     * @param end   the end
-     * @return the list
-     */
-    public List<Object> getList(String key, int start, int end) {
-        return opsForList().range(key, start, end);
-    }
-
-    /**
-     * redis List数据结构 : 批量存储
-     *
-     * @param key  the key
-     * @param list the list
-     * @return the long
-     */
-    public Long leftPushAll(String key, List<String> list) {
-        return opsForList().leftPushAll(key, list);
-    }
-
-    /**
-     * redis List数据结构 : 将值 value 插入到列表 key 当中，位于值 index 之前或之后,默认之后。
-     *
-     * @param key   the key
-     * @param index the index
-     * @param value the value
-     */
-    public void insert(String key, long index, Object value) {
-        opsForList().set(key, index, value);
-    }
 }
