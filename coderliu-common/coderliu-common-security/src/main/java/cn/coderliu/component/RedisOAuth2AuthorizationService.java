@@ -1,6 +1,9 @@
 package cn.coderliu.component;
 
+import cn.coderliu.config.JdkMapperRedisConfig;
+import cn.coderliu.config.JdkMapperRedisTemplate;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.lang.Nullable;
@@ -13,6 +16,8 @@ import org.springframework.security.oauth2.server.authorization.OAuth2Authorizat
 import org.springframework.security.oauth2.server.authorization.OAuth2TokenType;
 import org.springframework.util.Assert;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +34,10 @@ public class RedisOAuth2AuthorizationService implements OAuth2AuthorizationServi
 
     private static final String AUTHORIZATION = "token";
 
-    private final RedisTemplate<String, Object> redisTemplate;
+    private final JdkMapperRedisTemplate<String, Object> redisTemplate;
+
+
+
 
     @Override
     public void save(OAuth2Authorization authorization) {

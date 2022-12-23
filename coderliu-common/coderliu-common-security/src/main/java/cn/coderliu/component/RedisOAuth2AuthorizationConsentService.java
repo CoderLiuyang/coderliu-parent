@@ -1,19 +1,24 @@
 package cn.coderliu.component;
 
+import cn.coderliu.config.JdkMapperRedisTemplate;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationConsent;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationConsentService;
 import org.springframework.util.Assert;
 
+import javax.annotation.Resource;
 import java.util.concurrent.TimeUnit;
 
 @RequiredArgsConstructor
 public class RedisOAuth2AuthorizationConsentService implements OAuth2AuthorizationConsentService {
 
-	private final RedisTemplate<String, Object> redisTemplate;
+	private final JdkMapperRedisTemplate<String, Object> redisTemplate;
 
 	private final static Long TIMEOUT = 10L;
+
+
 
 	@Override
 	public void save(OAuth2AuthorizationConsent authorizationConsent) {

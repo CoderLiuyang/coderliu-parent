@@ -14,28 +14,32 @@
     <description>coderliu-admin</description>
 
 
-
     <dependencies>
+        <!--web基础功能包-->
         <dependency>
             <groupId>cn.coderliu</groupId>
             <artifactId>coderliu-common-core</artifactId>
             <version>0.0.1</version>
         </dependency>
+        <!--数据库功能包-->
         <dependency>
             <groupId>cn.coderliu</groupId>
             <artifactId>coderliu-common-db</artifactId>
             <version>0.0.1</version>
         </dependency>
+        <!--缓存包-->
         <dependency>
             <groupId>cn.coderliu</groupId>
             <artifactId>coderliu-common-redis</artifactId>
             <version>0.0.1</version>
         </dependency>
+        <!--服务间调用功能包-->
         <dependency>
             <groupId>cn.coderliu</groupId>
             <artifactId>coderliu-api</artifactId>
             <version>0.0.1</version>
         </dependency>
+        <!--鉴权包-->
         <dependency>
             <groupId>cn.coderliu</groupId>
             <artifactId>coderliu-common-security</artifactId>
