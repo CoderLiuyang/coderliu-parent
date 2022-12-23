@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.nio.file.AccessDeniedException;
 import java.util.List;
 
 /**
@@ -69,17 +70,16 @@ public class GlobalBizExceptionHandler {
 
     /**
      * AccessDeniedException
+     *
      * @param e the e
      * @return R
      */
-//	@ExceptionHandler(AccessDeniedException.class)
-//	@ResponseStatus(HttpStatus.FORBIDDEN)
-//	public R handleAccessDeniedException(AccessDeniedException e) {
-//		String msg = SpringSecurityMessageSource.getAccessor().getMessage("AbstractAccessDecisionManager.accessDenied",
-//				e.getMessage());
-//		log.warn("拒绝授权异常信息 ex={}", msg);
-//		return R.failed(e.getLocalizedMessage());
-//	}
+    @ExceptionHandler(AccessDeniedException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public ReturnData handleAccessDeniedException(AccessDeniedException e) {
+        log.warn("拒绝授权异常信息 ex={}", "不允许访问");
+        return ReturnData.failed(e.getLocalizedMessage());
+    }
 
     /**
      * 验证异常
