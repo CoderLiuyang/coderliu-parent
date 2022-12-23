@@ -38,26 +38,32 @@
 
 
 
-
     <springProfile name="dev">
         <root level="INFO">
             <appender-ref ref="CONSOLE"/>
         </root>
-        <!--nacos 心跳 INFO 屏蔽-->
         <logger name="com.alibaba.nacos" level="OFF">
             <appender-ref ref="CONSOLE"/>
         </logger>
-
+        <logger name="org.reflections" level="error">
+            <appender-ref ref="CONSOLE"/>
+        </logger>
+        <logger name="cn.coderliu.mapper" level="debug" additivity="false">
+            <appender-ref ref="CONSOLE"/>
+        </logger>
     </springProfile>
 
     <springProfile name="test,prd">
         <root level="INFO">
             <appender-ref ref="FileAppender"/>
         </root>
-        <!--nacos 心跳 INFO 屏蔽-->
         <logger name="com.alibaba.nacos" level="OFF">
             <appender-ref ref="FileAppender"/>
         </logger>
+        <logger name="org.reflections" level="error">
+            <appender-ref ref="FileAppender"/>
+        </logger>
     </springProfile>
+
 
 </configuration>
