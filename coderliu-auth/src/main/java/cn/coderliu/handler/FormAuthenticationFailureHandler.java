@@ -28,9 +28,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @author lengleng
- * @date 2022-06-02
- * <p>
  * 表单登录失败处理逻辑
  */
 @Slf4j

@@ -14,9 +14,6 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * @author jumuning
- * @date 2022-06-02
- * <p>
  * 密码认证转换器
  */
 public class OAuth2ResourceOwnerPasswordAuthenticationConverter

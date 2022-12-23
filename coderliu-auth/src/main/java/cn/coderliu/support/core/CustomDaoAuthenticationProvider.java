@@ -31,8 +31,7 @@ import java.util.Optional;
 import java.util.function.Supplier;
 
 /**
- * @author lengleng
- * @date 2022-06-04
+ * userDetail认证器器
  */
 public class CustomDaoAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
 

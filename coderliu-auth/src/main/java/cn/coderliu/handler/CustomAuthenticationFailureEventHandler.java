@@ -32,8 +32,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * @author lengleng
- * @date 2022-06-02
+ * 失败事件处理器
  */
 @Slf4j
 public class CustomAuthenticationFailureEventHandler implements AuthenticationFailureHandler {

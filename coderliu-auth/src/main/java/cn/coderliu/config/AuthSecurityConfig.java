@@ -4,6 +4,7 @@ import cn.coderliu.constants.SecurityConstants;
 import cn.coderliu.handler.CustomAuthenticationFailureEventHandler;
 import cn.coderliu.handler.CustomAuthenticationSuccessEventHandler;
 import cn.coderliu.support.core.CustomDaoAuthenticationProvider;
+import cn.coderliu.support.core.FormIdentityLoginConfigurer;
 import cn.coderliu.support.password.OAuth2ResourceOwnerPasswordAuthenticationConverter;
 import cn.coderliu.support.password.OAuth2ResourceOwnerPasswordAuthenticationProvider;
 import cn.coderliu.support.sms.OAuth2ResourceOwnerSmsAuthenticationConverter;

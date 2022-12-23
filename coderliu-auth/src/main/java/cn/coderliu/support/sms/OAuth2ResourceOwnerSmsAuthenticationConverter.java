@@ -14,9 +14,6 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * @author lengleng
- * @date 2022-05-31
- * <p>
  * 短信登录转换器
  */
 public class OAuth2ResourceOwnerSmsAuthenticationConverter

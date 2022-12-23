@@ -37,8 +37,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Map;
 
 /**
- * @author lengleng
- * @date 2022-06-02
+ * 成功事件处理器
  */
 @Slf4j
 public class CustomAuthenticationSuccessEventHandler implements AuthenticationSuccessHandler {

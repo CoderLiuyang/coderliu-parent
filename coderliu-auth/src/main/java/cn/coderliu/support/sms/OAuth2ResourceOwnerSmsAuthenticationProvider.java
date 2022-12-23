@@ -17,9 +17,6 @@ import org.springframework.security.oauth2.server.authorization.token.OAuth2Toke
 import java.util.Map;
 
 /**
- * @author lengleng
- * @date date
- *
  * 短信登录的核心处理
  */
 public class OAuth2ResourceOwnerSmsAuthenticationProvider

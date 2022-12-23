@@ -19,8 +19,8 @@ package cn.coderliu.exception;
 import lombok.NoArgsConstructor;
 
 /**
- * @author lengleng
- * @date 😴2018年06月22日16:21:57
+ *
+ * 检查异常
  */
 @NoArgsConstructor
 public class CheckedException extends RuntimeException {
