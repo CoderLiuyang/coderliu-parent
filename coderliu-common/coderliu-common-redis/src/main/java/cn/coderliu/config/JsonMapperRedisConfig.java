@@ -17,8 +17,8 @@ public class JsonMapperRedisConfig {
 
 
     @Bean(name = "jsonMapperRedisTemplate")
-    public JsonMapperRedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
-        JsonMapperRedisTemplate<String, Object> template = new JsonMapperRedisTemplate<>();
+    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
+        RedisTemplate<String, Object> template = new RedisTemplate<>();
         template.setConnectionFactory(factory);
         FastJson2JsonRedisSerializer serializer = new FastJson2JsonRedisSerializer(Object.class);
         ObjectMapper mapper = new ObjectMapper();

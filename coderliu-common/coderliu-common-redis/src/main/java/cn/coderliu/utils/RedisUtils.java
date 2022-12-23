@@ -1,8 +1,7 @@
 package cn.coderliu.utils;
 
-import cn.coderliu.config.JsonMapperRedisTemplate;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.connection.RedisClusterNode;
 import org.springframework.data.redis.connection.RedisServerCommands;
@@ -26,12 +25,13 @@ import java.util.concurrent.TimeUnit;
  * @Version: V1.0
  **/
 @Slf4j
-@RequiredArgsConstructor
 public class RedisUtils {
     /**
      * Spring Redis Template
      */
-    private final JsonMapperRedisTemplate<String, Object> redisTemplate;
+    @Resource(name = "jsonMapperRedisTemplate")
+    private  RedisTemplate<String, Object> redisTemplate;
+
 
 
     /**

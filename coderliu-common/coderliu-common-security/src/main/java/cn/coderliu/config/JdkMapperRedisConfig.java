@@ -15,8 +15,8 @@ public class JdkMapperRedisConfig {
 
 
     @Bean(name = "jdkMapperRedisTemplate")
-    public JdkMapperRedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
-        JdkMapperRedisTemplate<String, Object> redisTemplate = new JdkMapperRedisTemplate<>();
+    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
+        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
         redisTemplate.setKeySerializer(RedisSerializer.string());
         redisTemplate.setHashKeySerializer(RedisSerializer.string());
         redisTemplate.setValueSerializer(RedisSerializer.java());

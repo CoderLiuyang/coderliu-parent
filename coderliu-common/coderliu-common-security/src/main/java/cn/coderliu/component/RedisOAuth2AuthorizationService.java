@@ -1,9 +1,5 @@
 package cn.coderliu.component;
 
-import cn.coderliu.config.JdkMapperRedisConfig;
-import cn.coderliu.config.JdkMapperRedisTemplate;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.lang.Nullable;
@@ -28,14 +24,13 @@ import java.util.concurrent.TimeUnit;
 /**
  * 重写认证service实现redis存储认证信息
  */
-@RequiredArgsConstructor
 public class RedisOAuth2AuthorizationService implements OAuth2AuthorizationService {
     private final static Long TIMEOUT = 10L;
 
     private static final String AUTHORIZATION = "token";
 
-    private final JdkMapperRedisTemplate<String, Object> redisTemplate;
-
+    @Resource(name = "jdkMapperRedisTemplate")
+    private RedisTemplate<String, Object> redisTemplate;
 
 
 
