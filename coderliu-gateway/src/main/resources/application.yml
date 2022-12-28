@@ -1,6 +1,7 @@
 server:
   port: 10020
-
+  servlet:
+    context-path: /api
 
 spring:
   profiles:
@@ -10,10 +11,14 @@ spring:
       discovery:
         server-addr: 192.168.75.128:8848
     gateway:
-      discovery:
-        locator:
-          #通过服务发现组建找到服务
-          enabled: true
+      routes:
+        - id: auth
+          uri: lb://coderliu-auth
+          predicates:
+            - Path=/coderliu-auth/**
+          filters:
+            - StripPrefix=1
+            - PreserveHostHeader
   application:
     name: coderliu-gateway
 
