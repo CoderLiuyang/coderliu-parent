@@ -1,7 +1,5 @@
 server:
-  port: 10020
-  servlet:
-    context-path: /api
+  port: 10080
 
 spring:
   profiles:
@@ -15,7 +13,14 @@ spring:
         - id: auth
           uri: lb://coderliu-auth
           predicates:
-            - Path=/coderliu-auth/**
+            - Path=/auth/**
+          filters:
+            - StripPrefix=1
+            - PreserveHostHeader
+        - id: admin
+          uri: lb://coderliu-admin
+          predicates:
+            - Path=/admin/**
           filters:
             - StripPrefix=1
             - PreserveHostHeader
