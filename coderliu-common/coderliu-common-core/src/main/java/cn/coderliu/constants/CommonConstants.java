@@ -38,7 +38,7 @@ public interface CommonConstants {
 	/**
 	 * 菜单树根节点
 	 */
-	String MENU_TREE_ROOT_ID = "0";
+	String MENU_TREE_ROOT_ID = "-1";
 
 	/**
 	 * 菜单

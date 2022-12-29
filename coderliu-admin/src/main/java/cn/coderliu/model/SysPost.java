@@ -1,9 +1,6 @@
 package cn.coderliu.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import lombok.experimental.Accessors;
 
 /**
@@ -14,6 +11,7 @@ import lombok.experimental.Accessors;
 @Builder
 @Accessors(chain = true)
 @AllArgsConstructor
+@NoArgsConstructor
 public class SysPost extends BaseModel {
 
     /**
