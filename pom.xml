@@ -26,7 +26,7 @@
         <java.version>11</java.version>
 
 
-        <mybatis-plus-version>3.5.2</mybatis-plus-version>
+        <mybatis-plus-version>3.5.3</mybatis-plus-version>
         <fastjson.version>2.0.20</fastjson.version>
         <hutool.version>5.8.10</hutool.version>
         <authorization-server.version>0.4.0</authorization-server.version>
