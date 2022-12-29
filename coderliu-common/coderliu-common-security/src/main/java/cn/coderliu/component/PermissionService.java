@@ -44,14 +44,16 @@ public class PermissionService {
         }
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
+        if (authentication == null) {
+            return false;
+        }
+
         //管理员可以随便访问
         LoginUser loginUser = (LoginUser) authentication.getPrincipal();
         if (loginUser.getIsAdmin()) {
             return true;
         }
-        if (authentication == null) {
-            return false;
-        }
+
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         return authorities.stream().map(GrantedAuthority::getAuthority).filter(StringUtils::hasText)
                 .anyMatch(x -> PatternMatchUtils.simpleMatch(permissions, x));

@@ -17,11 +17,9 @@ public class SysMenu extends BaseModel{
     /** 菜单名称 */
     private String menuName;
 
-    /** 父菜单名称 */
-    private String parentName;
 
     /** 父菜单ID */
-    private Long parentId;
+    private String parentId;
 
     /** 显示顺序 */
     private String orderNum;
@@ -37,6 +35,11 @@ public class SysMenu extends BaseModel{
 
     /** 菜单状态（1显示 0隐藏） */
     private Boolean visible;
+
+    /**
+     * 路由缓冲
+     */
+    private String keepAlive;
 
     /** 是否刷新（0刷新 1不刷新） */
     private String isRefresh;

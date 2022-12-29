@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.coderliu.mapper.SysMenuMapper">
+
+
+	<select id="listMenusByRoleId" resultType="cn.coderliu.model.SysMenu">
+
+		SELECT sys_menu.id,
+			   sys_menu.menu_name,
+			   sys_menu.perms,
+			   sys_menu.url,
+			   sys_menu.parent_id,
+			   sys_menu.icon,
+			   sys_menu.order_num,
+			   sys_menu.keep_alive,
+			   sys_menu.menu_type,
+			   sys_menu.del_flag,
+			   sys_menu.create_by,
+			   sys_menu.create_time,
+			   sys_menu.update_by,
+			   sys_menu.update_time
+		FROM sys_menu
+				 LEFT JOIN sys_role_menu ON sys_menu.id = sys_role_menu.menu_id
+		WHERE sys_menu.del_flag = 0
+		  AND sys_role_menu.role_id = #{roleId}
+		ORDER BY sys_menu.order_num DESC
+	</select>
+
+</mapper>
+
+

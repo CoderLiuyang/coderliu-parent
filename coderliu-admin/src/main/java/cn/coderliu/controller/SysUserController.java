@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/sysUser")
+@RequestMapping("/user")
 public class SysUserController {
 
     private final SysUserService sysUserService;
@@ -29,8 +29,15 @@ public class SysUserController {
      */
     @PostMapping("/getUserDetail")
     public ReturnData<GetUserDetailVo> getUserDetail(String userName) {
-
         return ReturnData.succeed(sysUserService.getUserDetail(userName));
+    }
+
+    /**
+     * 查询登陆人
+     */
+    @GetMapping("/info")
+    public ReturnData<LoginUser> info() {
+        return ReturnData.succeed(SecurityUtils.getUser());
     }
 
     /**
@@ -40,7 +47,7 @@ public class SysUserController {
      * @return
      */
     @GetMapping("/test")
-   // @PreAuthorize("@pms.hasPermission('sys_role_perm')")
+    // @PreAuthorize("@pms.hasPermission('sys_role_perm')")
     public void test(String userName) {
         final LoginUser user = SecurityUtils.getUser();
         System.out.println(user);

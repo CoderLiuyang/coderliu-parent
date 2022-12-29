@@ -21,7 +21,7 @@ public interface AdminFeignService {
      * @param userName 用户名
      * @return
      */
-    @PostMapping("/sysUser/getUserDetail")
+    @PostMapping("/user/getUserDetail")
     R<GetUserDetailVo> getUserDetail(@RequestParam("userName") String userName);
 
 }

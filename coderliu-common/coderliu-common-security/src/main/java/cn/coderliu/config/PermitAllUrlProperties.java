@@ -43,8 +43,7 @@ public class PermitAllUrlProperties implements InitializingBean {
     private static final String[] DEFAULT_IGNORE_URLS = new String[]{"/actuator/**",
             "/error",
             //获取用户详情放行
-            "/sysUser/getUserDetail",
-            "/sysUser/test"
+            "/user/getUserDetail"
     };
 
     @Getter
