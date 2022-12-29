@@ -3,6 +3,8 @@ package cn.coderliu.controller;
 import cn.coderliu.common.ReturnData;
 import cn.coderliu.model.SysPost;
 import cn.coderliu.service.SysPostService;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +26,8 @@ public class SysPostController {
      * 岗位分页
      */
     @GetMapping("/page")
-    public ReturnData list(Page page) {
-        return ReturnData.succeed(sysPostService.page(page, Wrappers.<SysPost>lambdaQuery().orderByAsc(SysPost::getPostSort)));
+    public ReturnData<IPage<SysPost>> list(Page<SysPost> page) {
+        return ReturnData.succeed(sysPostService.page(page,
+                new LambdaQueryWrapper<SysPost>().orderByAsc(SysPost::getPostSort)));
     }
 }

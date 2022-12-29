@@ -22,7 +22,7 @@ import java.util.List;
 
 @Slf4j
 @Component
-public class ResponseLogGlobalFilter implements GlobalFilter, Ordered {
+public class ResponseGlobalFilter implements GlobalFilter, Ordered {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         try {
