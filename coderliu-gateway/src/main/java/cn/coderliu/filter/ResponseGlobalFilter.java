@@ -52,7 +52,7 @@ public class ResponseGlobalFilter implements GlobalFilter, Ordered {
                                 //rspArgs.add(requestUrl);
                                 String data = new String(content, StandardCharsets.UTF_8);//data
                                 sb2.append(data);
-                                log.info(sb2.toString(), rspArgs.toArray());
+                                log.info(data);
                                 //log.info("<-- {} {}\n", originalResponse.getStatusCode(), data);
                                 return bufferFactory.wrap(content);
                             }));
