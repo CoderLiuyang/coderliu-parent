@@ -1,17 +1,20 @@
 package cn.coderliu.model;
 
-import lombok.Data;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.oauth2.core.OAuth2AuthenticatedPrincipal;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
  * 认证框架需要的用户对象
  */
-public class LoginUser extends User implements OAuth2AuthenticatedPrincipal {
+public class LoginUser extends User implements OAuth2AuthenticatedPrincipal, Serializable {
+
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * 用户ID
@@ -35,11 +38,17 @@ public class LoginUser extends User implements OAuth2AuthenticatedPrincipal {
     @Getter
     private Boolean isAdmin;
 
+    /**
+     * 头像
+     */
     @Getter
-    private List<Role> roles;
+    private String avatar;
+
+    @Getter
+    private List<LoginUserRole> roles;
 
 
-    public LoginUser(String id, String deptId, String username, String password, String phone, boolean isAdmin, List<Role> roles, boolean enabled,
+    public LoginUser(String id, String deptId, String username, String password, String phone, boolean isAdmin, List<LoginUserRole> roles, boolean enabled,
                      boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked,
                      Collection<? extends GrantedAuthority> authorities) {
         super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
@@ -65,13 +74,5 @@ public class LoginUser extends User implements OAuth2AuthenticatedPrincipal {
         return this.getUsername();
     }
 
-
-    @Data
-    public static class Role {
-        private String id;
-
-        private String name;
-        private String dataScope;
-    }
 
 }

@@ -11,8 +11,10 @@ import lombok.NoArgsConstructor;
 @Builder
 public  class RoleVo {
 
-
     private String id;
+
+    private String name;
     private String roleKey;
+
     private String dataScope;
 }

@@ -43,6 +43,7 @@
         <module>coderliu-gateway</module>
         <module>coderliu-common</module>
         <module>coderliu-auth</module>
+        <module>coderliu-workflow</module>
     </modules>
 
 

@@ -2,6 +2,7 @@ package cn.coderliu.aspectj;
 
 import cn.coderliu.annotation.DataScope;
 import cn.coderliu.model.LoginUser;
+import cn.coderliu.model.LoginUserRole;
 import cn.coderliu.utils.SecurityUtils;
 import cn.hutool.core.util.StrUtil;
 import org.aspectj.lang.JoinPoint;
@@ -83,8 +84,7 @@ public class DataScopeAspect {
      */
     public static void dataScopeFilter(LoginUser user, String deptAlias, String userAlias) {
         StringBuilder sqlString = new StringBuilder();
-
-        for (LoginUser.Role role : user.getRoles()) {
+        for (LoginUserRole role : user.getRoles()) {
             String dataScope = role.getDataScope();
             if (DATA_SCOPE_ALL.equals(dataScope)) {
                 sqlString = new StringBuilder();

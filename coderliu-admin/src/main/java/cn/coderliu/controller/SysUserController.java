@@ -6,6 +6,7 @@ import cn.coderliu.common.ReturnData;
 import cn.coderliu.model.LoginUser;
 import cn.coderliu.service.SysUserService;
 import cn.coderliu.utils.SecurityUtils;
+import cn.coderliu.vo.UserInfoVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,8 +37,8 @@ public class SysUserController {
      * 查询登陆人
      */
     @GetMapping("/info")
-    public ReturnData<LoginUser> info() {
-        return ReturnData.succeed(SecurityUtils.getUser());
+    public ReturnData<UserInfoVo> info() {
+        return ReturnData.succeed(sysUserService.getUserInfo());
     }
 
     /**

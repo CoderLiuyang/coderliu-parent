@@ -2,12 +2,12 @@ package cn.coderliu.service.impl;
 
 import cn.coderliu.admin.feign.AdminFeignService;
 import cn.coderliu.admin.vo.GetUserDetailVo;
-import cn.coderliu.common.R;
 import cn.coderliu.constants.SecurityConstants;
 import cn.coderliu.model.LoginUser;
+import cn.coderliu.model.LoginUserRole;
 import cn.coderliu.service.CustomUserDetailsService;
+import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.ArrayUtil;
-import cn.hutool.core.util.StrUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -41,9 +41,10 @@ public class WebUserDetailsServiceImpl implements CustomUserDetailsService {
         //构建认证对象
         Collection<GrantedAuthority> authorities = AuthorityUtils
                 .createAuthorityList(dbAuthsSet.toArray(new String[0]));
+        final List<LoginUserRole> roles = Convert.toList(LoginUserRole.class, user.getRoles());
         return new LoginUser(user.getId(), user.getDeptId(), username,
                 SecurityConstants.BCRYPT + user.getPassWord(),
-                user.getPhone(), true, new ArrayList<>(), true, true, true,
+                user.getPhone(), true, roles, true, true, true,
                 user.getStatus(), authorities);
     }
 

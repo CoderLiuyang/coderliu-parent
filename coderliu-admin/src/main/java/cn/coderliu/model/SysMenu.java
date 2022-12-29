@@ -1,9 +1,6 @@
 package cn.coderliu.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import lombok.experimental.Accessors;
 
 @Data
@@ -11,6 +8,7 @@ import lombok.experimental.Accessors;
 @Builder
 @Accessors(chain = true)
 @AllArgsConstructor
+@NoArgsConstructor
 public class SysMenu extends BaseModel{
 
 
