@@ -20,6 +20,8 @@
         <module>coderliu-common-db</module>
         <module>coderliu-common-redis</module>
         <module>coderliu-common-security</module>
+        <module>coderliu-common-generate</module>
+
     </modules>
 
 
