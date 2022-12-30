@@ -56,17 +56,17 @@ public class CodeGenerator {
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://8.140.96.23:3306/hbky-app?useUnicode=true&useSSL=false&characterEncoding=utf8");
+        dsc.setUrl("jdbc:mysql://localhost:3306/coderliu-web-test?useUnicode=true&useSSL=false&characterEncoding=utf8");
         // dsc.setSchemaName("public");
         dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername("root");
-        dsc.setPassword("Hbky2021!");
+        dsc.setPassword("123456");
         mpg.setDataSource(dsc);
 
         // 包配置
         PackageConfig pc = new PackageConfig();
         //pc.setModuleName(scanner("模块名"));
-        pc.setParent("cn.hbky");
+        pc.setParent("cn.coderliu");
         pc.setEntity("model");
 
 
@@ -117,21 +117,21 @@ public class CodeGenerator {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
-                return projectPath + "/src/main/java/cn/hbky/dto/" + tableInfo.getEntityName() + "Dto" + StringPool.DOT_JAVA;
+                return projectPath + "/src/main/java/cn/coderliu/dto/" + tableInfo.getEntityName() + "Dto" + StringPool.DOT_JAVA;
             }
         });
         focList.add(new FileOutConfig("vo.java.vm") {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
-                return projectPath + "/src/main/java/cn/hbky/vo/" + tableInfo.getEntityName() + "Vo" + StringPool.DOT_JAVA;
+                return projectPath + "/src/main/java/cn/coderliu/vo/" + tableInfo.getEntityName() + "Vo" + StringPool.DOT_JAVA;
             }
         });
         focList.add(new FileOutConfig("controller.java.vm") {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
-                return projectPath + "/src/main/java/cn/hbky/controller/" + tableInfo.getEntityName() + "Controller" + StringPool.DOT_JAVA;
+                return projectPath + "/src/main/java/cn/coderliu/controller/" + tableInfo.getEntityName() + "Controller" + StringPool.DOT_JAVA;
             }
         });
         focList.add(new FileOutConfig("mapper.xml.vm") {
@@ -145,7 +145,7 @@ public class CodeGenerator {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
-                return projectPath + "/src/main/java/cn/hbky/model/" + tableInfo.getEntityName() + StringPool.DOT_JAVA;
+                return projectPath + "/src/main/java/cn/coderliu/model/" + tableInfo.getEntityName() + StringPool.DOT_JAVA;
             }
         });
         cfg.setFileOutConfigList(focList);
@@ -167,18 +167,16 @@ public class CodeGenerator {
         StrategyConfig strategy = new StrategyConfig();
         strategy.setNaming(NamingStrategy.underline_to_camel);
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);
-        strategy.setSuperEntityClass("cn.hbky.model.BaseModel");
+        strategy.setSuperEntityClass("cn.coderliu.model.BaseModel");
         strategy.setEntityLombokModel(true);
         strategy.setRestControllerStyle(true);
-
-        // strategy.setTablePrefix("t_");
         // 公共父类
         //strategy.setSuperControllerClass("你自己的父类控制器,没有就不用设置!");
         // 写于父类中的公共字段
-        strategy.setSuperEntityColumns("id", "created_by", "created_time", "updated_by", "updated_time", "remark", "is_del", "revision");
+        strategy.setSuperEntityColumns("id", "create_by", "create_time", "update_by", "update_time", "del_flag", "version");
         strategy.setInclude(scanner("表名").split(","));
         strategy.setControllerMappingHyphenStyle(true);
-        strategy.setTablePrefix(pc.getModuleName() + "_");
+     //   strategy.setTablePrefix(pc.getModuleName() + "_");
         mpg.setStrategy(strategy);
         mpg.setTemplateEngine(new FreemarkerTemplateEngine());
         mpg.execute();

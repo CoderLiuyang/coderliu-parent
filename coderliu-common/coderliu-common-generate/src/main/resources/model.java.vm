@@ -4,7 +4,6 @@ package cn.coderliu.model;
 ${i}
 </#list>
 import lombok.*;
-import lombok.experimental.Accessors;
 
 /**
  * ${cfg.table.comment}
@@ -15,7 +14,6 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Builder
-@Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor
 public class ${cfg.entityName} extends BaseModel{

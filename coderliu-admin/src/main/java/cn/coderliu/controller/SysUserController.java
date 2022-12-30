@@ -48,7 +48,6 @@ public class SysUserController {
      * @return
      */
     @GetMapping("/test")
-    // @PreAuthorize("@pms.hasPermission('sys_role_perm')")
     public void test(String userName) {
         final LoginUser user = SecurityUtils.getUser();
         System.out.println(user);
