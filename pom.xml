@@ -44,7 +44,6 @@
         <module>coderliu-common</module>
         <module>coderliu-auth</module>
         <module>coderliu-workflow</module>
-        <module>coderliu-web-test</module>
     </modules>
 
 
