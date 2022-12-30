@@ -1,4 +1,4 @@
-package cn.hbky.vo;
+package cn.coderliu.vo;
 
 
 <#list cfg.importList as i>

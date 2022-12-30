@@ -1,4 +1,4 @@
-package cn.hbky.model;
+package cn.coderliu.model;
 
 <#list cfg.importList as i>
 ${i}
