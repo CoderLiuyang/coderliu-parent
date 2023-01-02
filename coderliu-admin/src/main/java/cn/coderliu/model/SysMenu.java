@@ -3,6 +3,9 @@ package cn.coderliu.model;
 import lombok.*;
 import lombok.experimental.Accessors;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Builder
@@ -12,12 +15,15 @@ import lombok.experimental.Accessors;
 public class SysMenu extends BaseModel{
 
 
+
     /** 菜单名称 */
+    @NotBlank(message = "菜单名称不能为空")
     private String menuName;
 
 
     /** 父菜单ID */
-    private String parentId;
+    @NotNull(message = "菜单父ID不能为空")
+    private String pId;
 
     /** 显示顺序 */
     private String orderNum;
@@ -28,7 +34,7 @@ public class SysMenu extends BaseModel{
     /** 打开方式（menuItem页签 menuBlank新窗口） */
     private String target;
 
-    /** 类型（M目录 C菜单 F按钮） */
+    @NotNull(message = "菜单类型不能为空")
     private String menuType;
 
     /** 菜单状态（1显示 0隐藏） */
@@ -39,8 +45,6 @@ public class SysMenu extends BaseModel{
      */
     private String keepAlive;
 
-    /** 是否刷新（0刷新 1不刷新） */
-    private String isRefresh;
 
     /** 权限字符串 */
     private String perms;

@@ -18,4 +18,8 @@ public interface SysMenuService extends IService<SysMenu> {
      * @return
      */
     List<Tree<String>> filterMenu(Set<SysMenu> menuSet, String parentId);
+
+    List<Tree<String>> treeMenu(boolean lazy, String parentId);
+
+    Boolean removeMenuById(String id);
 }

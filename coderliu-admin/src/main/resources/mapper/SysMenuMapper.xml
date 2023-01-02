@@ -10,7 +10,7 @@
 			   sys_menu.menu_name,
 			   sys_menu.perms,
 			   sys_menu.url,
-			   sys_menu.parent_id,
+			   sys_menu.p_id,
 			   sys_menu.icon,
 			   sys_menu.order_num,
 			   sys_menu.keep_alive,

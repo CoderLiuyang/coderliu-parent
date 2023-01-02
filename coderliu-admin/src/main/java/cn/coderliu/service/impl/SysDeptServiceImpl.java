@@ -1,5 +1,6 @@
 package cn.coderliu.service.impl;
 
+import cn.coderliu.constants.CommonConstants;
 import cn.coderliu.mapper.SysDeptMapper;
 import cn.coderliu.model.SysDept;
 import cn.coderliu.service.SysDeptService;
@@ -25,7 +26,7 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> impl
      */
     @Override
     public List<Tree<String>> listDeptTrees() {
-        return getDeptTree(this.list(Wrappers.emptyWrapper()), "0");
+        return getDeptTree(this.list(Wrappers.emptyWrapper()), CommonConstants.MENU_TREE_ROOT_ID);
     }
 
     @Override
@@ -33,7 +34,7 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> impl
         String deptId = Objects.requireNonNull(SecurityUtils.getUser()).getDeptId();
         final var deptList = baseMapper.selectList(new LambdaQueryWrapper<SysDept>().eq(SysDept::getPId, deptId));
         Optional<SysDept> dept = deptList.stream().filter(item -> item.getId().equals(deptId)).findFirst();
-        return getDeptTree(deptList, dept.isPresent() ? dept.get().getPId() : "0");
+        return getDeptTree(deptList, dept.isPresent() ? dept.get().getPId() : CommonConstants.MENU_TREE_ROOT_ID);
     }
 
     @Override
