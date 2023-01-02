@@ -4,9 +4,13 @@ package cn.coderliu.controller;
 import cn.coderliu.admin.vo.GetUserDetailVo;
 import cn.coderliu.common.ReturnData;
 import cn.coderliu.model.LoginUser;
+import cn.coderliu.page.UserPageBean;
 import cn.coderliu.service.SysUserService;
 import cn.coderliu.utils.SecurityUtils;
 import cn.coderliu.vo.UserInfoVo;
+import cn.coderliu.vo.UserVO;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,16 +46,12 @@ public class SysUserController {
     }
 
     /**
-     * 通过用户名查询用户信息
+     * 分页查询用户
      *
-     * @param userName
-     * @return
+     * @param page    参数集
      */
-    @GetMapping("/test")
-    public void test(String userName) {
-        final LoginUser user = SecurityUtils.getUser();
-        System.out.println(user);
-        System.out.println("123123123");
+    @GetMapping("/page")
+    public ReturnData<IPage<UserVO>> getUserPage(UserPageBean page) {
+       return ReturnData.succeed(sysUserService.getUserWithRolePage(page));
     }
-
 }

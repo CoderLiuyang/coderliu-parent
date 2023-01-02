@@ -6,14 +6,18 @@ import cn.coderliu.enums.MenuTypeEnum;
 import cn.coderliu.mapper.SysRoleMapper;
 import cn.coderliu.mapper.SysUserMapper;
 import cn.coderliu.model.*;
+import cn.coderliu.page.UserPageBean;
 import cn.coderliu.service.*;
 import cn.coderliu.utils.SecurityUtils;
 import cn.coderliu.vo.UserInfoVo;
+import cn.coderliu.vo.UserVO;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -113,6 +117,11 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
                         .filter(m -> MenuTypeEnum.BUTTON.getType().equals(m.getMenuType())).map(SysMenu::getPerms)
                         .filter(StrUtil::isNotBlank).toArray(String[]::new))
                 .build();
+    }
+
+    @Override
+    public IPage<UserVO> getUserWithRolePage(UserPageBean page) {
+        return baseMapper.getUserWithRolePage(page);
     }
 
 
