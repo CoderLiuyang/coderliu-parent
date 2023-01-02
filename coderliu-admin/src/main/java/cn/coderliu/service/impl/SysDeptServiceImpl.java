@@ -36,6 +36,18 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> impl
         return getDeptTree(deptList, dept.isPresent() ? dept.get().getPId() : "0");
     }
 
+    @Override
+    public Boolean saveDept(SysDept sysDept) {
+        return save(sysDept);
+    }
+
+    @Override
+    public Boolean removeDeptById(String id) {
+        remove(new LambdaQueryWrapper<SysDept>().eq(SysDept::getPId, id));
+        removeById(id);
+        return Boolean.TRUE;
+    }
+
 
     /**
      * 构建部门树

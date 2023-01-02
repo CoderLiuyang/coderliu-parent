@@ -2,6 +2,7 @@ package cn.coderliu.config;
 
 
 import com.baomidou.mybatisplus.annotation.DbType;
+import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import org.mybatis.spring.annotation.MapperScan;
@@ -19,5 +20,11 @@ public class MybatisPlusConfig {
         interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.MYSQL));
         return interceptor;
     }
-
+    /**
+     * 字段自动填充
+     */
+    @Bean
+    public MybatisPlusMetaObjectHandler mybatisPlusMetaObjectHandler() {
+        return new MybatisPlusMetaObjectHandler();
+    }
 }

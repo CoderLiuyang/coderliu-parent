@@ -10,4 +10,8 @@ public interface SysDeptService extends IService<SysDept> {
     List<Tree<String>> listDeptTrees();
 
     List<Tree<String>> listCurrentUserDeptTrees();
+
+    Boolean saveDept(SysDept sysDept);
+
+    Boolean removeDeptById(String id);
 }

@@ -5,11 +5,10 @@ import cn.coderliu.model.SysDept;
 import cn.coderliu.service.SysDeptService;
 import cn.hutool.core.lang.tree.Tree;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -53,40 +52,38 @@ public class SysDeptController {
     return ReturnData.succeed(sysDeptService.listCurrentUserDeptTrees());
   }
 
-//  /**
-//   * 添加
-//   * @param sysDept 实体
-//   * @return success/false
-//   */
-//  @PostMapping
-//  @PreAuthorize("@pms.hasPermission('sys_dept_add')")
-//  public ReturnData<Boolean> save(@Valid @RequestBody SysDept sysDept) {
-//    return ReturnData.succeed(sysDeptService.saveDept(sysDept));
-//  }
-//
-//  /**
-//   * 删除
-//   * @param id ID
-//   * @return success/false
-//   */
-//  @SysLog("删除部门")
-//  @DeleteMapping("/{id:\\d+}")
-//  @PreAuthorize("@pms.hasPermission('sys_dept_del')")
-//  public R<Boolean> removeById(@PathVariable Long id) {
-//    return R.ok(sysDeptService.removeDeptById(id));
-//  }
-//
-//  /**
-//   * 编辑
-//   * @param sysDept 实体
-//   * @return success/false
-//   */
-//  @SysLog("编辑部门")
-//  @PutMapping
-//  @PreAuthorize("@pms.hasPermission('sys_dept_edit')")
-//  public R<Boolean> update(@Valid @RequestBody SysDept sysDept) {
-//    return R.ok(sysDeptService.updateDeptById(sysDept));
-//  }
+  /**
+   * 添加
+   * @param sysDept 实体
+   * @return success/false
+   */
+  @PostMapping
+  @PreAuthorize("@pms.hasPermission('sys_dept_add')")
+  public ReturnData<Boolean> save(@Valid @RequestBody SysDept sysDept) {
+    return ReturnData.succeed(sysDeptService.saveDept(sysDept));
+  }
+
+  /**
+   * 删除
+   * @param id ID
+   * @return success/false
+   */
+  @DeleteMapping("/{id}")
+  @PreAuthorize("@pms.hasPermission('sys_dept_del')")
+  public  ReturnData<Boolean> removeById(@PathVariable String id) {
+    return ReturnData.succeed(sysDeptService.removeDeptById(id));
+  }
+
+  /**
+   * 编辑
+   * @param sysDept 实体
+   * @return success/false
+   */
+  @PutMapping
+  @PreAuthorize("@pms.hasPermission('sys_dept_edit')")
+  public  ReturnData<Boolean> update(@Valid @RequestBody SysDept sysDept) {
+    return ReturnData.succeed(sysDeptService.updateById(sysDept));
+  }
 //
 //  /**
 //   * 根据部门名查询部门信息

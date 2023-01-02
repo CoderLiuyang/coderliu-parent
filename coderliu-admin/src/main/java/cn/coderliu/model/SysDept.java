@@ -16,4 +16,5 @@ public class SysDept extends BaseModel {
     private String phone;
     private String email;
     private Boolean status;
+
 }
