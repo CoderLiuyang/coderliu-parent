@@ -1,24 +1,26 @@
 package cn.coderliu.model;
 
 import com.baomidou.mybatisplus.annotation.TableId;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
+import lombok.*;
 import lombok.experimental.Accessors;
 
 import java.util.Date;
 
 /**
  * 用户岗位表
+ *
  * @author liu
  * @since 2021-03-03
  */
 @Data
-public class SysUserPost  {
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class SysUserPost extends Model<SysUserPost> {
 
-   @TableId("user_id")
-   private String userId;
+    @TableId("user_id")
+    private String userId;
 
-   private String postId;
+    private String postId;
 }

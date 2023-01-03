@@ -2,10 +2,13 @@ package cn.coderliu.service.impl;
 
 import cn.coderliu.admin.vo.GetUserDetailVo;
 import cn.coderliu.admin.vo.detail.RoleVo;
+import cn.coderliu.common.ReturnData;
 import cn.coderliu.dto.UserDTO;
 import cn.coderliu.enums.MenuTypeEnum;
 import cn.coderliu.mapper.SysRoleMapper;
 import cn.coderliu.mapper.SysUserMapper;
+import cn.coderliu.mapper.SysUserPostMapper;
+import cn.coderliu.mapper.SysUserRoleMapper;
 import cn.coderliu.model.*;
 import cn.coderliu.page.UserPageBean;
 import cn.coderliu.service.*;
@@ -18,6 +21,7 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -43,6 +47,12 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     private final SysMenuService sysMenuService;
 
     private final SysRoleMapper sysRoleMapper;
+
+    private final SysUserRoleMapper sysUserRoleMapper;
+
+    private final SysUserPostMapper sysUserPostMapper;
+
+    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Override
     public GetUserDetailVo getUserDetail(String userName) {
@@ -127,7 +137,51 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
     @Override
     public Boolean saveUser(UserDTO userDto) {
+        //新增用户
+        var user = Convert.convert(SysUser.class, userDto);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        save(user);
+        userDto.getRole().forEach(a -> {
+            SysUserRole.builder()
+                    .userId(user.getId())
+                    .roleId(a)
+                    .build()
+                    .insert();
+        });
+        userDto.getPost().forEach(a -> {
+            SysUserPost.builder()
+                    .userId(user.getId())
+                    .postId(a)
+                    .build()
+                    .insert();
+        });
         return Boolean.TRUE;
+    }
+
+    @Override
+    public ReturnData<Boolean> updateUser(UserDTO userDto) {
+        var user = Convert.convert(SysUser.class, userDto);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        updateById(user);
+        sysUserRoleMapper
+                .delete(Wrappers.<SysUserRole>update().lambda().eq(SysUserRole::getUserId, userDto.getId()));
+        userDto.getRole().forEach(a -> {
+            SysUserRole.builder()
+                    .userId(user.getId())
+                    .roleId(a)
+                    .build()
+                    .insert();
+        });
+
+        sysUserPostMapper.delete(Wrappers.<SysUserPost>lambdaQuery()
+                .eq(SysUserPost::getUserId, userDto.getId()));
+        userDto.getPost().forEach(postId -> {
+            SysUserPost userPost = new SysUserPost();
+            userPost.setUserId(user.getId());
+            userPost.setPostId(postId);
+            userPost.insert();
+        });
+        return ReturnData.succeed();
     }
 
 

@@ -12,7 +12,6 @@ import org.springframework.security.oauth2.server.authorization.OAuth2Authorizat
 import org.springframework.security.oauth2.server.authorization.OAuth2TokenType;
 import org.springframework.util.Assert;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;

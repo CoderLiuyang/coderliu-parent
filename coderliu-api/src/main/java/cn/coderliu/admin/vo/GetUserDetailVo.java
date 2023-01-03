@@ -33,7 +33,7 @@ public class GetUserDetailVo {
     /**
      * 是否启用
      */
-    private Boolean status;
+    private Integer status;
 
 
     private List<RoleVo> roles;

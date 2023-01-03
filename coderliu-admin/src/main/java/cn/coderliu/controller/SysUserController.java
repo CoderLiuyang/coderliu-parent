@@ -17,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -64,8 +65,10 @@ public class SysUserController {
      * @return
      */
     @GetMapping("/check/exsit")
-    public ReturnData<Boolean> isExsit(String  loginName) {
-        List<SysUser> sysUserList = sysUserService.list(new LambdaQueryWrapper<SysUser>().eq(SysUser::getLoginName,loginName));
+    public ReturnData<Boolean> isExsit(String loginName) {
+        List<SysUser> sysUserList = sysUserService
+                .list(new LambdaQueryWrapper<SysUser>()
+                        .eq(SysUser::getLoginName, loginName));
         if (CollUtil.isNotEmpty(sysUserList)) {
             return ReturnData.succeed(Boolean.TRUE, "用户已经存在");
         }
@@ -74,6 +77,7 @@ public class SysUserController {
 
     /**
      * 添加用户
+     *
      * @param userDto 用户信息
      * @return success/false
      */
@@ -81,5 +85,29 @@ public class SysUserController {
     @PreAuthorize("@pms.hasPermission('sys_user_add')")
     public ReturnData<Boolean> user(@RequestBody UserDTO userDto) {
         return ReturnData.succeed(sysUserService.saveUser(userDto));
+    }
+
+    /**
+     * 管理员更新用户信息
+     *
+     * @param userDto 用户信息
+     * @return R
+     */
+    @PutMapping
+    @PreAuthorize("@pms.hasPermission('sys_user_edit')")
+    public ReturnData<Boolean> updateUser(@Valid @RequestBody UserDTO userDto) {
+        return sysUserService.updateUser(userDto);
+    }
+
+    /**
+     * 删除用户信息
+     *
+     * @param id ID
+     * @return R
+     */
+    @DeleteMapping("/{id}")
+    @PreAuthorize("@pms.hasPermission('sys_user_del')")
+    public ReturnData<Boolean> userDel(@PathVariable String id) {
+        return ReturnData.succeed(sysUserService.removeById(id));
     }
 }

@@ -45,7 +45,7 @@ public class WebUserDetailsServiceImpl implements CustomUserDetailsService {
         return new LoginUser(user.getId(), user.getDeptId(), username,
                 SecurityConstants.BCRYPT + user.getPassWord(),
                 user.getPhone(), true, roles, true, true, true,
-                user.getStatus(), authorities);
+                user.getStatus() == 1, authorities);
     }
 
 

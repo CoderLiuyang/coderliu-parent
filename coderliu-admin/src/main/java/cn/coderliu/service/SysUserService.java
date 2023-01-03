@@ -1,6 +1,7 @@
 package cn.coderliu.service;
 
 import cn.coderliu.admin.vo.GetUserDetailVo;
+import cn.coderliu.common.ReturnData;
 import cn.coderliu.dto.UserDTO;
 import cn.coderliu.model.SysUser;
 import cn.coderliu.page.UserPageBean;
@@ -18,4 +19,6 @@ public interface SysUserService extends IService<SysUser> {
     IPage<UserVO> getUserWithRolePage(UserPageBean page);
 
     Boolean saveUser(UserDTO userDto);
+
+    ReturnData<Boolean> updateUser(UserDTO userDto);
 }
