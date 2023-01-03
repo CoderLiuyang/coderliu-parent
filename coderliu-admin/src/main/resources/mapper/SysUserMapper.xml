@@ -7,12 +7,13 @@
     <resultMap id="baseResultMap" type="cn.coderliu.vo.UserVO">
         <id column="id" property="id"/>
         <result column="user_name" property="userName"/>
+        <result column="login_name" property="loginName"/>
         <result column="phone" property="phone"/>
         <result column="avatar" property="avatar"/>
         <result column="create_time" property="createTime"/>
         <result column="update_time" property="updateTime"/>
         <result column="status" property="status"/>
-        <result column="udel_flag" property="delFlag"/>
+        <result column="del_flag" property="delFlag"/>
         <result column="dept_id" property="deptId"/>
         <result column="dept_name" property="deptName"/>
         <collection property="roleList" ofType="cn.coderliu.model.SysRole"
@@ -26,6 +27,7 @@
     <select id="getUserWithRolePage" resultMap="baseResultMap">
         SELECT
         a.id,
+        a.login_name,
         user_name,
         a.phone,
         avatar,
@@ -40,8 +42,8 @@
         LEFT JOIN sys_dept b ON b.id = a.dept_id
         <where>
             a.del_flag = '0'
-            <if test="username != null and username != ''">
-                and a.user_name LIKE concat('%', #{username}, '%')
+            <if test="userName != null and userName != ''">
+                and a.user_name LIKE concat('%', #{userName}, '%')
             </if>
         </where>
         ORDER BY a.create_time DESC

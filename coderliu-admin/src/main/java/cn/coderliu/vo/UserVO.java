@@ -13,6 +13,8 @@ import java.util.List;
 public class UserVO implements Serializable {
 
     private String id;
+
+    private String loginName;
     private String userName;
     private String phone;
     private String avatar;

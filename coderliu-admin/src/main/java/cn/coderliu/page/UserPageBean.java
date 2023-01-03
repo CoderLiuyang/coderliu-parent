@@ -6,5 +6,5 @@ import lombok.Data;
 @Data
 public class UserPageBean extends Page {
 
-    private String username;
+    private String userName;
 }

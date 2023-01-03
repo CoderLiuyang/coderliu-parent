@@ -2,6 +2,7 @@ package cn.coderliu.service.impl;
 
 import cn.coderliu.admin.vo.GetUserDetailVo;
 import cn.coderliu.admin.vo.detail.RoleVo;
+import cn.coderliu.dto.UserDTO;
 import cn.coderliu.enums.MenuTypeEnum;
 import cn.coderliu.mapper.SysRoleMapper;
 import cn.coderliu.mapper.SysUserMapper;
@@ -122,6 +123,11 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Override
     public IPage<UserVO> getUserWithRolePage(UserPageBean page) {
         return baseMapper.getUserWithRolePage(page);
+    }
+
+    @Override
+    public Boolean saveUser(UserDTO userDto) {
+        return Boolean.TRUE;
     }
 
 

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 
 /**
  * 角色
@@ -26,14 +28,22 @@ public class SysRoleController {
     private final SysRoleMenuService sysRoleMenuService;
 
 
-
     /**
      * 分页查询角色信息
+     *
      * @param page 分页对象
      * @return 分页对象
      */
     @GetMapping("/page")
     public ReturnData<IPage<SysRole>> getRolePage(Page page) {
         return ReturnData.succeed(sysRoleService.page(page, Wrappers.emptyWrapper()));
+    }
+
+    /**
+     * 获取角色列表
+     */
+    @GetMapping("/list")
+    public ReturnData<List<SysRole>> listRoles() {
+        return ReturnData.succeed(sysRoleService.list(Wrappers.emptyWrapper()));
     }
 }
