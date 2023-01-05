@@ -1,8 +1,10 @@
 package cn.coderliu.model;
 
+import cn.coderliu.dto.ActWorkflowFormDataDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.activiti.api.task.model.Task;
 
 /**
  * 动态单对象 act_workflow_formdata
@@ -51,6 +53,18 @@ public class ActWorkflowFormData {
     private String taskNodeName;
 
     private String createName;
-
+    public ActWorkflowFormData(String businessKey, ActWorkflowFormDataDTO actWorkflowFormDataDTO, Task task) {
+        this.businessKey = businessKey;
+        this.formKey = task.getFormKey();
+        this.controlId = actWorkflowFormDataDTO.getControlId();
+        this.controlName = actWorkflowFormDataDTO.getControlLable();
+        if ("radio".equals(actWorkflowFormDataDTO.getControlType())) {
+            int i = Integer.parseInt(actWorkflowFormDataDTO.getControlValue());
+            this.controlValue =  actWorkflowFormDataDTO.getControlDefault().split("--__--")[i];
+        }else {
+            this.controlValue = actWorkflowFormDataDTO.getControlValue();
+        }
+        this.taskNodeName = task.getName();
+    }
 
 }

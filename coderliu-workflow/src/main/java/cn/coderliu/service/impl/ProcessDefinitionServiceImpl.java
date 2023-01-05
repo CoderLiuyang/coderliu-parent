@@ -103,19 +103,20 @@ public class ProcessDefinitionServiceImpl implements IProcessDefinitionService {
 
     @Override
     public void suspendOrActiveApply(String id, Integer suspendState) {
-        if (1==suspendState) {
+        if (1 == suspendState) {
             // 当流程定义被挂起时，已经发起的该流程定义的流程实例不受影响（如果选择级联挂起则流程实例也会被挂起）。
             // 当流程定义被挂起时，无法发起新的该流程定义的流程实例。
             // 直观变化：act_re_procdef 的 SUSPENSION_STATE_ 为 2
             repositoryService.suspendProcessDefinitionById(id);
-        } else if (2==suspendState) {
+        } else if (2 == suspendState) {
             repositoryService.activateProcessDefinitionById(id);
         }
     }
 
     @Override
     public String upload(MultipartFile multipartFile) throws IOException {
-       return FileUploadUtils.upload(RuoYiConfig.getUploadPath()+"/processDefinition" , multipartFile);
+        //return FileUploadUtils.upload(RuoYiConfig.getUploadPath()+"/processDefinition" , multipartFile);
+        return null;
     }
 
     @Override

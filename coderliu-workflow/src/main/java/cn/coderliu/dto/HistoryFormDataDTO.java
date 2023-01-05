@@ -1,6 +1,8 @@
 package cn.coderliu.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 汇讯数码科技(深圳)有限公司
@@ -9,6 +11,8 @@ import lombok.Data;
  * 1.0    Danny    2020/11/3
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class HistoryFormDataDTO {
     private String title;
     private String value;
