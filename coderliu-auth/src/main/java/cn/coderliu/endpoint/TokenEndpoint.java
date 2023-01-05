@@ -1,4 +1,4 @@
- 
+
 
 package cn.coderliu.endpoint;
 
@@ -27,10 +27,6 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("/token")
 public class TokenEndpoint {
-
-    private final HttpMessageConverter<OAuth2AccessTokenResponse> accessTokenHttpResponseConverter = new OAuth2AccessTokenResponseHttpMessageConverter();
-
-    private final AuthenticationFailureHandler authenticationFailureHandler = new CustomAuthenticationFailureEventHandler();
 
     private final OAuth2AuthorizationService authorizationService;
 
