@@ -12,8 +12,7 @@ import java.util.List;
  * @author danny
  * @date 2020-11-02
  */
-public interface ActWorkflowFormDataMapper
-{
+public interface ActWorkflowFormDataMapper {
     /**
      * 查询动态单
      *
@@ -21,6 +20,7 @@ public interface ActWorkflowFormDataMapper
      * @return 动态单
      */
     public ActWorkflowFormData selectActWorkflowFormDataById(Long id);
+
     /**
      * 查询动态单
      *
@@ -52,9 +52,7 @@ public interface ActWorkflowFormDataMapper
      * @param
      * @return 结果
      */
-    public int insertActWorkflowFormDatas(@Param("createBy") String createBy, @Param("ActWorkflowFormData")List<ActWorkflowFormData> ActWorkflowFormData, Date date ,String createName);
-
-
+    public int insertActWorkflowFormDatas(@Param("createBy") String createBy, @Param("ActWorkflowFormData") List<ActWorkflowFormData> ActWorkflowFormData, Date date, String createName);
 
 
     /**

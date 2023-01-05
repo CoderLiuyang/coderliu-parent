@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.coderliu.mapper.ActReDeploymentMapper">
 
-    <resultMap type="ActReDeploymentVO" id="ActReDeploymentResult">
+    <resultMap type="cn.coderliu.vo.ActReDeploymentVO" id="ActReDeploymentResult">
         <id property="id" column="id"/>
         <result property="deployTime" column="deploy_time"/>
     </resultMap>

@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.activiti.mapper.ActWorkflowFormDataMapper">
-    <resultMap type="ActWorkflowFormData" id="ActWorkflowFormDataResult">
+<mapper namespace="cn.coderliu.mapper.ActWorkflowFormDataMapper">
+    <resultMap type="cn.coderliu.model.ActWorkflowFormData" id="ActWorkflowFormDataResult">
         <result property="id"    column="id"    />
         <result property="businessKey"    column="business_key"    />
         <result property="formKey"    column="form_key"    />
@@ -12,15 +12,17 @@
         <result property="controlValue"    column="control_value"    />
         <result property="taskNodeName"    column="task_node_name"    />
         <result property="createName"    column="create_name"    />
-        <result property="createBy"    column="create_by"    />
-        <result property="createTime"    column="create_time"    />
+<!--        <result property="createBy"    column="create_by"    />-->
+<!--        <result property="createTime"    column="create_time"    />-->
     </resultMap>
 
     <sql id="selectActWorkflowFormDataVo">
-        select id, business_key, form_key, control_id,control_name, control_value, task_node_name, create_name,create_by, create_time from act_workflow_FormData
+        select id, business_key, form_key, control_id,control_name, control_value, task_node_name, create_name
+       --      ,create_by, create_time
+        from act_workflow_FormData
     </sql>
 
-    <select id="selectActWorkflowFormDataList" parameterType="ActWorkflowFormData" resultMap="ActWorkflowFormDataResult">
+    <select id="selectActWorkflowFormDataList" parameterType="cn.coderliu.model.ActWorkflowFormData" resultMap="ActWorkflowFormDataResult">
         <include refid="selectActWorkflowFormDataVo"/>
         <where>
             <if test="businessKey != null  and businessKey != ''"> and business_key = #{businessKey}</if>
@@ -40,7 +42,7 @@
         where  business_key = #{businessKey}
     </select>
 
-    <insert id="insertActWorkflowFormData" parameterType="ActWorkflowFormData" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertActWorkflowFormData"  useGeneratedKeys="true" keyProperty="id">
         insert into act_workflow_FormData
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="businessKey != null">business_key,</if>
@@ -71,7 +73,7 @@
         </foreach>
     </insert>
 
-    <update id="updateActWorkflowFormData" parameterType="ActWorkflowFormData">
+    <update id="updateActWorkflowFormData" parameterType="cn.coderliu.model.ActWorkflowFormData">
         update act_workflow_FormData
         <trim prefix="SET" suffixOverrides=",">
             <if test="businessKey != null">business_key = #{businessKey},</if>
