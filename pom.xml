@@ -30,7 +30,7 @@
         <fastjson.version>2.0.20</fastjson.version>
         <hutool.version>5.8.10</hutool.version>
         <authorization-server.version>0.4.0</authorization-server.version>
-        <activiti.version>7.1.0.M6</activiti.version>
+        <activiti.version>7.1.0-M17</activiti.version>
     </properties>
 
 
@@ -66,9 +66,10 @@
             </dependency>
 
             <dependency>
-                <groupId>org.activiti.dependencies</groupId>
+                <groupId>org.activiti</groupId>
                 <artifactId>activiti-dependencies</artifactId>
                 <version>${activiti.version}</version>
+                <scope>import</scope>
                 <type>pom</type>
             </dependency>
 
@@ -95,13 +96,6 @@
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool.version}</version>
             </dependency>
-            <!-- https://mvnrepository.com/artifact/org.activiti/activiti-spring-boot-starter -->
-            <dependency>
-                <groupId>org.activiti</groupId>
-                <artifactId>activiti-spring-boot-starter</artifactId>
-                <version>${activiti.version}</version>
-            </dependency>
-
 
         </dependencies>
     </dependencyManagement>
