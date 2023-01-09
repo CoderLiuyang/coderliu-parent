@@ -10,7 +10,7 @@ import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
-import org.apache.commons.io.FilenameUtils;
+//import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -82,23 +82,23 @@ public class ProcessDefinitionServiceImpl implements IProcessDefinitionService {
     @Override
     public void uploadStreamAndDeployment(MultipartFile file) throws IOException {
         // 获取上传的文件名
-        String fileName = file.getOriginalFilename();
-        // 得到输入流（字节流）对象
-        InputStream fileInputStream = file.getInputStream();
-        // 文件的扩展名
-        String extension = FilenameUtils.getExtension(fileName);
-
-        if (extension.equals("zip")) {
-            ZipInputStream zip = new ZipInputStream(fileInputStream);
-            repositoryService.createDeployment()//初始化流程
-                    .addZipInputStream(zip)
-                    .deploy();
-        } else {
-            repositoryService.createDeployment()//初始化流程
-                    .addInputStream(fileName, fileInputStream)
-
-                    .deploy();
-        }
+//        String fileName = file.getOriginalFilename();
+//        // 得到输入流（字节流）对象
+//        InputStream fileInputStream = file.getInputStream();
+//        // 文件的扩展名
+//        String extension = FilenameUtils.getExtension(fileName);
+//
+//        if (extension.equals("zip")) {
+//            ZipInputStream zip = new ZipInputStream(fileInputStream);
+//            repositoryService.createDeployment()//初始化流程
+//                    .addZipInputStream(zip)
+//                    .deploy();
+//        } else {
+//            repositoryService.createDeployment()//初始化流程
+//                    .addInputStream(fileName, fileInputStream)
+//
+//                    .deploy();
+//        }
     }
 
     @Override

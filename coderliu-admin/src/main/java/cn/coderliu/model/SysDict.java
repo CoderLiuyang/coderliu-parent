@@ -25,12 +25,12 @@ public class SysDict extends BaseModel {
     /**
      * 是否是系统内置
      */
-    private Boolean systemFlag;
+    private String systemFlag;
 
     /**
      * 备注信息
      */
-    private Boolean remark;
+    private String remark;
 
 
 }

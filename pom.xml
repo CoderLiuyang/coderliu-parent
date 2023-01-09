@@ -25,6 +25,8 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>11</java.version>
 
+        <spring-cloud.version>2021.0.5</spring-cloud.version>
+        <spring-cloud-alibaba.version>2021.0.4.0</spring-cloud-alibaba.version>
 
         <mybatis-plus-version>3.5.3</mybatis-plus-version>
         <fastjson.version>2.0.20</fastjson.version>
@@ -44,6 +46,7 @@
         <module>coderliu-common</module>
         <module>coderliu-auth</module>
         <module>coderliu-workflow</module>
+        <module>coderliu-fileserver</module>
     </modules>
 
 
@@ -52,7 +55,7 @@
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>2021.0.5</version>
+                <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -60,18 +63,12 @@
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-                <version>2021.0.4.0</version>
+                <version>${spring-cloud-alibaba.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
 
-            <dependency>
-                <groupId>org.activiti</groupId>
-                <artifactId>activiti-dependencies</artifactId>
-                <version>${activiti.version}</version>
-                <scope>import</scope>
-                <type>pom</type>
-            </dependency>
+
 
             <dependency>
                 <groupId>org.springframework.security</groupId>

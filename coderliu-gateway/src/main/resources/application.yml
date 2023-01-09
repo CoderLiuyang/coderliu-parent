@@ -24,6 +24,13 @@ spring:
           filters:
             - StripPrefix=1
             - PreserveHostHeader
+        - id: admin
+          uri: lb://coderliu-workflow
+          predicates:
+            - Path=/workflow/**
+          filters:
+            - StripPrefix=1
+            - PreserveHostHeader
   application:
     name: coderliu-gateway
 

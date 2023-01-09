@@ -99,7 +99,7 @@ public class SysMenuController {
      * @param id 菜单ID
      * @return success/false
      */
-    @DeleteMapping("/{id:\\d+}")
+    @DeleteMapping("/{id}")
     @PreAuthorize("@pms.hasPermission('sys_menu_del')")
     public ReturnData<Boolean> removeById(@PathVariable String id) {
         return ReturnData.succeed(sysMenuService.removeMenuById(id));

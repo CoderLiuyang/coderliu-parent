@@ -1,4 +1,4 @@
- 
+
 
 package cn.coderliu.controller;
 
@@ -95,7 +95,7 @@ public class DictController {
     @DeleteMapping("/{id}")
     @PreAuthorize("@pms.hasPermission('sys_dict_del')")
     public ReturnData removeById(@PathVariable Long id) {
-        // sysDictService.removeDict(id);
+        sysDictService.removeById(id);
         return ReturnData.succeed();
     }
 
@@ -109,7 +109,7 @@ public class DictController {
     //@SysLog("修改字典")
     @PreAuthorize("@pms.hasPermission('sys_dict_edit')")
     public ReturnData updateById(@Valid @RequestBody SysDict sysDict) {
-        //   sysDictService.updateDict(sysDict);
+         sysDictService.updateById(sysDict);
         return ReturnData.succeed();
     }
 
@@ -158,7 +158,7 @@ public class DictController {
     //@SysLog("修改字典项")
     @PutMapping("/item")
     public ReturnData updateById(@RequestBody SysDictItem sysDictItem) {
-        // sysDictItemService.updateDictItem(sysDictItem);
+        sysDictItemService.updateById(sysDictItem);
         return ReturnData.succeed();
     }
 
@@ -171,7 +171,7 @@ public class DictController {
     //@SysLog("删除字典项")
     @DeleteMapping("/item/{id}")
     public ReturnData removeDictItemById(@PathVariable Long id) {
-        //   sysDictItemService.removeDictItem(id);
+          sysDictItemService.removeById(id);
         return ReturnData.succeed();
     }
 

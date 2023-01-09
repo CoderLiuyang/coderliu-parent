@@ -36,10 +36,18 @@
             <artifactId>coderliu-api</artifactId>
             <version>0.0.1</version>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.activiti</groupId>-->
+<!--            <artifactId>activiti-dependencies</artifactId>-->
+<!--            <version>${activiti.version}</version>-->
+<!--            <scope>import</scope>-->
+<!--            <type>pom</type>-->
+<!--        </dependency>-->
         <!-- https://mvnrepository.com/artifact/org.activiti/activiti-spring-boot-starter -->
         <dependency>
             <groupId>org.activiti</groupId>
             <artifactId>activiti-spring-boot-starter</artifactId>
+            <version>7.1.0-M17</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.mybatis</groupId>
