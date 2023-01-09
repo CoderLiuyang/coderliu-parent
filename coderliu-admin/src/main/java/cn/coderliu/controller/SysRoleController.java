@@ -1,6 +1,8 @@
 package cn.coderliu.controller;
 
+import cn.coderliu.admin.vo.detail.RoleVo;
 import cn.coderliu.common.ReturnData;
+import cn.coderliu.dto.RoleMenusDto;
 import cn.coderliu.model.SysRole;
 import cn.coderliu.service.SysRoleMenuService;
 import cn.coderliu.service.SysRoleService;
@@ -8,10 +10,10 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 
@@ -45,5 +47,27 @@ public class SysRoleController {
     @GetMapping("/list")
     public ReturnData<List<SysRole>> listRoles() {
         return ReturnData.succeed(sysRoleService.list(Wrappers.emptyWrapper()));
+    }
+
+
+    /**
+     * 更新角色菜单
+     * @param roleVo 角色对象
+     */
+    @PutMapping("/menu")
+    @PreAuthorize("@pms.hasPermission('sys_role_perm')")
+    public ReturnData<Boolean> saveRoleMenus(@RequestBody RoleMenusDto roleMenusDto) {
+      return ReturnData.succeed(sysRoleMenuService.saveRoleMenus(roleMenusDto.getRoleId(), roleMenusDto.getMenuIds()));
+    }
+
+    /**
+     * 修改角色
+     * @param sysRole 角色信息
+     * @return success/false
+     */
+    @PutMapping
+    @PreAuthorize("@pms.hasPermission('sys_role_edit')")
+    public ReturnData<Boolean> update(@Valid @RequestBody SysRole sysRole) {
+        return ReturnData.succeed(sysRoleService.updateById(sysRole));
     }
 }

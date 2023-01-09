@@ -49,6 +49,17 @@ public class SysMenuController {
     public ReturnData<List<Tree<String>>> getTree(boolean lazy, String parentId) {
         return ReturnData.succeed(sysMenuService.treeMenu(lazy, parentId));
     }
+    /**
+     * 返回角色的菜单集合
+     * @param roleId 角色ID
+     * @return 属性集合
+     */
+    @GetMapping("/tree/{roleId}")
+    public ReturnData<List<String>> getRoleTree(@PathVariable String roleId) {
+        return ReturnData.succeed(
+                sysMenuService.findMenuByRoleId(roleId).stream()
+                        .map(SysMenu::getId).collect(Collectors.toList()));
+    }
 
     /**
      * 新增菜单
