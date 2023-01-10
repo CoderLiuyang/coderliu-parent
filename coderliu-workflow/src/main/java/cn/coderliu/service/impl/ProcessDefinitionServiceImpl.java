@@ -1,141 +1,56 @@
 package cn.coderliu.service.impl;
 
-import cn.coderliu.dto.DefinitionIdDTO;
-import cn.coderliu.dto.ProcessDefinitionDTO;
-import cn.coderliu.mapper.ActReDeploymentMapper;
-import cn.coderliu.service.IProcessDefinitionService;
+import cn.coderliu.page.ProcessDefinitionPage;
+import cn.coderliu.service.ProcessDefinitionService;
+import cn.hutool.core.convert.Convert;
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import org.activiti.engine.HistoryService;
+import lombok.RequiredArgsConstructor;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.repository.ProcessDefinition;
-import org.activiti.engine.runtime.ProcessInstance;
-//import org.apache.commons.io.FilenameUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.activiti.engine.repository.ProcessDefinitionQuery;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.zip.ZipInputStream;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
- * 汇讯数码科技(深圳)有限公司
- * 创建日期:2020/10/23-9:52
- * 版本   开发者     日期
- * 1.0    Danny    2020/10/23
+ * 定义流程
  */
-
 @Service
-public class ProcessDefinitionServiceImpl implements IProcessDefinitionService {
-    @Autowired
-    private RepositoryService repositoryService;
+@RequiredArgsConstructor
+public class ProcessDefinitionServiceImpl implements ProcessDefinitionService {
 
-    @Autowired
-    private ActReDeploymentMapper actReDeploymentMapper;
-    @Autowired
-    private HistoryService historyService;
-    @Autowired
-    private RuntimeService runtimeService;
+    private final RuntimeService runtimeService;
+
+    private final RepositoryService repositoryService;
+
 
     @Override
-    public Page<ProcessDefinitionDTO> selectProcessDefinitionList(ProcessDefinitionDTO processDefinition, Page pageDomain) {
-//        Page<ProcessDefinitionDTO> list = new Page<>();
-//        ProcessDefinitionQuery processDefinitionQuery = repositoryService.createProcessDefinitionQuery().orderByProcessDefinitionId().orderByProcessDefinitionVersion().desc();
-//        if (StringUtils.isNotBlank(processDefinition.getName())) {
-//            processDefinitionQuery.processDefinitionNameLike("%" + processDefinition.getName() + "%");
-//        }
-//        if (StringUtils.isNotBlank(processDefinition.getKey())) {
-//            processDefinitionQuery.processDefinitionKeyLike("%" + processDefinition.getKey() + "%");
-//        }
-//        List<ProcessDefinition> processDefinitions = processDefinitionQuery.listPage((pageDomain.getPageNum() - 1) * pageDomain.getPageSize(), pageDomain.getPageSize());
-//        long count = processDefinitionQuery.count();
-//        list.setTotal(count);
-//        if (count!=0) {
-//            Set<String> ids = processDefinitions.parallelStream().map(pdl -> pdl.getDeploymentId()).collect(Collectors.toSet());
-//            List<ActReDeploymentVO> actReDeploymentVOS = actReDeploymentMapper.selectActReDeploymentByIds(ids);
-//            List<ProcessDefinitionDTO> processDefinitionDTOS = processDefinitions.stream()
-//                    .map(pd -> new ProcessDefinitionDTO((ProcessDefinitionEntityImpl) pd, actReDeploymentVOS.parallelStream().filter(ard -> pd.getDeploymentId().equals(ard.getId())).findAny().orElse(new ActReDeploymentVO())))
-//                    .collect(Collectors.toList());
-//            list.addAll(processDefinitionDTOS);
-//        }
-//        return list;
-        return null;
-    }
-
-    @Override
-    public DefinitionIdDTO getDefinitionsByInstanceId(String instanceId) {
-        ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().processInstanceId(instanceId).singleResult();
-        String deploymentId = processInstance.getDeploymentId();
-        ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery().deploymentId(deploymentId).singleResult();
-        return new DefinitionIdDTO(processDefinition);
-    }
-
-    @Override
-    public int deleteProcessDefinitionById(String id) {
-        repositoryService.deleteDeployment(id, false);
-        return 1;
-    }
-
-    @Override
-    public void uploadStreamAndDeployment(MultipartFile file) throws IOException {
-        // 获取上传的文件名
-//        String fileName = file.getOriginalFilename();
-//        // 得到输入流（字节流）对象
-//        InputStream fileInputStream = file.getInputStream();
-//        // 文件的扩展名
-//        String extension = FilenameUtils.getExtension(fileName);
-//
-//        if (extension.equals("zip")) {
-//            ZipInputStream zip = new ZipInputStream(fileInputStream);
-//            repositoryService.createDeployment()//初始化流程
-//                    .addZipInputStream(zip)
-//                    .deploy();
-//        } else {
-//            repositoryService.createDeployment()//初始化流程
-//                    .addInputStream(fileName, fileInputStream)
-//
-//                    .deploy();
-//        }
-    }
-
-    @Override
-    public void suspendOrActiveApply(String id, Integer suspendState) {
-        if (1 == suspendState) {
-            // 当流程定义被挂起时，已经发起的该流程定义的流程实例不受影响（如果选择级联挂起则流程实例也会被挂起）。
-            // 当流程定义被挂起时，无法发起新的该流程定义的流程实例。
-            // 直观变化：act_re_procdef 的 SUSPENSION_STATE_ 为 2
-            repositoryService.suspendProcessDefinitionById(id);
-        } else if (2 == suspendState) {
-            repositoryService.activateProcessDefinitionById(id);
+    public Page listProcessDefinition(ProcessDefinitionPage processDefinitionPage) {
+        
+        ProcessDefinitionQuery processDefinitionQuery = repositoryService.createProcessDefinitionQuery();
+        processDefinitionQuery.orderByProcessDefinitionId().orderByProcessDefinitionVersion().desc();
+        if (StrUtil.isNotBlank(processDefinitionPage.getName())) {
+            processDefinitionQuery.processDefinitionNameLike("%" + processDefinitionPage.getName() + "%");
         }
-    }
-
-    @Override
-    public String upload(MultipartFile multipartFile) throws IOException {
-        //return FileUploadUtils.upload(RuoYiConfig.getUploadPath()+"/processDefinition" , multipartFile);
-        return null;
-    }
-
-    @Override
-    public void addDeploymentByString(String stringBPMN) {
-        repositoryService.createDeployment()
-                .addString("CreateWithBPMNJS.bpmn", stringBPMN)
-                .deploy();
-    }
-
-    @Override
-    public void getProcessDefineXML(HttpServletResponse response, String deploymentId, String resourceName) throws IOException {
-        InputStream inputStream = repositoryService.getResourceAsStream(deploymentId, resourceName);
-        int count = inputStream.available();
-        byte[] bytes = new byte[count];
-        response.setContentType("text/xml");
-        OutputStream outputStream = response.getOutputStream();
-        while (inputStream.read(bytes) != -1) {
-            outputStream.write(bytes);
+        if (StrUtil.isNotBlank(processDefinitionPage.getKey())) {
+            processDefinitionQuery.processDefinitionKeyLike("%" + processDefinitionPage.getKey() + "%");
         }
-        inputStream.close();
+        if (StrUtil.isNotBlank(processDefinitionPage.getCategory())) {
+            processDefinitionQuery.processDefinitionCategoryLike("%" + processDefinitionPage.getCategory() + "%");
+        }
+        Page<cn.coderliu.model.ProcessDefinition> page = new Page<>();
+
+
+        List<ProcessDefinition> processDefinitionList = processDefinitionQuery
+                .listPage(Math.toIntExact((processDefinitionPage.getCurrent() - 1) * processDefinitionPage.getSize()),
+                        Math.toIntExact(processDefinitionPage.getSize()));
+        page.setTotal(processDefinitionQuery.count());
+        page.setRecords(processDefinitionList.stream()
+                .map(a -> Convert.convert(cn.coderliu.model.ProcessDefinition.class, a))
+                .collect(Collectors.toList()));
+        return page;
     }
 }
