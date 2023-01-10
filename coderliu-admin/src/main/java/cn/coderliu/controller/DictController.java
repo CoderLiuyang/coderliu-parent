@@ -94,7 +94,7 @@ public class DictController {
     //@SysLog("删除字典")
     @DeleteMapping("/{id}")
     @PreAuthorize("@pms.hasPermission('sys_dict_del')")
-    public ReturnData removeById(@PathVariable Long id) {
+    public ReturnData removeById(@PathVariable String id) {
         sysDictService.removeById(id);
         return ReturnData.succeed();
     }
@@ -109,7 +109,7 @@ public class DictController {
     //@SysLog("修改字典")
     @PreAuthorize("@pms.hasPermission('sys_dict_edit')")
     public ReturnData updateById(@Valid @RequestBody SysDict sysDict) {
-         sysDictService.updateById(sysDict);
+        sysDictService.updateById(sysDict);
         return ReturnData.succeed();
     }
 
@@ -170,8 +170,8 @@ public class DictController {
      */
     //@SysLog("删除字典项")
     @DeleteMapping("/item/{id}")
-    public ReturnData removeDictItemById(@PathVariable Long id) {
-          sysDictItemService.removeById(id);
+    public ReturnData removeDictItemById(@PathVariable String id) {
+        sysDictItemService.removeById(id);
         return ReturnData.succeed();
     }
 
