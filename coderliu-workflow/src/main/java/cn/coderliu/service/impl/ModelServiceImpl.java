@@ -1,5 +1,6 @@
 package cn.coderliu.service.impl;
 
+import cn.coderliu.common.ReturnData;
 import cn.coderliu.page.ModelPage;
 import cn.coderliu.service.ModelService;
 import cn.hutool.core.util.StrUtil;
@@ -42,5 +43,10 @@ public class ModelServiceImpl implements ModelService {
                 .setCurrent(modelPage.getCurrent())
                 .setSize(modelPage.getSize())
                 .setRecords(list);
+    }
+
+    @Override
+    public ReturnData save(Model modelPage) {
+        return null;
     }
 }
