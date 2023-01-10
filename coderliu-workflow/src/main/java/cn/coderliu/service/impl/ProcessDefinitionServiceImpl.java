@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.RequiredArgsConstructor;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
+import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntityImpl;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.repository.ProcessDefinitionQuery;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,6 @@ public class ProcessDefinitionServiceImpl implements ProcessDefinitionService {
 
     @Override
     public Page listProcessDefinition(ProcessDefinitionPage processDefinitionPage) {
-        
         ProcessDefinitionQuery processDefinitionQuery = repositoryService.createProcessDefinitionQuery();
         processDefinitionQuery.orderByProcessDefinitionId().orderByProcessDefinitionVersion().desc();
         if (StrUtil.isNotBlank(processDefinitionPage.getName())) {
@@ -41,16 +41,26 @@ public class ProcessDefinitionServiceImpl implements ProcessDefinitionService {
         if (StrUtil.isNotBlank(processDefinitionPage.getCategory())) {
             processDefinitionQuery.processDefinitionCategoryLike("%" + processDefinitionPage.getCategory() + "%");
         }
-        Page<cn.coderliu.model.ProcessDefinition> page = new Page<>();
-
-
         List<ProcessDefinition> processDefinitionList = processDefinitionQuery
                 .listPage(Math.toIntExact((processDefinitionPage.getCurrent() - 1) * processDefinitionPage.getSize()),
                         Math.toIntExact(processDefinitionPage.getSize()));
-        page.setTotal(processDefinitionQuery.count());
-        page.setRecords(processDefinitionList.stream()
-                .map(a -> Convert.convert(cn.coderliu.model.ProcessDefinition.class, a))
-                .collect(Collectors.toList()));
-        return page;
+        return new Page<>()
+                .setCurrent(processDefinitionPage.getCurrent())
+                .setSize(processDefinitionPage.getSize())
+                .setTotal(processDefinitionQuery.count())
+                .setRecords(processDefinitionList.stream()
+                        .map(a -> {
+                                    ProcessDefinitionEntityImpl e = (ProcessDefinitionEntityImpl) a;
+                                    cn.coderliu.model.ProcessDefinition p = Convert.convert(cn.coderliu.model.ProcessDefinition.class, a);
+                                    p.setSuspendState(String.valueOf(e.getSuspensionState()));
+                                    if (e.getSuspensionState() == 1) {
+                                        p.setSuspendStateName("已激活");
+                                    } else {
+                                        p.setSuspendStateName("已挂起");
+                                    }
+                                    return p;
+                                }
+                        )
+                        .collect(Collectors.toList()));
     }
 }

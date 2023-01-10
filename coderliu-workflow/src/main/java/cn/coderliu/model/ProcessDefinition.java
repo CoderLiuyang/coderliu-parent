@@ -1,6 +1,9 @@
 package cn.coderliu.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
@@ -8,6 +11,9 @@ import java.util.Date;
  * 流程定义
  */
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ProcessDefinition {
 
 

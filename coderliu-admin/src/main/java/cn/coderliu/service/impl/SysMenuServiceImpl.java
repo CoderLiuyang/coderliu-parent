@@ -82,7 +82,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
             extra.put("type", menu.getMenuType());
             extra.put("perms", menu.getPerms());
             extra.put("label", menu.getMenuName());
-            extra.put("sortOrder", menu.getOrderNum());
+            extra.put("orderNum", menu.getOrderNum());
             extra.put("keepAlive", menu.getKeepAlive());
             node.setExtra(extra);
             return node;

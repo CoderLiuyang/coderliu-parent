@@ -1,5 +1,6 @@
 package cn.coderliu.controller;
 
+import cn.coderliu.common.ReturnData;
 import cn.coderliu.page.ProcessDefinitionPage;
 import cn.coderliu.service.ProcessDefinitionService;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -26,8 +27,8 @@ public class ProcessDefinitionController {
      * @param processDefinition
      * @return
      */
-    @GetMapping()
-    public Page list(ProcessDefinitionPage processDefinition) {
-        return processDefinitionService.listProcessDefinition(processDefinition);
+    @GetMapping("/page")
+    public ReturnData<Page> list(ProcessDefinitionPage processDefinition) {
+        return ReturnData.succeed(processDefinitionService.listProcessDefinition(processDefinition));
     }
 }
