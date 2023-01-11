@@ -8,9 +8,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -42,6 +41,43 @@ public class SysPostController {
     @GetMapping("/list")
     public ReturnData<List<SysPost>> listPosts() {
         return ReturnData.succeed(sysPostService.list(Wrappers.emptyWrapper()));
+    }
+
+    /**
+     * 新增岗位信息表
+     *
+     * @param sysPost 岗位信息表
+     * @return R
+     */
+    @PostMapping
+    @PreAuthorize("@pms.hasPermission('sys_post_add')")
+    public ReturnData save(@RequestBody SysPost sysPost) {
+        return ReturnData.succeed(sysPostService.save(sysPost));
+    }
+
+
+    /**
+     * 修改岗位信息表
+     *
+     * @param sysPost 岗位信息表
+     * @return R
+     */
+    @PutMapping
+    @PreAuthorize("@pms.hasPermission('sys_post_edit')")
+    public ReturnData<Boolean> updateById(@RequestBody SysPost sysPost) {
+        return ReturnData.succeed(sysPostService.updateById(sysPost));
+    }
+
+    /**
+     * 通过id删除岗位信息表
+     *
+     * @param postId id
+     * @return R
+     */
+    @DeleteMapping("/{postId}")
+    @PreAuthorize("@pms.hasPermission('sys_post_del')")
+    public ReturnData removeById(@PathVariable String postId) {
+        return ReturnData.succeed(sysPostService.removeById(postId));
     }
 
 
