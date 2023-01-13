@@ -27,7 +27,7 @@ public class SysDeptController {
    * @param id ID
    * @return SysDept
    */
-  @GetMapping("/{id:\\d+}")
+  @GetMapping("/{id}")
   public ReturnData<SysDept> getById(@PathVariable String id) {
     return ReturnData.succeed(sysDeptService.getById(id));
   }
@@ -102,7 +102,7 @@ public class SysDeptController {
 //   * @return 返回子级id列表
 //   */
 //  @Inner
-//  @GetMapping(value = "/child-id/{deptId:\\d+}")
+//  @GetMapping(value = "/child-id/{deptId}")
 //  public R<List<Long>> listChildDeptId(@PathVariable Long deptId) {
 //    return R.ok(sysDeptService.listChildDeptId(deptId));
 //  }
