@@ -62,8 +62,7 @@ public class BizLeaveController {
      */
     @PostMapping("/submitProcess")
     public ReturnData submitProcess(@RequestBody BizLeave bizLeave) {
-
-        bizLeaveService.submitProcess(bizLeave);
+        bizLeaveService.submitProcess(bizLeave.getId());
         return ReturnData.succeed();
     }
 

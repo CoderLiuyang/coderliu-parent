@@ -43,6 +43,7 @@ public class ProcessServiceService implements ProcessService {
                     .instanceId(processInstance.getProcessInstanceId())
                     .taskName("task" + a.getTaskDefinitionKey().substring(0, 1).toUpperCase() + a.getTaskDefinitionKey().substring(1))
                     .todoUserName(a.getAssignee())
+                    .todoUserId(a.getAssignee())
                     .taskId(a.getId())
                     .build());
         });

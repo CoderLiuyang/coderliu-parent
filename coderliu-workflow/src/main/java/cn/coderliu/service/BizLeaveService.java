@@ -8,5 +8,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface BizLeaveService extends IService<BizLeave> {
     Page<BizLeave> getPage(BizLeavePage page);
 
-    void submitProcess(BizLeave bizLeave);
+    void submitProcess(String bizLeaveId);
 }

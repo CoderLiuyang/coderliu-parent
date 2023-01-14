@@ -50,13 +50,22 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: Asia/Shanghai
+  activiti:
+    #解决SpringAutoDeployment 问题
+    deployment-mode: never-fail
+    #校验流程文件，默认校验resources下的processes文件夹里的流程文件
+    check-process-definitions: false
+    #启动对比数据库如果有不同会创建或更新
+    database-schema-update: true
+    history-level: full
+    db-history-used: true
 
 mybatis-plus:
   global-config:
-#    db-config:
-#      logic-delete-field: delFlag  # 全局逻辑删除的实体字段名(since 3.3.0,配置后可以忽略不配置步骤2)
-#      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
-#      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
+    #    db-config:
+    #      logic-delete-field: delFlag  # 全局逻辑删除的实体字段名(since 3.3.0,配置后可以忽略不配置步骤2)
+    #      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+    #      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
     banner: false
 
 #feign全局配置
