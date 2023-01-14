@@ -1,5 +1,6 @@
 package cn.coderliu.service.impl;
 
+import cn.coderliu.dto.CompleteDto;
 import cn.coderliu.mapper.BizLeaveMapper;
 import cn.coderliu.model.BizLeave;
 import cn.coderliu.page.BizLeavePage;
@@ -36,9 +37,16 @@ public class BizLeaveServiceImpl extends ServiceImpl<BizLeaveMapper, BizLeave> i
     @Transactional(rollbackFor = Exception.class)
     public void submitProcess(String bizLeaveId) {
         BizLeave bizLeave = baseMapper.selectById(bizLeaveId);
-        ProcessInstance p = processService.submitApply(SecurityUtils.getUser().getId(), bizLeave.getId(), "leave", new HashMap<>());
+        ProcessInstance p = processService.submitApply(SecurityUtils.getUser().getId(),
+                bizLeave.getId(), "leave", bizLeave.getTitle(),
+                bizLeave.getReason(), new HashMap<>());
         bizLeave.setInstanceId(p.getProcessInstanceId());
         baseMapper.updateById(bizLeave);
+
+    }
+
+    @Override
+    public void complete(CompleteDto completeDto) {
 
     }
 }

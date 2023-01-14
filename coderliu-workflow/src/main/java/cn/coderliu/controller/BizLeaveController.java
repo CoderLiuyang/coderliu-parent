@@ -2,6 +2,7 @@ package cn.coderliu.controller;
 
 
 import cn.coderliu.common.ReturnData;
+import cn.coderliu.dto.CompleteDto;
 import cn.coderliu.model.BizLeave;
 import cn.coderliu.page.BizLeavePage;
 import cn.coderliu.service.BizLeaveService;
@@ -66,5 +67,11 @@ public class BizLeaveController {
         return ReturnData.succeed();
     }
 
+    @PostMapping("/complete")
+    public ReturnData complete(@RequestBody CompleteDto completeDto) {
 
+        bizLeaveService.complete(completeDto);
+
+        return ReturnData.succeed();
+    }
 }

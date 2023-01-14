@@ -96,17 +96,11 @@ public class BizTodoItem {
      */
     private Date handleTime;
 
-    private String userName;
 
-    private String cname;
 
-    private String phoneNo;
 
-    private String opinion;
 
-    private String deptName;
 
-    private String costItem;
 
 
 }

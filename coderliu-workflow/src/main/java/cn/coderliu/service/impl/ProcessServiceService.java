@@ -27,7 +27,7 @@ public class ProcessServiceService implements ProcessService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public ProcessInstance submitApply(String applyUserId, String businessKey, String key, Map<String, Object> variables) {
+    public ProcessInstance submitApply(String applyUserId, String businessKey, String key, String itemName, String itemContent, Map<String, Object> variables) {
 
 
         ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(key, businessKey, variables);
@@ -39,6 +39,8 @@ public class ProcessServiceService implements ProcessService {
 
         taskList.forEach(a -> {
             bizTodoItemService.save(BizTodoItem.builder()
+                    .itemName(itemName)
+                    .itemContent(itemContent)
                     .nodeName(a.getName())
                     .instanceId(processInstance.getProcessInstanceId())
                     .taskName("task" + a.getTaskDefinitionKey().substring(0, 1).toUpperCase() + a.getTaskDefinitionKey().substring(1))

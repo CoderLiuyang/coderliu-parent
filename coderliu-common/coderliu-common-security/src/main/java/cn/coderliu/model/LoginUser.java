@@ -22,6 +22,9 @@ public class LoginUser extends User implements OAuth2AuthenticatedPrincipal, Ser
     @Getter
     private String id;
 
+
+    private String userName;
+
     /**
      * 部门ID
      */
@@ -53,6 +56,7 @@ public class LoginUser extends User implements OAuth2AuthenticatedPrincipal, Ser
                      Collection<? extends GrantedAuthority> authorities) {
         super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
         this.id = id;
+        this.userName = username;
         this.deptId = deptId;
         this.phone = phone;
         this.isAdmin = isAdmin;
