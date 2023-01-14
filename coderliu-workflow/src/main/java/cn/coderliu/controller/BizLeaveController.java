@@ -70,7 +70,11 @@ public class BizLeaveController {
     @PostMapping("/complete")
     public ReturnData complete(@RequestBody CompleteDto completeDto) {
 
-        bizLeaveService.complete(completeDto);
+        try {
+            bizLeaveService.complete(completeDto);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         return ReturnData.succeed();
     }

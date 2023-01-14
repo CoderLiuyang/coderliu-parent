@@ -24,7 +24,7 @@ public class BizTodoItemController {
     public ReturnData page(Page page) {
         return ReturnData.succeed(bizTodoItemService.page(page, new LambdaQueryWrapper<BizTodoItem>()
                 .eq(BizTodoItem::getTodoUserId, SecurityUtils.getUser().getUsername())
-                .isNull(BizTodoItem::getHandleTime)
+                .isNull(BizTodoItem::getHandleUserId)
                 .orderByDesc(BizTodoItem::getHandleTime)));
     }
 

@@ -3,8 +3,10 @@ package cn.coderliu.service.impl;
 import cn.coderliu.dto.CompleteDto;
 import cn.coderliu.mapper.BizLeaveMapper;
 import cn.coderliu.model.BizLeave;
+import cn.coderliu.model.BizTodoItem;
 import cn.coderliu.page.BizLeavePage;
 import cn.coderliu.service.BizLeaveService;
+import cn.coderliu.service.BizTodoItemService;
 import cn.coderliu.service.ProcessService;
 import cn.coderliu.utils.SecurityUtils;
 import cn.hutool.core.util.StrUtil;
@@ -24,6 +26,8 @@ public class BizLeaveServiceImpl extends ServiceImpl<BizLeaveMapper, BizLeave> i
 
 
     private final ProcessService processService;
+
+    private final BizTodoItemService bizTodoItemService;
 
 
     @Override
@@ -46,7 +50,17 @@ public class BizLeaveServiceImpl extends ServiceImpl<BizLeaveMapper, BizLeave> i
     }
 
     @Override
-    public void complete(CompleteDto completeDto) {
+    @Transactional(rollbackFor = Exception.class)
+    public void complete(CompleteDto completeDto) throws Exception {
+        BizTodoItem bizTodoItem = bizTodoItemService.getById(completeDto.getId());
+        processService.complete(bizTodoItem.getTaskId(), bizTodoItem.getInstanceId(),
+                bizTodoItem.getItemName(), bizTodoItem.getItemContent(), null, new HashMap<>() {{
+                    put("flag", completeDto.getApproveStatus());
+                }});
+        bizTodoItem.setHandleUserId(SecurityUtils.getUser().getId());
+        bizTodoItem.setHandleUserName(SecurityUtils.getUser().getName());
+        bizTodoItem.setIsView("1");
+        bizTodoItem.updateById();
 
     }
 }

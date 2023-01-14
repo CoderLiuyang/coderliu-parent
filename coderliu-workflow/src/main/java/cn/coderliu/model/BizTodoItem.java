@@ -1,5 +1,6 @@
 package cn.coderliu.model;
 
+import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,7 +12,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class BizTodoItem {
+public class BizTodoItem extends Model<BizTodoItem> {
 
 
     /**
@@ -96,11 +97,7 @@ public class BizTodoItem {
      */
     private Date handleTime;
 
-
-
-
-
-
+    private Date createTime;
 
 
 }

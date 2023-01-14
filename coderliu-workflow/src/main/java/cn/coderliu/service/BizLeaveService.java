@@ -11,5 +11,5 @@ public interface BizLeaveService extends IService<BizLeave> {
 
     void submitProcess(String bizLeaveId);
 
-    void complete(CompleteDto completeDto);
+    void complete(CompleteDto completeDto) throws Exception;
 }

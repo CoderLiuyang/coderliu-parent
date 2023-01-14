@@ -55,6 +55,24 @@ public class ProcessServiceService implements ProcessService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void complete(String taskId, String instanceId, String itemName, String itemContent, String module, Map<String, Object> variables) throws Exception {
-
+        //走流程
+        taskService.complete(taskId, variables);
+        //插入todo表
+        List<Task> taskList = taskService.createTaskQuery()
+                .processInstanceId(instanceId)
+                .active()
+                .list();
+        taskList.forEach(a -> {
+            bizTodoItemService.save(BizTodoItem.builder()
+                    .itemName(itemName)
+                    .itemContent(itemContent)
+                    .nodeName(a.getName())
+                    .instanceId(instanceId)
+                    .taskName("task" + a.getTaskDefinitionKey().substring(0, 1).toUpperCase() + a.getTaskDefinitionKey().substring(1))
+                    .todoUserName(a.getAssignee())
+                    .todoUserId(a.getAssignee())
+                    .taskId(a.getId())
+                    .build());
+        });
     }
 }
