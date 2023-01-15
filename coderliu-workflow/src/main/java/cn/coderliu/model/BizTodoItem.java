@@ -87,6 +87,8 @@ public class BizTodoItem extends Model<BizTodoItem> {
      */
     private String handleUserName;
 
+    private String handleRemark;
+
     /**
      * 通知时间
      */

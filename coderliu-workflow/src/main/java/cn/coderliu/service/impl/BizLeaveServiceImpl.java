@@ -54,12 +54,13 @@ public class BizLeaveServiceImpl extends ServiceImpl<BizLeaveMapper, BizLeave> i
     public void complete(CompleteDto completeDto) throws Exception {
         BizTodoItem bizTodoItem = bizTodoItemService.getById(completeDto.getId());
         processService.complete(bizTodoItem.getTaskId(), bizTodoItem.getInstanceId(),
-                bizTodoItem.getItemName(), bizTodoItem.getItemContent(), null, new HashMap<>() {{
+                bizTodoItem.getItemName(), bizTodoItem.getItemContent(), null ,new HashMap<>() {{
                     put("flag", completeDto.getApproveStatus());
                 }});
         bizTodoItem.setHandleUserId(SecurityUtils.getUser().getId());
         bizTodoItem.setHandleUserName(SecurityUtils.getUser().getName());
-        bizTodoItem.setIsView("1");
+        bizTodoItem.setIsHandle("1");
+        bizTodoItem.setHandleRemark(completeDto.getRemark());
         bizTodoItem.updateById();
 
     }
