@@ -20,6 +20,11 @@ public class BizTodoItem extends Model<BizTodoItem> {
      */
     private String id;
 
+
+    private String applyUserId;
+    private String applyUserName;
+
+
     /**
      * 事项标题
      */

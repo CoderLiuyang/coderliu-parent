@@ -1,7 +1,11 @@
 package cn.coderliu.service.impl;
 
+import cn.coderliu.admin.feign.AdminFeignService;
+import cn.coderliu.admin.vo.GetUserVo;
+import cn.coderliu.common.R;
 import cn.coderliu.model.BizTodoItem;
 import cn.coderliu.service.ProcessService;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import lombok.RequiredArgsConstructor;
 import org.activiti.engine.TaskService;
 import org.activiti.engine.runtime.ProcessInstance;
@@ -24,6 +28,7 @@ public class ProcessServiceService implements ProcessService {
 
     private final BizTodoItemService bizTodoItemService;
 
+    private final AdminFeignService adminFeignService;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -36,9 +41,11 @@ public class ProcessServiceService implements ProcessService {
                 .processInstanceId(processInstance.getProcessInstanceId())
                 .active()
                 .list();
-
+        R<GetUserVo> getUserVo = adminFeignService.get(applyUserId);
         taskList.forEach(a -> {
             bizTodoItemService.save(BizTodoItem.builder()
+                    .applyUserId(applyUserId)
+                    .applyUserName(getUserVo.getCode() == 0 ? getUserVo.getData().getUserName() : "")
                     .itemName(itemName)
                     .itemContent(itemContent)
                     .nodeName(a.getName())
@@ -62,8 +69,15 @@ public class ProcessServiceService implements ProcessService {
                 .processInstanceId(instanceId)
                 .active()
                 .list();
+        //查询提交人
+        BizTodoItem bizTodoItem = bizTodoItemService.getOne(new LambdaQueryWrapper<BizTodoItem>()
+                .eq(BizTodoItem::getInstanceId, instanceId)
+                .orderByAsc(BizTodoItem::getId)
+                .last("limit 1"));
         taskList.forEach(a -> {
             bizTodoItemService.save(BizTodoItem.builder()
+                    .applyUserName(bizTodoItem.getApplyUserName())
+                    .applyUserId(bizTodoItem.getApplyUserId())
                     .itemName(itemName)
                     .itemContent(itemContent)
                     .nodeName(a.getName())

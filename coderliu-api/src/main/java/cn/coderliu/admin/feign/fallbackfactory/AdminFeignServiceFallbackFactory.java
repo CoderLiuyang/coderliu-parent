@@ -2,6 +2,7 @@ package cn.coderliu.admin.feign.fallbackfactory;
 
 import cn.coderliu.admin.feign.AdminFeignService;
 import cn.coderliu.admin.vo.GetUserDetailVo;
+import cn.coderliu.admin.vo.GetUserVo;
 import cn.coderliu.common.R;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.openfeign.FallbackFactory;
@@ -20,6 +21,11 @@ public class AdminFeignServiceFallbackFactory implements FallbackFactory<AdminFe
             public R<GetUserDetailVo> getUserDetail(String userName) {
                 return null;
             }
+
+           @Override
+           public R<GetUserVo> get(String id) {
+               return null;
+           }
 
        };
     }

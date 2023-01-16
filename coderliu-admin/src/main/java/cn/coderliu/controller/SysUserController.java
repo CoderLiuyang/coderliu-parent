@@ -2,6 +2,7 @@ package cn.coderliu.controller;
 
 
 import cn.coderliu.admin.vo.GetUserDetailVo;
+import cn.coderliu.admin.vo.GetUserVo;
 import cn.coderliu.common.ReturnData;
 import cn.coderliu.dto.UserDTO;
 import cn.coderliu.model.SysUser;
@@ -10,6 +11,7 @@ import cn.coderliu.service.SysUserService;
 import cn.coderliu.vo.UserInfoVo;
 import cn.coderliu.vo.UserVO;
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.convert.Convert;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -110,4 +112,17 @@ public class SysUserController {
     public ReturnData<Boolean> userDel(@PathVariable String id) {
         return ReturnData.succeed(sysUserService.removeById(id));
     }
+
+    /**
+     * 删除用户信息
+     *
+     * @param id ID
+     * @return R
+     */
+    @GetMapping("/{id}")
+    public ReturnData<GetUserVo> get(@PathVariable String id) {
+        return ReturnData.succeed(Convert.convert(GetUserVo.class, sysUserService.getById(id)));
+    }
+
+
 }
