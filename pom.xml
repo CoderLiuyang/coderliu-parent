@@ -28,11 +28,13 @@
         <spring-cloud.version>2021.0.5</spring-cloud.version>
         <spring-cloud-alibaba.version>2021.0.4.0</spring-cloud-alibaba.version>
 
-        <mybatis-plus-version>3.5.3</mybatis-plus-version>
+        <mybatis-plus.version>3.5.3</mybatis-plus.version>
+        <dynamic-ds.version>3.6.1</dynamic-ds.version>
         <fastjson.version>2.0.20</fastjson.version>
         <hutool.version>5.8.10</hutool.version>
         <authorization-server.version>0.4.0</authorization-server.version>
         <activiti.version>7.1.0-M17</activiti.version>
+        <jasypt.version>3.0.5</jasypt.version>
     </properties>
 
 
@@ -47,6 +49,7 @@
         <module>coderliu-auth</module>
         <module>coderliu-workflow</module>
         <module>coderliu-fileserver</module>
+        <module>coderliu-generate</module>
     </modules>
 
 
@@ -69,7 +72,7 @@
             </dependency>
 
 
-
+            <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-oauth2-authorization-server -->
             <dependency>
                 <groupId>org.springframework.security</groupId>
                 <artifactId>spring-security-oauth2-authorization-server</artifactId>
@@ -85,7 +88,20 @@
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
-                <version>${mybatis-plus-version}</version>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/com.baomidou/dynamic-datasource-spring-boot-starter -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
+                <version>${dynamic-ds.version}</version>
+            </dependency>
+            <!--配置文件加解密-->
+            <!-- https://mvnrepository.com/artifact/com.github.ulisesbocchio/jasypt-spring-boot-starter -->
+            <dependency>
+                <groupId>com.github.ulisesbocchio</groupId>
+                <artifactId>jasypt-spring-boot-starter</artifactId>
+                <version>${jasypt.version}</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/cn.hutool/hutool-all -->
             <dependency>
