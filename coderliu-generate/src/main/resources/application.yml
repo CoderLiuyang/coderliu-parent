@@ -70,6 +70,8 @@ feign:
     max-connections: 200
     max-connections-per-route: 50
 
-
-
+#\u52A0\u5BC6\u7EC4\u4EF6\u9700\u8981
+jasypt:
+  encryptor:
+    password: coderliu
 

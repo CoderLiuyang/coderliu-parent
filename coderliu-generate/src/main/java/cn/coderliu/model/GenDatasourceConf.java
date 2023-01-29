@@ -7,10 +7,8 @@ import lombok.Data;
  * 数据库配置对象
  */
 @Data
-public class GenDatasourceConf {
+public class GenDatasourceConf extends BaseModel{
 
-
-    private Long id;
 
     private String name;
 
