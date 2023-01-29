@@ -24,10 +24,17 @@ spring:
           filters:
             - StripPrefix=1
             - PreserveHostHeader
-        - id: admin
+        - id: workflow
           uri: lb://coderliu-workflow
           predicates:
             - Path=/workflow/**
+          filters:
+            - StripPrefix=1
+            - PreserveHostHeader
+        - id: generate
+          uri: lb://coderliu-generate
+          predicates:
+            - Path=/generate/**
           filters:
             - StripPrefix=1
             - PreserveHostHeader
