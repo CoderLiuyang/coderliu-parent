@@ -5,7 +5,6 @@ package cn.coderliu.config;
 import cn.coderliu.common.DataSourceConstants;
 import com.baomidou.dynamic.datasource.provider.AbstractJdbcDataSourceProvider;
 import com.baomidou.dynamic.datasource.spring.boot.autoconfigure.DataSourceProperty;
-import org.jasypt.encryption.StringEncryptor;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,11 +19,11 @@ public class JdbcDynamicDataSourceProvider extends AbstractJdbcDataSourceProvide
 
     private final DataSourceProperties properties;
 
-    private final StringEncryptor stringEncryptor;
+   // private final StringEncryptor stringEncryptor;
 
-    public JdbcDynamicDataSourceProvider(StringEncryptor stringEncryptor, DataSourceProperties properties) {
+    public JdbcDynamicDataSourceProvider( DataSourceProperties properties) {
         super(properties.getDriverClassName(), properties.getUrl(), properties.getUsername(), properties.getPassword());
-        this.stringEncryptor = stringEncryptor;
+      //  this.stringEncryptor = stringEncryptor;
         this.properties = properties;
     }
 
@@ -48,7 +47,8 @@ public class JdbcDynamicDataSourceProvider extends AbstractJdbcDataSourceProvide
             DataSourceProperty property = new DataSourceProperty();
             property.setUsername(username);
             property.setLazy(true);
-            //property.setPassword(stringEncryptor.decrypt(password));
+          //  String decryptPassword = stringEncryptor.decrypt(password);
+           // property.setPassword(password);
             property.setPassword(password);
             property.setUrl(url);
             map.put(name, property);

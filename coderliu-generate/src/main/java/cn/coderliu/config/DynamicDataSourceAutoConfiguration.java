@@ -4,7 +4,6 @@ package cn.coderliu.config;
 
 import com.baomidou.dynamic.datasource.processor.DsProcessor;
 import com.baomidou.dynamic.datasource.provider.DynamicDataSourceProvider;
-import org.jasypt.encryption.StringEncryptor;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -23,9 +22,9 @@ import org.springframework.context.annotation.Configuration;
 public class DynamicDataSourceAutoConfiguration {
 
 	@Bean
-	public DynamicDataSourceProvider dynamicDataSourceProvider(StringEncryptor stringEncryptor,
+	public DynamicDataSourceProvider dynamicDataSourceProvider(
 			DataSourceProperties properties) {
-		return new JdbcDynamicDataSourceProvider(stringEncryptor, properties);
+		return new JdbcDynamicDataSourceProvider( properties);
 	}
 
 	@Bean

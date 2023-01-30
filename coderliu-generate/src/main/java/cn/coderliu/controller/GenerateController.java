@@ -2,7 +2,9 @@ package cn.coderliu.controller;
 
 import cn.coderliu.common.ReturnData;
 import cn.coderliu.model.GenDatasourceConf;
+import cn.coderliu.page.GenPage;
 import cn.coderliu.service.GenDatasourceConfService;
+import cn.coderliu.service.GeneratorService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -13,16 +15,17 @@ import java.util.List;
 
 
 /**
- * 数据源配置
+ * 代码生成
  */
 @RestController
-@RequestMapping("/dsconf")
+@RequestMapping("/gen")
 @RequiredArgsConstructor
-public class GenDatasourceConfController {
+public class GenerateController {
 
 
     private final GenDatasourceConfService genDatasourceConfService;
 
+    private final GeneratorService generatorService;
 
     /**
      * 分页
@@ -31,9 +34,10 @@ public class GenDatasourceConfController {
      * @return
      */
     @GetMapping("/page")
-    public ReturnData<IPage<GenDatasourceConf>> page(Page page) {
-        return ReturnData.succeed(genDatasourceConfService.page(page));
+    public ReturnData page(GenPage page) {
+        return ReturnData.succeed(generatorService.getPage(page));
     }
+
 
 
     /**

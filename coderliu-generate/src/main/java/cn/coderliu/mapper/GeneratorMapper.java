@@ -1,6 +1,8 @@
 package cn.coderliu.mapper;
 
+import cn.coderliu.page.GenPage;
 import com.baomidou.dynamic.datasource.annotation.DS;
+import com.baomidou.mybatisplus.annotation.InterceptorIgnore;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.ibatis.annotations.Param;
@@ -17,7 +19,9 @@ public interface GeneratorMapper {
      * @param tableName
      * @return
      */
-    IPage<List<Map<String, Object>>> queryList(Page page, @Param("tableName") String tableName);
+    @DS("#dsName")
+    IPage<List<Map<String, Object>>> queryList(GenPage page, @Param("tableName") String tableName, String dsName);
+
 
     /**
      * 查询表信息
@@ -26,7 +30,7 @@ public interface GeneratorMapper {
      * @param dsName    数据源名称
      * @return
      */
-    @DS("#last")
+    @DS("#dsName")
     Map<String, String> queryTable(@Param("tableName") String tableName, String dsName);
 
     /**
@@ -36,6 +40,6 @@ public interface GeneratorMapper {
      * @param dsName    数据源名称
      * @return
      */
-    @DS("#last")
+    @DS("#dsName")
     List<Map<String, String>> queryColumns(@Param("tableName") String tableName, String dsName);
 }

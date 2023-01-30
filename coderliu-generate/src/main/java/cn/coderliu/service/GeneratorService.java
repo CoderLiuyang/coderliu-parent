@@ -1,5 +1,6 @@
 package cn.coderliu.service;
 
+import cn.coderliu.page.GenPage;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
@@ -24,6 +25,6 @@ public interface GeneratorService {
      * @param name      数据源ID
      * @return
      */
-    IPage<List<Map<String, Object>>> getPage(Page page, String tableName, String name);
+    IPage<List<Map<String, Object>>> getPage(GenPage page);
 
 }

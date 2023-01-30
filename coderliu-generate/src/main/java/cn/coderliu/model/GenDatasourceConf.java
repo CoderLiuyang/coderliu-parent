@@ -10,6 +10,7 @@ import lombok.Data;
 public class GenDatasourceConf extends BaseModel{
 
 
+
     private String name;
 
     private String url;
@@ -18,5 +19,7 @@ public class GenDatasourceConf extends BaseModel{
 
     private String password;
 
-    private Boolean delFlag;
+
+
+
 }

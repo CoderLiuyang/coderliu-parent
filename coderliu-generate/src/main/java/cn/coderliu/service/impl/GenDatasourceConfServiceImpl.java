@@ -11,7 +11,6 @@ import com.baomidou.dynamic.datasource.spring.boot.autoconfigure.DataSourcePrope
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.jasypt.encryption.StringEncryptor;
 import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
@@ -23,7 +22,7 @@ import java.sql.SQLException;
 @RequiredArgsConstructor
 public class GenDatasourceConfServiceImpl extends ServiceImpl<GenDatasourceConfMapper, GenDatasourceConf> implements GenDatasourceConfService {
 
-    private final StringEncryptor stringEncryptor;
+  //  private final StringEncryptor stringEncryptor;
 
     private final DataSourceCreator hikariDataSourceCreator;
 
@@ -35,9 +34,9 @@ public class GenDatasourceConfServiceImpl extends ServiceImpl<GenDatasourceConfM
             return Boolean.FALSE;
         }
         addDynamicDataSource(genDatasourceConf);
-        if (StrUtil.isNotBlank(genDatasourceConf.getPassword())) {
-            genDatasourceConf.setPassword(stringEncryptor.encrypt(genDatasourceConf.getPassword()));
-        }
+//        if (StrUtil.isNotBlank(genDatasourceConf.getPassword())) {
+//            genDatasourceConf.setPassword(stringEncryptor.encrypt(genDatasourceConf.getPassword()));
+//        }
 
         save(genDatasourceConf);
 
@@ -57,9 +56,9 @@ public class GenDatasourceConfServiceImpl extends ServiceImpl<GenDatasourceConfM
         // 添加动态数据源
         addDynamicDataSource(genDatasourceConf);
 
-        if (StrUtil.isNotBlank(genDatasourceConf.getPassword())) {
-            genDatasourceConf.setPassword(stringEncryptor.encrypt(genDatasourceConf.getPassword()));
-        }
+//        if (StrUtil.isNotBlank(genDatasourceConf.getPassword())) {
+//            genDatasourceConf.setPassword(stringEncryptor.encrypt(genDatasourceConf.getPassword()));
+//        }
 
 
         updateById(genDatasourceConf);
