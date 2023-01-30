@@ -18,7 +18,5 @@ public class GenDatasourceConf extends BaseModel{
 
     private String password;
 
-
-
     private Boolean delFlag;
 }

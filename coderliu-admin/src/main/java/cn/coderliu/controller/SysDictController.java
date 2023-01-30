@@ -5,6 +5,7 @@ package cn.coderliu.controller;
 import cn.coderliu.common.ReturnData;
 import cn.coderliu.model.SysDict;
 import cn.coderliu.model.SysDictItem;
+import cn.coderliu.page.SysDictPage;
 import cn.coderliu.service.SysDictItemService;
 import cn.coderliu.service.SysDictService;
 import cn.hutool.core.util.StrUtil;
@@ -12,8 +13,6 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,7 +30,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/dict")
-public class DictController {
+public class SysDictController {
 
     private final SysDictItemService sysDictItemService;
 
@@ -55,9 +54,10 @@ public class DictController {
      * @return 分页对象
      */
     @GetMapping("/page")
-    public ReturnData<IPage<SysDict>> getDictPage(Page page, SysDict sysDict) {
+    public ReturnData<IPage<SysDict>> getDictPage(SysDictPage page) {
         return ReturnData.succeed(sysDictService.page(page, Wrappers.<SysDict>lambdaQuery()
-                .like(StrUtil.isNotBlank(sysDict.getDictKey()), SysDict::getDictKey, sysDict.getDictKey())));
+                .eq(StrUtil.isNotBlank(page.getSystemFlag()), SysDict::getSystemFlag, page.getSystemFlag())
+                .like(StrUtil.isNotBlank(page.getDictKey()), SysDict::getDictKey, page.getDictKey())));
     }
 
     /**
