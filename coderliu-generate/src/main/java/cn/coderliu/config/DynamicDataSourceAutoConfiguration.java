@@ -27,9 +27,9 @@ public class DynamicDataSourceAutoConfiguration {
 		return new JdbcDynamicDataSourceProvider( properties);
 	}
 
-	@Bean
-	public DsProcessor dsProcessor() {
-		return new LastParamDsProcessor();
-	}
+//	@Bean
+//	public DsProcessor dsProcessor() {
+//		return new LastParamDsProcessor();
+//	}
 
 }
