@@ -1,13 +1,13 @@
 package cn.coderliu.dto;
 
-<#list cfg.importList as i>
+<#list importList as i>
     ${i}
 </#list>
 import lombok.*;
 import lombok.experimental.Accessors;
 
 /**
- * ${cfg.table.comment}
+ * ${table.comment}
  * @author ${author}
  * @since ${date}
  */
@@ -17,8 +17,8 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class ${cfg.entityName}Dto {
-    <#list cfg.fields as field>
+public class ${entity}Dto {
+    <#list fields as field>
         /**
          * ${field.comment}
          */

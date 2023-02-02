@@ -6,6 +6,7 @@ import cn.coderliu.model.GenDatasourceConf;
 import cn.coderliu.page.GenPage;
 import cn.coderliu.service.GenDatasourceConfService;
 import cn.coderliu.service.GeneratorService;
+import cn.coderliu.utils.GenUtils;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import lombok.RequiredArgsConstructor;
@@ -31,9 +32,9 @@ public class GeneratorServiceImpl implements GeneratorService {
 
     @Override
     public void generatorCode(GenDto data) {
-//        GenUtils.gen(data.getTableName(), data.getServerName(),
-//                genDatasourceConfService.getOne(new LambdaQueryWrapper<GenDatasourceConf>()
-//                        .eq(GenDatasourceConf::getName, data.getDsName())));
+        GenUtils.gen(data.getTableName(), data.getServerName(),
+                genDatasourceConfService.getOne(new LambdaQueryWrapper<GenDatasourceConf>()
+                        .eq(GenDatasourceConf::getName, data.getDsName())));
 
     }
 

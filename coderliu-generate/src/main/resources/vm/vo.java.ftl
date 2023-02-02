@@ -1,7 +1,7 @@
 package cn.coderliu.vo;
 
 
-<#list cfg.importList as i>
+<#list importList as i>
     ${i}
 </#list>
 import lombok.*;
@@ -9,7 +9,7 @@ import lombok.experimental.Accessors;
 
 
 /**
- * ${cfg.table.comment}
+ * ${table.comment}
  * @author ${author}
  * @since ${date}
  */
@@ -19,8 +19,12 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class ${cfg.entityName}Vo {
-    <#list cfg.fields as field>
+public class ${entity}Vo {
+
+
+
+
+    <#list fields as field>
     /**
      * ${field.comment}
      */

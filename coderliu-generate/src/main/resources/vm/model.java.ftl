@@ -1,12 +1,12 @@
 package cn.coderliu.model;
 
-<#list cfg.importList as i>
+<#list importList as i>
 ${i}
 </#list>
 import lombok.*;
 
 /**
- * ${cfg.table.comment}
+ * ${table.comment}
  * @author ${author}
  * @since ${date}
  */
@@ -16,8 +16,8 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ${cfg.entityName} extends BaseModel{
-    <#list cfg.fields as field>
+public class ${entity} extends BaseModel{
+    <#list fields as field>
     /**
     * ${field.comment}
     */
