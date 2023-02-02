@@ -1,0 +1,139 @@
+package cn.coderliu.controller;
+
+import cn.coderliu.common.ReturnData;
+import cn.hutool.core.convert.Convert;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import cn.coderliu.service.${cfg.service};
+import cn.coderliu.model.${cfg.entityName};
+import cn.coderliu.vo.${cfg.entityName}Vo;
+import cn.coderliu.dto.${cfg.entityName}Dto;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import org.springframework.util.StringUtils;
+
+/**
+ * @author ${cfg.author}
+ */
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("/${cfg.entityPath}")
+public class ${cfg.entityName}Controller {
+
+    private final ${cfg.service} ${cfg.serviceName};
+
+    /**
+   * 主键获取对象
+   */
+    @GetMapping("/{id}")
+    @PreAuthorize("@pms.hasPermission('${cfg.entityPath}_getOne')")
+    public ReturnData<${cfg.entityName}Vo> getOne(@PathVariable String id) {
+        ${cfg.entityName} ${cfg.entityPath} = ${cfg.serviceName}.getById(id);
+        return ReturnData.succeed(Convert.convert(${cfg.entityName}Vo.class,${cfg.entityPath}));
+    }
+
+
+
+    /**
+    * 分页查询
+    */
+    @GetMapping("/getPage")
+    @PreAuthorize("@pms.hasPermission('${cfg.entityPath}_getPage')")
+    public ReturnData<Page<${cfg.entityName}>> searchByPage(Page pageBean) {
+        Page<${cfg.entityName}> page = ${cfg.serviceName}
+            .page(pageBean,
+                new LambdaQueryWrapper<${cfg.entityName}>().orderByDesc(${cfg.entityName}::getCreateTime));
+        page.convert(a -> Convert.convert(${cfg.entityName}Vo.class, a));
+        return ReturnData.succeed(page);
+    }
+
+
+
+   /**
+   * 单表查询
+   */
+    @GetMapping("/getList")
+    @PreAuthorize("@pms.hasPermission('${cfg.entityPath}_getList')")
+    public ReturnData<List<${cfg.entityName}Vo>> searchByPage(@RequestBody ${cfg.entityName}Dto ${cfg.entityPath}Dto) {
+        List<${cfg.entityName}Vo> list = ${cfg.entityPath}Service
+                .list(new LambdaQueryWrapper<${cfg.entityName}>()
+                <#list cfg.fieldsList as field>
+                    .eq(!StringUtils.isEmpty(${cfg.entityPath}Dto.get${field}()),${cfg.entityName}::get${field},${cfg.entityPath}Dto.get${field}())
+                </#list>
+                        .orderByDesc(${cfg.entityName}::getCreateTime))
+                .stream()
+                .map(a -> Convert.convert(${cfg.entityName}Vo.class, a))
+                .collect(Collectors.toList());
+        return ReturnData.succeed(list);
+    }
+
+
+    /**
+    * 新增
+    */
+    @PostMapping("/add")
+    @PreAuthorize("@pms.hasPermission('${cfg.entityPath}_add')")
+    public ReturnData<Object> add(@RequestBody ${cfg.entityName}Dto ${cfg.entityPath}Dto) {
+        return ReturnData.succeed(${cfg.serviceName}.save(Convert.convert(${cfg.entityName}.class,${cfg.entityPath}Dto)));
+    }
+
+
+    /**
+    * 修改
+    */
+    @PostMapping("/update")
+    @PreAuthorize("@pms.hasPermission('${cfg.entityPath}_update')")
+    public ReturnData<Object> update(@RequestBody ${cfg.entityName}Dto ${cfg.entityPath}Dto) {
+        return ReturnData.succeed(${cfg.serviceName}.updateById(Convert.convert(${cfg.entityName}.class,${cfg.entityPath}Dto)));
+    }
+
+    /**
+    * 删除
+    */
+    @PostMapping("/delete")
+    @PreAuthorize("@pms.hasPermission('${cfg.entityPath}_delete')")
+    public ReturnData<Object> delete(@RequestBody String[] ids) {
+        ${cfg.serviceName}.removeByIds(Arrays.asList(ids));
+        return ReturnData.succeed();
+    }
+
+
+    /**
+    * 导出excel
+    *
+    * @return
+    */
+    @GetMapping("/exportExcel")
+    @PreAuthorize("@pms.hasPermission('${cfg.entityPath}_exportExcel')")
+    public ReturnData<Map<String, Object>> exportExcel(@RequestBody ${cfg.entityName}Dto ${cfg.entityPath}Dto) {
+        List<${cfg.entityName}Vo> list = ${cfg.entityPath}Service
+                .list(new LambdaQueryWrapper<${cfg.entityName}>()
+                        <#list cfg.fieldsList as field>
+                        .eq(!StringUtils.isEmpty(${cfg.entityPath}Dto.get${field}()),${cfg.entityName}::get${field},${cfg.entityPath}Dto.get${field}())
+                        </#list>
+                        .orderByDesc(${cfg.entityName}::getCreateTime))
+                .stream()
+                .map(a -> Convert.convert(${cfg.entityName}Vo.class, a))
+                .collect(Collectors.toList());
+        Map<String, Object> map = new HashMap<>(18);
+        String[] headers =
+                {
+                    ${cfg.comment}
+                };
+        String[] names =
+                {
+                    ${cfg.fieldNames}
+                };
+        map.put("headers", headers);
+        map.put("names", names);
+        map.put("list", list);
+        return ReturnData.succeed(map);
+    }
+
+}

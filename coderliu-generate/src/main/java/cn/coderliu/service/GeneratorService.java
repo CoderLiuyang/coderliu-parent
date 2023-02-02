@@ -1,5 +1,6 @@
 package cn.coderliu.service;
 
+import cn.coderliu.dto.GenDto;
 import cn.coderliu.page.GenPage;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -9,13 +10,7 @@ import java.util.Map;
 
 public interface GeneratorService {
 
-    /**
-     * 生成代码
-     *
-     * @param tableNames 表名称
-     * @return
-     */
-    void generatorCode(String tableNames);
+
 
     /**
      * 分页查询表
@@ -26,5 +21,15 @@ public interface GeneratorService {
      * @return
      */
     IPage<List<Map<String, Object>>> getPage(GenPage page);
+
+
+
+    /**
+     * 生成代码
+     *
+     * @param tableNames 表名称
+     * @return
+     */
+    void generatorCode(GenDto data);
 
 }

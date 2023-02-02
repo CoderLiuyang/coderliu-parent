@@ -22,7 +22,6 @@ import java.sql.SQLException;
 @RequiredArgsConstructor
 public class GenDatasourceConfServiceImpl extends ServiceImpl<GenDatasourceConfMapper, GenDatasourceConf> implements GenDatasourceConfService {
 
-  //  private final StringEncryptor stringEncryptor;
 
     private final DataSourceCreator hikariDataSourceCreator;
 

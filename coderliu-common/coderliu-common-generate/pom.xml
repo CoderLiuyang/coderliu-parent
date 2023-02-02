@@ -8,7 +8,7 @@
         <version>0.0.1</version>
     </parent>
     <artifactId>coderliu-common-generate</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>coderliu-common-generate</name>
     <description>coderliu-common-generate</description>
     <dependencies>
@@ -20,7 +20,7 @@
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-generator</artifactId>
-            <version>3.4.0</version>
+            <version>3.4.1</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
