@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import cn.coderliu.service.${service};
 import cn.coderliu.model.${entity};
+import cn.coderliu.page.${entity}Page;
 import cn.coderliu.vo.${entity}Vo;
 import cn.coderliu.dto.${entity}Dto;
 import java.util.Arrays;
@@ -50,7 +51,7 @@ public class ${entity}Controller {
             .page(pageBean,
                 new LambdaQueryWrapper<${entity}>()
             <#list fieldsList as field>
-                .eq(!StringUtils.isEmpty(${entity}Page.get${field}()),${entity}::get${field},${entity}Page.get${field}())
+                .eq(!StringUtils.isEmpty(pageBean.get${field}()),${entity}::get${field},pageBean.get${field}())
              </#list>
             .orderByDesc(${entity}::getCreateTime));
         page.convert(a -> Convert.convert(${entity}Vo.class, a));
@@ -100,10 +101,10 @@ public class ${entity}Controller {
     /**
     * 删除
     */
-    @De("/delete")
+    @DeleteMapping("/{id}")
     @PreAuthorize("@pms.hasPermission('${entityPath}_delete')")
-    public ReturnData<Object> delete(@RequestBody String[] ids) {
-        ${serviceName}.removeByIds(Arrays.asList(ids));
+    public ReturnData<Object> delete(@PathVariable String id) {
+        ${serviceName}.removeById(id);
         return ReturnData.succeed();
     }
 

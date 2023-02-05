@@ -72,7 +72,6 @@ public class CustomFreemarkerTemplateEngine extends FreemarkerTemplateEngine {
     @Override
     public void writer(@NotNull Map<String, Object> objectMap, @NotNull String templatePath, @NotNull File outputFile) throws Exception {
 
-
         objectMap.putAll(paramMap);
         Template template = configuration.getTemplate(templatePath);
         try (FileOutputStream fileOutputStream = new FileOutputStream(outputFile)) {
@@ -93,19 +92,36 @@ public class CustomFreemarkerTemplateEngine extends FreemarkerTemplateEngine {
     protected void outputCustomFile(@NotNull List<CustomFile> customFiles, @NotNull TableInfo tableInfo, @NotNull Map<String, Object> objectMap) {
         //加入自定义配置
         objectMap.putAll(paramMap);
-
         String entityName = tableInfo.getEntityName();
         String parentPath = getPathInfo(OutputFile.parent);
+
+        String[] split = parentPath.split("/");
+        String serverName = split[1];
+        //增加前端请求后端的服务前缀
+        objectMap.put("moduleName", serverName.split("-")[1]);
         customFiles.forEach(file -> {
             String filePath = StringUtils.isNotBlank(file.getFilePath()) ? file.getFilePath() : parentPath;
             //基于自定义类型拼接路径啊
-            filePath = filePath + File.separator + toLowerCaseFirstOne(file.getFileName().split("\\.")[0]);
+
             if (StringUtils.isNotBlank(file.getPackageName())) {
+                filePath = filePath + File.separator + toLowerCaseFirstOne(file.getFileName().split("\\.")[0]);
                 filePath = filePath + File.separator + file.getPackageName();
                 filePath = filePath.replaceAll("\\.", StringPool.BACK_SLASH + File.separator);
             }
-            String fileName = filePath + File.separator + entityName + file.getFileName();
-            outputFile(new File(fileName), objectMap, file.getTemplatePath(), file.isFileOverride());
+            if (file.getFileName().contains("java")) {
+                String fileName = filePath + File.separator + entityName + file.getFileName();
+                outputFile(new File(fileName), objectMap, file.getTemplatePath(), file.isFileOverride());
+            } else {
+                //前端页面
+
+                String[] pathSplit = filePath.split("/");
+                filePath = filePath.substring(0, filePath.length() - 16);
+                filePath = filePath + "resources/vue";
+                String fileName = filePath + File.separator + entityName + File.separator + file.getFileName();
+                outputFile(new File(fileName), objectMap, file.getTemplatePath(), file.isFileOverride());
+            }
+
+
         });
     }
 

@@ -26,7 +26,8 @@ public class GenUtils {
                             .service("service")
                             .serviceImpl("service.impl")
                             .controller("controller")
-                            .pathInfo(Collections.singletonMap(OutputFile.xml, dir + "/" + serverName + "/src/main/resources/mapper")); // 设置mapperXml生成路径
+                            .pathInfo(Collections.singletonMap(OutputFile.xml, dir + "/" + serverName + "/src/main/resources/mapper"))
+                    ; // 设置mapperXml生成路径
                 })
                 //注入表名
                 .strategyConfig(builder -> {
@@ -54,10 +55,14 @@ public class GenUtils {
 
                 .injectionConfig(consumer -> {
                     Map<String, String> customFile = new HashMap<>();
-                    // DTO
                     customFile.put("Dto.java", "/vm/dto.java.ftl");
                     customFile.put("Vo.java", "/vm/vo.java.ftl");
                     customFile.put("Page.java", "/vm/page.java.ftl");
+
+
+                    customFile.put("api.js", "/vm/vue/api.js.ftl");
+                    customFile.put("crud.js", "/vm/vue/crud.js.ftl");
+                    customFile.put("index.vue", "/vm/vue/index.vue.ftl");
                     consumer.customFile(customFile);
                 })
                 .templateEngine(new CustomFreemarkerTemplateEngine())

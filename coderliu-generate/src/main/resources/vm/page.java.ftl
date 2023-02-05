@@ -1,4 +1,4 @@
-package cn.coderliu.dto;
+package cn.coderliu.page;
 
 <#list importList as i>
     ${i}
