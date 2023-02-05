@@ -7,13 +7,18 @@ export const tableOption = {
   "align": "center",
   "searchMenuSpan": 6,
   "column": [
-#foreach ($column in fields)
-## 当列是主键 或者 列是审计字段时候， 新增不显示，编辑的时候显示单不能编辑
+
+<#list fields as field>
     {
-      "type": "input",
-      "label": "$column.comments",
-      "prop": "$column.lowerAttrName"
-    }#if($foreach.hasNext),#end
-#end
+    "type": "input",
+    "label": "${field.comment}",
+    "prop": "${field.propertyName}",
+    "addDisplay": false,
+    "editDisabled": true
+    }
+    <#if field_has_next>
+        ,
+    </#if>
+</#list>
   ]
 }
