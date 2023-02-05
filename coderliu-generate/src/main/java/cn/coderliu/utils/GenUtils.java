@@ -57,6 +57,7 @@ public class GenUtils {
                     // DTO
                     customFile.put("Dto.java", "/vm/dto.java.ftl");
                     customFile.put("Vo.java", "/vm/vo.java.ftl");
+                    customFile.put("Page.java", "/vm/page.java.ftl");
                     consumer.customFile(customFile);
                 })
                 .templateEngine(new CustomFreemarkerTemplateEngine())

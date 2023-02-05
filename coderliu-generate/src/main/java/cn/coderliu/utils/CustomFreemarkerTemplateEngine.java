@@ -98,6 +98,7 @@ public class CustomFreemarkerTemplateEngine extends FreemarkerTemplateEngine {
         String parentPath = getPathInfo(OutputFile.parent);
         customFiles.forEach(file -> {
             String filePath = StringUtils.isNotBlank(file.getFilePath()) ? file.getFilePath() : parentPath;
+            //基于自定义类型拼接路径啊
             filePath = filePath + File.separator + toLowerCaseFirstOne(file.getFileName().split("\\.")[0]);
             if (StringUtils.isNotBlank(file.getPackageName())) {
                 filePath = filePath + File.separator + file.getPackageName();

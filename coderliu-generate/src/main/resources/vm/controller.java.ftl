@@ -45,10 +45,14 @@ public class ${entity}Controller {
     */
     @GetMapping("/getPage")
     @PreAuthorize("@pms.hasPermission('${entityPath}_getPage')")
-    public ReturnData<Page<${entity}>> searchByPage(Page pageBean) {
+    public ReturnData<Page<${entity}>> searchByPage(${entity}Page pageBean) {
         Page<${entity}> page = ${serviceName}
             .page(pageBean,
-                new LambdaQueryWrapper<${entity}>().orderByDesc(${entity}::getCreateTime));
+                new LambdaQueryWrapper<${entity}>()
+            <#list fieldsList as field>
+                .eq(!StringUtils.isEmpty(${entity}Page.get${field}()),${entity}::get${field},${entity}Page.get${field}())
+             </#list>
+            .orderByDesc(${entity}::getCreateTime));
         page.convert(a -> Convert.convert(${entity}Vo.class, a));
         return ReturnData.succeed(page);
     }
@@ -60,7 +64,7 @@ public class ${entity}Controller {
    */
     @GetMapping("/getList")
     @PreAuthorize("@pms.hasPermission('${entityPath}_getList')")
-    public ReturnData<List<${entity}Vo>> searchByPage(@RequestBody ${entity}Dto ${entityPath}Dto) {
+    public ReturnData<List<${entity}Vo>> searchByList(@RequestBody ${entity}Dto ${entityPath}Dto) {
         List<${entity}Vo> list = ${entityPath}Service
                 .list(new LambdaQueryWrapper<${entity}>()
                 <#list fieldsList as field>
@@ -77,7 +81,7 @@ public class ${entity}Controller {
     /**
     * 新增
     */
-    @PostMapping("/add")
+    @PostMapping
     @PreAuthorize("@pms.hasPermission('${entityPath}_add')")
     public ReturnData<Object> add(@RequestBody ${entity}Dto ${entityPath}Dto) {
         return ReturnData.succeed(${serviceName}.save(Convert.convert(${entity}.class,${entityPath}Dto)));
@@ -87,7 +91,7 @@ public class ${entity}Controller {
     /**
     * 修改
     */
-    @PostMapping("/update")
+    @PutMapping
     @PreAuthorize("@pms.hasPermission('${entityPath}_update')")
     public ReturnData<Object> update(@RequestBody ${entity}Dto ${entityPath}Dto) {
         return ReturnData.succeed(${serviceName}.updateById(Convert.convert(${entity}.class,${entityPath}Dto)));
@@ -96,7 +100,7 @@ public class ${entity}Controller {
     /**
     * 删除
     */
-    @PostMapping("/delete")
+    @De("/delete")
     @PreAuthorize("@pms.hasPermission('${entityPath}_delete')")
     public ReturnData<Object> delete(@RequestBody String[] ids) {
         ${serviceName}.removeByIds(Arrays.asList(ids));

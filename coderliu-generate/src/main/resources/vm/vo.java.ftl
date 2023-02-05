@@ -21,7 +21,7 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 public class ${entity}Vo {
 
-
+    private String id;
 
 
     <#list fields as field>

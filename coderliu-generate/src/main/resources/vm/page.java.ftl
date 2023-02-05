@@ -5,9 +5,10 @@ package cn.coderliu.dto;
 </#list>
 import lombok.*;
 import lombok.experimental.Accessors;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 /**
- * ${table.comment}
+ * ${table.comment} 分页对象
  * @author ${author}
  * @since ${date}
  */
@@ -17,10 +18,9 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class ${entity}Dto {
+public class ${entity}Page extends Page{
 
     private String id;
-
 
     <#list fields as field>
         /**
