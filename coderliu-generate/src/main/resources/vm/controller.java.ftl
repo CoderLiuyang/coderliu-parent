@@ -44,8 +44,8 @@ public class ${entity}Controller {
     /**
     * 分页查询
     */
-    @GetMapping("/getPage")
-    @PreAuthorize("@pms.hasPermission('${entityPath}_getPage')")
+    @GetMapping("/page")
+    @PreAuthorize("@pms.hasPermission('${entityPath}_page')")
     public ReturnData<Page<${entity}>> searchByPage(${entity}Page pageBean) {
         Page<${entity}> page = ${serviceName}
             .page(pageBean,
@@ -63,8 +63,8 @@ public class ${entity}Controller {
    /**
    * 单表查询
    */
-    @GetMapping("/getList")
-    @PreAuthorize("@pms.hasPermission('${entityPath}_getList')")
+    @GetMapping("/list")
+    @PreAuthorize("@pms.hasPermission('${entityPath}_list')")
     public ReturnData<List<${entity}Vo>> searchByList(@RequestBody ${entity}Dto ${entityPath}Dto) {
         List<${entity}Vo> list = ${entityPath}Service
                 .list(new LambdaQueryWrapper<${entity}>()

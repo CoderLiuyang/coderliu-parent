@@ -66,12 +66,12 @@
                 })
             },
             rowDel: function (row, index) {
-                this.$confirm('是否确认删除ID为' + row.$pk.lowerAttrName, '提示', {
+                this.$confirm('是否确认删除ID为' +id, '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(function () {
-                    return delObj(row.$pk.lowerAttrName)
+                    return delObj(row.id)
                 }).then(data => {
                     this.$message.success('删除成功')
                     this.getList(this.page)

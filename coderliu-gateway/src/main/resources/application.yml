@@ -38,6 +38,13 @@ spring:
           filters:
             - StripPrefix=1
             - PreserveHostHeader
+        - id: business
+          uri: lb://coderliu-business
+          predicates:
+            - Path=/business/**
+          filters:
+            - StripPrefix=1
+            - PreserveHostHeader
   application:
     name: coderliu-gateway
 

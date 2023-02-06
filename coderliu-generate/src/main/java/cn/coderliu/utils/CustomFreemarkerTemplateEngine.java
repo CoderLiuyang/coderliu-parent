@@ -102,13 +102,12 @@ public class CustomFreemarkerTemplateEngine extends FreemarkerTemplateEngine {
         customFiles.forEach(file -> {
             String filePath = StringUtils.isNotBlank(file.getFilePath()) ? file.getFilePath() : parentPath;
             //基于自定义类型拼接路径啊
-
             if (StringUtils.isNotBlank(file.getPackageName())) {
-                filePath = filePath + File.separator + toLowerCaseFirstOne(file.getFileName().split("\\.")[0]);
                 filePath = filePath + File.separator + file.getPackageName();
                 filePath = filePath.replaceAll("\\.", StringPool.BACK_SLASH + File.separator);
             }
             if (file.getFileName().contains("java")) {
+                filePath = filePath + File.separator + toLowerCaseFirstOne(file.getFileName().split("\\.")[0]);
                 String fileName = filePath + File.separator + entityName + file.getFileName();
                 outputFile(new File(fileName), objectMap, file.getTemplatePath(), file.isFileOverride());
             } else {
