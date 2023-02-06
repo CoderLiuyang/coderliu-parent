@@ -1,20 +1,19 @@
 package cn.coderliu.controller;
 
 import cn.coderliu.common.ReturnData;
+import cn.coderliu.dto.ModelDto;
 import cn.coderliu.page.ModelPage;
 import cn.coderliu.service.ModelService;
 import lombok.RequiredArgsConstructor;
-import org.activiti.engine.repository.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 模型定义
  */
 @RestController
 @RequiredArgsConstructor
+@Slf4j
 @RequestMapping("/model")
 public class ModelController {
 
@@ -32,12 +31,25 @@ public class ModelController {
     }
 
     /**
-     * 模型分页查询
-     *
-     * @return
+     * 保存模型
      */
-    @PostMapping()
-    public ReturnData save(Model modelPage) {
-        return modelService.save(modelPage);
+    @PostMapping
+    public ReturnData save(@RequestBody ModelDto modelDto) {
+        try {
+            return modelService.save(modelDto);
+        } catch (Exception e) {
+            log.error("保存模型报错！", e);
+        }
+        return null;
     }
+
+    /**
+     * 删除模型
+     */
+    @DeleteMapping("/{id}")
+    public ReturnData delete(@PathVariable String id) {
+        return modelService.delete(id);
+    }
+
+
 }
