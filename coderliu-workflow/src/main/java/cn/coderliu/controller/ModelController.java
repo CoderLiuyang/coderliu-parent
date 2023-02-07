@@ -31,6 +31,14 @@ public class ModelController {
     }
 
     /**
+     * 通过id获取模型json
+     */
+    @GetMapping("/{id}/json")
+    public ReturnData getJson(@PathVariable String id) {
+        return modelService.getJson(id);
+    }
+
+    /**
      * 保存模型
      */
     @PostMapping

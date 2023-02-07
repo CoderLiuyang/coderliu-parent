@@ -14,4 +14,6 @@ public interface ModelService {
     ReturnData save(ModelDto modelDto) throws Exception;
 
     ReturnData delete(String id);
+
+    ReturnData getJson(String id);
 }

@@ -9,13 +9,14 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.activiti.engine.ActivitiException;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.repository.Model;
 import org.activiti.engine.repository.ModelQuery;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 /**
@@ -23,9 +24,14 @@ import java.util.List;
  */
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ModelServiceImpl implements ModelService {
 
     private final RepositoryService repositoryService;
+
+
+    private final ObjectMapper objectMapper;
+
 
     @Override
     public Page page(ModelPage modelPage) {
@@ -79,5 +85,31 @@ public class ModelServiceImpl implements ModelService {
     public ReturnData delete(String id) {
         repositoryService.deleteModel(id);
         return ReturnData.succeed();
+    }
+
+    @Override
+    public ReturnData getJson(String id) {
+        ObjectNode modelNode = null;
+
+        Model model = repositoryService.getModel(id);
+
+        if (model != null) {
+            try {
+                if (StringUtils.isNotEmpty(model.getMetaInfo())) {
+                    modelNode = (ObjectNode) objectMapper.readTree(model.getMetaInfo());
+                } else {
+                    modelNode = objectMapper.createObjectNode();
+                    modelNode.put("name", model.getName());
+                }
+                modelNode.put("modelId", model.getId());
+                ObjectNode editorJsonNode = (ObjectNode) objectMapper.readTree(
+                        new String(repositoryService.getModelEditorSource(model.getId()), "utf-8"));
+                modelNode.put("model", editorJsonNode);
+
+            } catch (Exception e) {
+                log.error("Error creating model JSON", e);
+            }
+        }
+        return ReturnData.succeed(modelNode);
     }
 }
