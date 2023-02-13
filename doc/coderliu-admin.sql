@@ -11,7 +11,7 @@
  Target Server Version : 80031 (8.0.31)
  File Encoding         : 65001
 
- Date: 14/01/2023 22:23:47
+ Date: 13/02/2023 08:30:39
 */
 
 SET NAMES utf8mb4;
@@ -338,6 +338,8 @@ CREATE TABLE `sys_dict`  (
 -- ----------------------------
 INSERT INTO `sys_dict` VALUES ('1', 'dict_type', '字典类型', NULL, '0', b'0', NULL, '2019-05-16 14:16:20', '', 'admin', '2023-01-09 15:11:50');
 INSERT INTO `sys_dict` VALUES ('1614135588571758593', 'approve_status', '请假审核状态', '', '1', b'0', NULL, '2023-01-14 13:41:28', 'admin', 'admin', '2023-01-14 13:41:28');
+INSERT INTO `sys_dict` VALUES ('1619876958200582145', '服务名', '微服务中的具体服务名', '微服务中的具体服务名', '1', b'1', NULL, '2023-01-30 09:55:37', 'admin', 'admin', '2023-01-30 09:55:53');
+INSERT INTO `sys_dict` VALUES ('1619877151750934529', 'server_name', '服务名', '微服务中的服务名', '1', b'0', NULL, '2023-01-30 09:56:23', 'admin', 'admin', '2023-01-30 09:58:19');
 INSERT INTO `sys_dict` VALUES ('2', 'log_type', '日志类型', NULL, '0', b'0', NULL, '2020-03-13 14:21:01', '', 'admin', '2021-12-29 12:30:14');
 INSERT INTO `sys_dict` VALUES ('3', 'ds_type', '驱动类型', NULL, '0', b'0', NULL, '2021-10-15 16:24:35', '', 'admin', '2021-12-29 12:30:18');
 INSERT INTO `sys_dict` VALUES ('4', 'param_type', '参数配置', '检索、原文、报表、安全、文档、消息、其他', '0', b'0', NULL, '2022-03-25 20:51:26', 'admin', 'admin', '2022-03-25 20:51:26');
@@ -386,6 +388,8 @@ INSERT INTO `sys_dict_item` VALUES ('15', '4', 'param_type', '3', '报表', NULL
 INSERT INTO `sys_dict_item` VALUES ('16', '4', 'param_type', '4', '安全', NULL, '安全', 3, '安全', '0', '2022-03-25 20:52:32', 'admin', 'admin', '2022-03-25 20:52:32', 0);
 INSERT INTO `sys_dict_item` VALUES ('1614135750224429057', '1614135588571758593', 'approve_status', '1', '同意', NULL, '审核通过', 1, '', '0', '2023-01-14 13:42:07', 'admin', 'admin', '2023-01-14 13:42:07', 0);
 INSERT INTO `sys_dict_item` VALUES ('1614135814485360642', '1614135588571758593', 'approve_status', '0', '拒绝', NULL, '审核拒绝', 2, '', '0', '2023-01-14 13:42:22', 'admin', 'admin', '2023-01-14 13:42:41', 0);
+INSERT INTO `sys_dict_item` VALUES ('1619877324686282753', '1619877151750934529', 'server_name', 'coderliu-admin', '用户权限服务', NULL, '用户权限服务', 1, '', '0', '2023-01-30 09:57:05', 'admin', 'admin', '2023-02-02 09:20:37', 0);
+INSERT INTO `sys_dict_item` VALUES ('1619877568857690114', '1619877151750934529', 'server_name', 'coderliu-business', '业务服务', NULL, '业务服务', 2, '', '0', '2023-01-30 09:58:03', 'admin', 'admin', '2023-02-02 09:20:43', 0);
 INSERT INTO `sys_dict_item` VALUES ('17', '4', 'param_type', '5', '文档', NULL, '文档', 4, '文档', '0', '2022-03-25 20:52:52', 'admin', 'admin', '2022-03-25 20:52:52', 0);
 INSERT INTO `sys_dict_item` VALUES ('18', '4', 'param_type', '6', '消息', NULL, '消息', 5, '消息', '0', '2022-03-25 20:53:07', 'admin', 'admin', '2022-03-25 20:53:07', 0);
 INSERT INTO `sys_dict_item` VALUES ('19', '4', 'param_type', '9', '其他', NULL, '其他', 6, '其他', '0', '2022-03-25 20:54:50', 'admin', 'admin', '2022-03-25 20:54:50', 0);
@@ -474,6 +478,10 @@ INSERT INTO `sys_menu` VALUES ('1612693772701941761', '1612693076061601794', '�
 INSERT INTO `sys_menu` VALUES ('1612696623608119297', '1611544352958660610', '画流程', 2, '/workflow/model/index', '', '0', b'1', NULL, 'icon-rizhi1', '', '1', b'0', 'admin', '2023-01-10 14:23:32', 'admin', '2023-01-10 14:25:06', 0);
 INSERT INTO `sys_menu` VALUES ('1613343248932347905', '-1', '请假流程', 4, '/leave', '', '0', b'1', NULL, 'icon-shouji', '', '1', b'0', 'admin', '2023-01-12 09:13:00', 'admin', '2023-01-12 09:13:07', 0);
 INSERT INTO `sys_menu` VALUES ('1613343555233980418', '1613343248932347905', '测试请假', 1, '/leave/manager/index', '', '0', b'1', NULL, 'icon-cuowutishitubiao', '', '0', b'0', 'admin', '2023-01-12 09:14:13', 'admin', '2023-01-12 10:47:44', 0);
+INSERT INTO `sys_menu` VALUES ('1619160105283096578', '1612262112118349825', '代码生成', 3, '/tool/gen/index', '', '0', b'1', NULL, 'icon-quanxianshezhi', '', '1', b'0', 'admin', '2023-01-28 10:27:06', 'admin', '2023-01-30 09:35:42', 0);
+INSERT INTO `sys_menu` VALUES ('1619603929449009154', '1612262112118349825', '数据源管理', 2, '/tool/database/index', '', '0', b'1', NULL, 'icon-quanxianguanli1', '', '1', b'0', 'admin', '2023-01-29 15:50:42', 'admin', '2023-01-30 09:35:46', 0);
+INSERT INTO `sys_menu` VALUES ('1622120549375459329', '-1', '业务目录', 6, '/bus', '', '0', b'1', NULL, 'icon-dongtai', '', '0', b'0', 'admin', '2023-02-05 14:30:51', 'admin', '2023-02-05 14:32:21', 0);
+INSERT INTO `sys_menu` VALUES ('1622121062137511937', '1622120549375459329', '测试页面', 1, '/bus/test/index', '', '0', b'1', NULL, 'icon-huaban88', '', '0', b'0', 'admin', '2023-02-05 14:32:53', 'admin', '2023-02-05 14:32:53', 0);
 
 -- ----------------------------
 -- Table structure for sys_oauth_client_details
@@ -624,9 +632,46 @@ INSERT INTO `sys_role_menu` VALUES ('1', '1612693772701941761');
 INSERT INTO `sys_role_menu` VALUES ('1', '1612696623608119297');
 INSERT INTO `sys_role_menu` VALUES ('1', '1613343248932347905');
 INSERT INTO `sys_role_menu` VALUES ('1', '1613343555233980418');
+INSERT INTO `sys_role_menu` VALUES ('1', '1619160105283096578');
+INSERT INTO `sys_role_menu` VALUES ('1', '1619603929449009154');
+INSERT INTO `sys_role_menu` VALUES ('1', '1622120549375459329');
+INSERT INTO `sys_role_menu` VALUES ('1', '1622121062137511937');
+INSERT INTO `sys_role_menu` VALUES ('2', '1000');
+INSERT INTO `sys_role_menu` VALUES ('2', '1001');
+INSERT INTO `sys_role_menu` VALUES ('2', '1002');
+INSERT INTO `sys_role_menu` VALUES ('2', '10021');
+INSERT INTO `sys_role_menu` VALUES ('2', '10022');
+INSERT INTO `sys_role_menu` VALUES ('2', '10023');
+INSERT INTO `sys_role_menu` VALUES ('2', '1003');
+INSERT INTO `sys_role_menu` VALUES ('2', '1004');
+INSERT INTO `sys_role_menu` VALUES ('2', '10041');
+INSERT INTO `sys_role_menu` VALUES ('2', '10042');
+INSERT INTO `sys_role_menu` VALUES ('2', '10043');
+INSERT INTO `sys_role_menu` VALUES ('2', '1005');
+INSERT INTO `sys_role_menu` VALUES ('2', '10051');
+INSERT INTO `sys_role_menu` VALUES ('2', '10052');
+INSERT INTO `sys_role_menu` VALUES ('2', '10053');
+INSERT INTO `sys_role_menu` VALUES ('2', '1610078611927404545');
+INSERT INTO `sys_role_menu` VALUES ('2', '1610078693573726209');
+INSERT INTO `sys_role_menu` VALUES ('2', '1611534839077601282');
+INSERT INTO `sys_role_menu` VALUES ('2', '1611534952214757378');
+INSERT INTO `sys_role_menu` VALUES ('2', '1611535071442042882');
+INSERT INTO `sys_role_menu` VALUES ('2', '1611535148386549761');
+INSERT INTO `sys_role_menu` VALUES ('2', '1611544352958660610');
+INSERT INTO `sys_role_menu` VALUES ('2', '1611544641568718850');
+INSERT INTO `sys_role_menu` VALUES ('2', '1612262112118349825');
+INSERT INTO `sys_role_menu` VALUES ('2', '1612262526511390722');
+INSERT INTO `sys_role_menu` VALUES ('2', '1612267160479117314');
+INSERT INTO `sys_role_menu` VALUES ('2', '1612267224207372290');
+INSERT INTO `sys_role_menu` VALUES ('2', '1612267285687480321');
 INSERT INTO `sys_role_menu` VALUES ('2', '1612693076061601794');
 INSERT INTO `sys_role_menu` VALUES ('2', '1612693522096472065');
 INSERT INTO `sys_role_menu` VALUES ('2', '1612693772701941761');
+INSERT INTO `sys_role_menu` VALUES ('2', '1612696623608119297');
+INSERT INTO `sys_role_menu` VALUES ('2', '1613343248932347905');
+INSERT INTO `sys_role_menu` VALUES ('2', '1613343555233980418');
+INSERT INTO `sys_role_menu` VALUES ('2', '1619160105283096578');
+INSERT INTO `sys_role_menu` VALUES ('2', '1619603929449009154');
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -661,8 +706,9 @@ CREATE TABLE `sys_user`  (
 -- ----------------------------
 INSERT INTO `sys_user` VALUES ('1', '100', 'admin', '超级码农', 'hanshijie@qijin.net', '15888888888', '0', '/profile/avatar/2022/02/10/46bd3de2-81b7-4a72-bf4a-e3761b0f3384.png', '$2a$10$kjAtkA7Z6/MhK/ePMEALsOdJHRxzlA99BOw0X57ibeS1j2PyPYZxu', b'1', '124.239.218.142', '2022-12-16 14:04:55', '2022-04-02 10:40:20', '管理员', b'0', 'admin', '2021-04-29 13:41:30', '', '2022-12-16 14:04:54', 0);
 INSERT INTO `sys_user` VALUES ('1611567220538949633', '273', 'coderliu', 'coderliu', '', '15839999999', '0', '', '$2a$10$Ascl3yHL.PJsiUT64UCV0u9ZdRMG/IJ/YFyub1ehHtcqdVUxnsOre', b'1', '', NULL, NULL, NULL, b'0', 'admin', '2023-01-07 11:35:42', 'admin', '2023-01-07 11:37:36', 0);
-INSERT INTO `sys_user` VALUES ('1614100213245591553', '205', 'jingli', 'jingli', '', '18888888888', '0', '', '$2a$10$BCvwbD0ISlMHoSSNLKnWZ.3Lnmq6BCThaRSy6c.AzlNkOKL5bbkdm', b'1', '', NULL, NULL, NULL, b'0', 'admin', '2023-01-14 11:20:54', 'admin', '2023-01-14 14:11:10', 0);
-INSERT INTO `sys_user` VALUES ('1614136542188716034', '273', 'renshi', 'renshi', '', '18888888888', '0', '', '$2a$10$aqCaGOL4EGxsyAdyNOQLqODBv3iAsFNAmB6fGsF2mxmYtYDuw8aPW', b'1', '', NULL, NULL, NULL, b'0', 'admin', '2023-01-14 13:45:16', 'admin', '2023-01-14 13:45:16', 0);
+INSERT INTO `sys_user` VALUES ('1614100213245591553', '205', 'jingli', '刘经理', '', '18888888888', '0', '', '$2a$10$Qu5NjrYd0sQKwZbsezcsX.Bl0PLOfh7vAedxQTpKo6Q6FiksxZcJ2', b'1', '', NULL, NULL, NULL, b'0', 'admin', '2023-01-14 11:20:54', 'admin', '2023-01-16 09:21:59', 0);
+INSERT INTO `sys_user` VALUES ('1614136542188716034', '273', 'renshi', '王人事', '', '18888888888', '0', '', '$2a$10$AFY4kh14Bk8vzC8i.ohife/D3XcT5R/ZMJ0QqIMAjbYMYZEsjLy8e', b'1', '', NULL, NULL, NULL, b'0', 'admin', '2023-01-14 13:45:16', 'admin', '2023-01-16 09:21:45', 0);
+INSERT INTO `sys_user` VALUES ('1614653179220389890', '273', 'laoban', '张老板', '', '18888888888', '0', '', '$2a$10$bAcT4vgj4/5.1puM1n6n7uGF9oC/sk62fzO2tJiBBieJyaEwAflDG', b'1', '', NULL, NULL, NULL, b'0', 'admin', '2023-01-15 23:58:11', 'admin', '2023-01-16 09:21:34', 0);
 
 -- ----------------------------
 -- Table structure for sys_user_post
@@ -681,6 +727,7 @@ INSERT INTO `sys_user_post` VALUES ('1', '3');
 INSERT INTO `sys_user_post` VALUES ('1611567220538949633', '1');
 INSERT INTO `sys_user_post` VALUES ('1614100213245591553', '1');
 INSERT INTO `sys_user_post` VALUES ('1614136542188716034', '1');
+INSERT INTO `sys_user_post` VALUES ('1614653179220389890', '3');
 
 -- ----------------------------
 -- Table structure for sys_user_role
@@ -699,5 +746,6 @@ INSERT INTO `sys_user_role` VALUES ('1', '1');
 INSERT INTO `sys_user_role` VALUES ('1611567220538949633', '1');
 INSERT INTO `sys_user_role` VALUES ('1614100213245591553', '2');
 INSERT INTO `sys_user_role` VALUES ('1614136542188716034', '2');
+INSERT INTO `sys_user_role` VALUES ('1614653179220389890', '2');
 
 SET FOREIGN_KEY_CHECKS = 1;
