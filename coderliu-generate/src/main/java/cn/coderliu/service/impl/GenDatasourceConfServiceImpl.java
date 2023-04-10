@@ -3,7 +3,6 @@ package cn.coderliu.service.impl;
 import cn.coderliu.mapper.GenDatasourceConfMapper;
 import cn.coderliu.model.GenDatasourceConf;
 import cn.coderliu.service.GenDatasourceConfService;
-import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.spring.SpringUtil;
 import com.baomidou.dynamic.datasource.DynamicRoutingDataSource;
 import com.baomidou.dynamic.datasource.creator.DataSourceCreator;
