@@ -1,9 +1,10 @@
 package cn.coderliu.utils;
 
 import cn.hutool.core.convert.Convert;
+import org.apache.commons.lang3.time.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.*;
 import java.util.Date;
@@ -15,6 +16,13 @@ import java.util.Date;
  */
 @SuppressWarnings("rawtypes")
 public class ReflectUtils {
+
+    private static String[] parsePatterns = {
+            "yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm", "yyyy-MM",
+            "yyyy/MM/dd", "yyyy/MM/dd HH:mm:ss", "yyyy/MM/dd HH:mm", "yyyy/MM",
+            "yyyy.MM.dd", "yyyy.MM.dd HH:mm:ss", "yyyy.MM.dd HH:mm", "yyyy.MM"};
+
+
     private static final String SETTER_PREFIX = "set";
 
     private static final String GETTER_PREFIX = "get";
@@ -148,10 +156,12 @@ public class ReflectUtils {
                         args[i] = Convert.toFloat(args[i]);
                     } else if (cs[i] == Date.class) {
                         if (args[i] instanceof String) {
-                            args[i] = DateUtils.parseDate(args[i]);
-                        } else {
-                            args[i] = DateUtil.getJavaDate((Double) args[i]);
+                            args[i] = DateUtils.parseDate((String) args[i], parsePatterns);
                         }
+                        //小数先不考虑
+//                        else {
+//                            args[i] = DateUtil.getJavaDate((Double) args[i]);
+//                        }
                     } else if (cs[i] == boolean.class || cs[i] == Boolean.class) {
                         args[i] = Convert.toBool(args[i]);
                     }
@@ -173,7 +183,7 @@ public class ReflectUtils {
         if (obj == null) {
             return null;
         }
-        Validate.notBlank(fieldName, "fieldName can't be blank");
+        //Validate.notBlank(fieldName, "fieldName can't be blank");
         for (Class<?> superClass = obj.getClass(); superClass != Object.class; superClass = superClass.getSuperclass()) {
             try {
                 Field field = superClass.getDeclaredField(fieldName);
@@ -198,7 +208,7 @@ public class ReflectUtils {
         if (obj == null) {
             return null;
         }
-        Validate.notBlank(methodName, "methodName can't be blank");
+        //Validate.notBlank(methodName, "methodName can't be blank");
         for (Class<?> searchType = obj.getClass(); searchType != Object.class; searchType = searchType.getSuperclass()) {
             try {
                 Method method = searchType.getDeclaredMethod(methodName, parameterTypes);
