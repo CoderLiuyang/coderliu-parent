@@ -84,7 +84,7 @@ public class ${entity}Controller {
     */
     @PostMapping
     @PreAuthorize("@pms.hasPermission('${entityPath}_add')")
-    public ReturnData<Object> add(@RequestBody ${entity}Dto ${entityPath}Dto) {
+    public ReturnData<Void> add(@RequestBody ${entity}Dto ${entityPath}Dto) {
         return ReturnData.succeed(${serviceName}.save(Convert.convert(${entity}.class,${entityPath}Dto)));
     }
 
@@ -94,7 +94,7 @@ public class ${entity}Controller {
     */
     @PutMapping
     @PreAuthorize("@pms.hasPermission('${entityPath}_update')")
-    public ReturnData<Object> update(@RequestBody ${entity}Dto ${entityPath}Dto) {
+    public ReturnData<Void> update(@RequestBody ${entity}Dto ${entityPath}Dto) {
         return ReturnData.succeed(${serviceName}.updateById(Convert.convert(${entity}.class,${entityPath}Dto)));
     }
 
@@ -103,7 +103,7 @@ public class ${entity}Controller {
     */
     @DeleteMapping("/{id}")
     @PreAuthorize("@pms.hasPermission('${entityPath}_delete')")
-    public ReturnData<Object> delete(@PathVariable String id) {
+    public ReturnData<Void> delete(@PathVariable String id) {
         ${serviceName}.removeById(id);
         return ReturnData.succeed();
     }

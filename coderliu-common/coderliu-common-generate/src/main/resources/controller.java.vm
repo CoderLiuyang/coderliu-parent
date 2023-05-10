@@ -79,7 +79,7 @@ public class ${cfg.entityName}Controller {
     */
     @PostMapping("/add")
     @PreAuthorize("@pms.hasPermission('${cfg.entityPath}_add')")
-    public ReturnData<Object> add(@RequestBody ${cfg.entityName}Dto ${cfg.entityPath}Dto) {
+    public ReturnData<Void> add(@RequestBody ${cfg.entityName}Dto ${cfg.entityPath}Dto) {
         return ReturnData.succeed(${cfg.serviceName}.save(Convert.convert(${cfg.entityName}.class,${cfg.entityPath}Dto)));
     }
 
@@ -89,7 +89,7 @@ public class ${cfg.entityName}Controller {
     */
     @PostMapping("/update")
     @PreAuthorize("@pms.hasPermission('${cfg.entityPath}_update')")
-    public ReturnData<Object> update(@RequestBody ${cfg.entityName}Dto ${cfg.entityPath}Dto) {
+    public ReturnData<Void> update(@RequestBody ${cfg.entityName}Dto ${cfg.entityPath}Dto) {
         return ReturnData.succeed(${cfg.serviceName}.updateById(Convert.convert(${cfg.entityName}.class,${cfg.entityPath}Dto)));
     }
 
@@ -98,7 +98,7 @@ public class ${cfg.entityName}Controller {
     */
     @PostMapping("/delete")
     @PreAuthorize("@pms.hasPermission('${cfg.entityPath}_delete')")
-    public ReturnData<Object> delete(@RequestBody String[] ids) {
+    public ReturnData<Void> delete(@RequestBody String[] ids) {
         ${cfg.serviceName}.removeByIds(Arrays.asList(ids));
         return ReturnData.succeed();
     }

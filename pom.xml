@@ -35,7 +35,9 @@
         <authorization-server.version>0.4.0</authorization-server.version>
         <activiti.version>7.1.0-M17</activiti.version>
         <jasypt.version>3.0.5</jasypt.version>
-        <masql.version>8.0.32</masql.version>
+        <mysql.version>8.0.32</mysql.version>
+        <flowable.version>6.8.0</flowable.version>
+        <aviator.version>5.3.3</aviator.version>
     </properties>
 
 
@@ -115,6 +117,18 @@
                 <version>${hutool.version}</version>
             </dependency>
 
+            <!-- flowable工作流啊相关 -->
+            <dependency>
+                <groupId>org.flowable</groupId>
+                <artifactId>flowable-spring-boot-starter-process</artifactId>
+                <version>${flowable.version}</version>
+            </dependency>
+            <!--正则包-->
+            <dependency>
+                <groupId>com.googlecode.aviator</groupId>
+                <artifactId>aviator</artifactId>
+                <version>${aviator.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

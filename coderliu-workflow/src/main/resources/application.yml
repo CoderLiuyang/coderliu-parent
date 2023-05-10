@@ -50,15 +50,6 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: Asia/Shanghai
-  activiti:
-    #解决SpringAutoDeployment 问题
-    deployment-mode: never-fail
-    #校验流程文件，默认校验resources下的processes文件夹里的流程文件
-    check-process-definitions: false
-    #启动对比数据库如果有不同会创建或更新
-    database-schema-update: true
-    history-level: full
-    db-history-used: true
 
 mybatis-plus:
   global-config:
@@ -79,5 +70,10 @@ feign:
     max-connections: 200
     max-connections-per-route: 50
 
-
-
+flowable:
+  # 关闭定时任务 job
+  async-executor-activate: false
+  # 库与数据库表结构不一致时，会自动将数据库表结构升级至新版本。
+  database-schema-update: true
+  idm:
+    enabled: false
