@@ -25,7 +25,7 @@ public interface IWfFormService extends IService<WfForm> {
      * @param formId 流程表单ID
      * @return 流程表单
      */
-    WfFormVo queryById(Long formId);
+    WfFormVo queryById(String formId);
 
     /**
      * 查询流程表单列表
@@ -65,5 +65,5 @@ public interface IWfFormService extends IService<WfForm> {
      * @param formIds 需要删除的流程表单ID
      * @return 结果
      */
-    Boolean deleteWithValidByIds(Collection<Long> formIds);
+    Boolean deleteWithValidByIds(Collection<String> formIds);
 }

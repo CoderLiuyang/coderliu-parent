@@ -39,7 +39,7 @@ public class WfFormServiceImpl extends ServiceImpl<WfFormMapper, WfForm> impleme
      * @return 流程表单
      */
     @Override
-    public WfFormVo queryById(Long formId) {
+    public WfFormVo queryById(String formId) {
         return Convert.convert(WfFormVo.class, baseMapper.selectById(formId));
     }
 
@@ -109,7 +109,7 @@ public class WfFormServiceImpl extends ServiceImpl<WfFormMapper, WfForm> impleme
      * @return 结果
      */
     @Override
-    public Boolean deleteWithValidByIds(Collection<Long> ids) {
+    public Boolean deleteWithValidByIds(Collection<String> ids) {
         return baseMapper.deleteBatchIds(ids) > 0;
     }
 
