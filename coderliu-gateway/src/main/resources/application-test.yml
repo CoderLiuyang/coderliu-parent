@@ -1,0 +1,61 @@
+server:
+  port: 80
+
+spring:
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+    gateway:
+      routes:
+        - id: auth
+          uri: lb://coderliu-auth
+          predicates:
+            - Path=/auth/**
+          filters:
+            - StripPrefix=1
+            - PreserveHostHeader
+        - id: admin
+          uri: lb://coderliu-admin
+          predicates:
+            - Path=/admin/**
+          filters:
+            - StripPrefix=1
+            - PreserveHostHeader
+        - id: workflow
+          uri: lb://coderliu-workflow
+          predicates:
+            - Path=/workflow/**
+          filters:
+            - StripPrefix=1
+            - PreserveHostHeader
+        - id: generate
+          uri: lb://coderliu-generate
+          predicates:
+            - Path=/generate/**
+          filters:
+            - StripPrefix=1
+            - PreserveHostHeader
+        - id: business
+          uri: lb://coderliu-business
+          predicates:
+            - Path=/business/**
+          filters:
+            - StripPrefix=1
+            - PreserveHostHeader
+  application:
+    name: coderliu-gateway
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        exclude: '*'
+  endpoint:
+    health:
+      show-details: always
+
+
