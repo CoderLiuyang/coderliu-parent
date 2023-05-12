@@ -48,9 +48,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <mainClass>com.qfx.App</mainClass>
-                </configuration>
             </plugin>
         </plugins>
     </build>
