@@ -1,18 +1,16 @@
-server:
-  port: 10090
 
 
 spring:
   cloud:
     nacos:
       discovery:
-        server-addr: localhost:8848
+        server-addr: 192.168.75.128:8848
   application:
     name: coderliu-workflow
   datasource:
     username: root
     password: Coderliu123456!
-    url: jdbc:mysql://localhost:3306/coderliu-workflow?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&useSSL=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://124.239.180.10:26033/coderliu-workflow?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&useSSL=false&serverTimezone=Asia/Shanghai
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource
     hikari:

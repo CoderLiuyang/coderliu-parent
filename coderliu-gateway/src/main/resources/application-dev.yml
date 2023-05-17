@@ -5,7 +5,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: localhost:8848
+        server-addr: 192.168.75.128:8848
     gateway:
       routes:
         - id: auth
@@ -26,6 +26,13 @@ spring:
           uri: lb://coderliu-workflow
           predicates:
             - Path=/workflow/**
+          filters:
+            - StripPrefix=1
+            - PreserveHostHeader
+        - id: workflow
+          uri: lb://coderliu-activiti
+          predicates:
+            - Path=/activiti/**
           filters:
             - StripPrefix=1
             - PreserveHostHeader

@@ -51,6 +51,7 @@
         <module>coderliu-common</module>
         <module>coderliu-auth</module>
         <module>coderliu-workflow</module>
+        <module>coderliu-activiti</module>
         <module>coderliu-fileserver</module>
         <module>coderliu-generate</module>
     </modules>

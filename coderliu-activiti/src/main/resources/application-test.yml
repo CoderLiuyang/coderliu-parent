@@ -1,18 +1,18 @@
 server:
-  port: 10020
+  port: 10090
 
 
 spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 192.168.75.128:8848
+        server-addr: localhost:8848
   application:
-    name: coderliu-generate
+    name: coderliu-activiti
   datasource:
     username: root
     password: Coderliu123456!
-    url: jdbc:mysql://124.239.180.10:26033/coderliu-generate?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&useSSL=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3306/coderliu-activiti?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
@@ -49,13 +49,13 @@ spring:
 
 mybatis-plus:
   global-config:
-    db-config:
-      logic-delete-field: delFlag  # \u5168\u5C40\u903B\u8F91\u5220\u9664\u7684\u5B9E\u4F53\u5B57\u6BB5\u540D(since 3.3.0,\u914D\u7F6E\u540E\u53EF\u4EE5\u5FFD\u7565\u4E0D\u914D\u7F6E\u6B65\u9AA42)
-      logic-delete-value: 1 # \u903B\u8F91\u5DF2\u5220\u9664\u503C(\u9ED8\u8BA4\u4E3A 1)
-      logic-not-delete-value: 0 # \u903B\u8F91\u672A\u5220\u9664\u503C(\u9ED8\u8BA4\u4E3A 0)
+    #    db-config:
+    #      logic-delete-field: delFlag  # 全局逻辑删除的实体字段名(since 3.3.0,配置后可以忽略不配置步骤2)
+    #      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+    #      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
     banner: false
 
-#feign\u5168\u5C40\u914D\u7F6E
+#feign全局配置
 feign:
   client:
     config:
@@ -66,8 +66,10 @@ feign:
     max-connections: 200
     max-connections-per-route: 50
 
-##\u52A0\u5BC6\u7EC4\u4EF6\u9700\u8981
-#jasypt:
-#  encryptor:
-#    password: coderliu
-
+flowable:
+  # 关闭定时任务 job
+  async-executor-activate: false
+  # 库与数据库表结构不一致时，会自动将数据库表结构升级至新版本。
+  database-schema-update: true
+  idm:
+    enabled: false

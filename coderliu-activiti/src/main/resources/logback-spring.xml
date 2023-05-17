@@ -11,7 +11,7 @@
     <!-- 控制台输出 -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%highlight(%date{yyyy-MM-dd HH:mm:ss.SSS}) %boldYellow([%thread]) %highlight([%-5level])  %logger{36} - %msg%n</pattern>
+            <pattern>%highlight(%date{yyyy-MM-dd HH:mm:ss.SSS}) %boldYellow([%thread]) %highlight([%-5level]) %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
 
@@ -37,6 +37,7 @@
     </appender>
 
 
+
     <springProfile name="dev">
         <root level="INFO">
             <appender-ref ref="CONSOLE"/>
@@ -45,6 +46,9 @@
             <appender-ref ref="CONSOLE"/>
         </logger>
         <logger name="org.reflections" level="error">
+            <appender-ref ref="CONSOLE"/>
+        </logger>
+        <logger name="cn.coderliu.mapper" level="debug" additivity="false">
             <appender-ref ref="CONSOLE"/>
         </logger>
     </springProfile>
@@ -57,6 +61,9 @@
             <appender-ref ref="FileAppender"/>
         </logger>
         <logger name="org.reflections" level="error">
+            <appender-ref ref="FileAppender"/>
+        </logger>
+        <logger name="cn.coderliu.mapper" level="debug" additivity="false">
             <appender-ref ref="FileAppender"/>
         </logger>
     </springProfile>

@@ -3,3 +3,5 @@ spring:
     banner-mode: off
   profiles:
     active: dev
+server:
+  port: 10040
