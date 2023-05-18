@@ -1,10 +1,8 @@
 package cn.coderliu.config;
 
 
-import cn.coderliu.serializer.FastJsonJsonRedisSerializer;
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.PropertyAccessor;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import cn.coderliu.serializer.FastJsonRedisSerializer;
+import com.alibaba.fastjson.parser.ParserConfig;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurer;
@@ -26,22 +24,25 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 public class JsonMapperRedisConfig implements CachingConfigurer {
 
     private final RedisConnectionFactory factory;
-    private FastJsonJsonRedisSerializer serializer = new FastJsonJsonRedisSerializer(Object.class);
+    private FastJsonRedisSerializer serializer = new FastJsonRedisSerializer(Object.class);
 
 
     @Bean(name = "jsonMapperRedisTemplate")
     public RedisTemplate<String, Object> redisTemplate() {
-        RedisTemplate<String, Object> template = new RedisTemplate<>();
-        template.setConnectionFactory(factory);
+        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
+        redisTemplate.setConnectionFactory(factory);
 
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
-        serializer.setObjectMapper(mapper);
-        template.setValueSerializer(serializer);
-        template.setHashKeySerializer(serializer);
-        template.setKeySerializer(new StringRedisSerializer());
-        template.afterPropertiesSet();
-        return template;
+        FastJsonRedisSerializer<Object> fastJsonRedisSerializer = new FastJsonRedisSerializer<>(Object.class);
+
+        // 设置值（value）的序列化采用FastJsonRedisSerializer。
+        redisTemplate.setValueSerializer(fastJsonRedisSerializer);
+        redisTemplate.setHashValueSerializer(fastJsonRedisSerializer);
+        // 设置键（key）的序列化采用StringRedisSerializer。
+        redisTemplate.setKeySerializer(new StringRedisSerializer());
+        redisTemplate.setHashKeySerializer(new StringRedisSerializer());
+
+        redisTemplate.afterPropertiesSet();
+        return redisTemplate;
     }
 
     /**
