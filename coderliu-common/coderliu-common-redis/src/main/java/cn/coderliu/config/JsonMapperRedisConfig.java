@@ -1,7 +1,7 @@
 package cn.coderliu.config;
 
 
-import cn.coderliu.serializer.FastJson2JsonRedisSerializer;
+import cn.coderliu.serializer.FastJsonJsonRedisSerializer;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -26,7 +26,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 public class JsonMapperRedisConfig implements CachingConfigurer {
 
     private final RedisConnectionFactory factory;
-    private FastJson2JsonRedisSerializer serializer = new FastJson2JsonRedisSerializer(Object.class);
+    private FastJsonJsonRedisSerializer serializer = new FastJsonJsonRedisSerializer(Object.class);
 
 
     @Bean(name = "jsonMapperRedisTemplate")

@@ -10,12 +10,17 @@ import org.activiti.engine.repository.Model;
 import java.io.UnsupportedEncodingException;
 
 public interface ModelService {
+
+
     Page<Model> page(ModelPage modelPage);
 
     ReturnData<Void> save(ModelDto modelDto) throws Exception;
-    ReturnData<Void> update(ModelDto modelDto,String modelId) throws Exception;
+
+    ReturnData<Void> update(ModelDto modelDto, String modelId) throws Exception;
 
     ReturnData<Void> delete(String id);
 
     ReturnData<String> getJson(String id);
+
+    ReturnData<Void> deployModel(String modelId);
 }

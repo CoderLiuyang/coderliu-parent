@@ -26,11 +26,11 @@
         <java.version>11</java.version>
 
         <spring-cloud.version>2021.0.5</spring-cloud.version>
-        <spring-cloud-alibaba.version>2021.0.4.0</spring-cloud-alibaba.version>
+        <spring-cloud-alibaba.version>2021.0.5.0</spring-cloud-alibaba.version>
 
         <mybatis-plus.version>3.5.3</mybatis-plus.version>
         <dynamic-ds.version>3.6.1</dynamic-ds.version>
-        <fastjson.version>2.0.20</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
         <hutool.version>5.8.10</hutool.version>
         <authorization-server.version>0.4.0</authorization-server.version>
         <activiti.version>7.1.0-M17</activiti.version>
@@ -86,10 +86,10 @@
                 <artifactId>spring-security-oauth2-authorization-server</artifactId>
                 <version>${authorization-server.version}</version>
             </dependency>
-            <!-- https://mvnrepository.com/artifact/com.alibaba.fastjson2/fastjson2 -->
+            <!-- https://mvnrepository.com/artifact/com.alibaba.fastjson/fastjson2 -->
             <dependency>
-                <groupId>com.alibaba.fastjson2</groupId>
-                <artifactId>fastjson2</artifactId>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
                 <version>${fastjson.version}</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/com.baomidou/mybatis-plus-boot-starter -->

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Data
 public class ModelDto {
 
+    private String id;
     private String name;
     private String key;
     private String description;

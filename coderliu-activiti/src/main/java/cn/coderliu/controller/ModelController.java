@@ -42,12 +42,12 @@ public class ModelController {
     }
 
     /**
-     * 保存模型
+     * 修改模型
      */
-    @PostMapping
-    public ReturnData<Void> save(@RequestBody ModelDto modelDto) {
+    @PutMapping("/{id}")
+    public ReturnData<Void> update(@RequestBody ModelDto modelDto, @PathVariable String id) {
         try {
-            return modelService.save(modelDto);
+            return modelService.update(modelDto, id);
         } catch (Exception e) {
             log.error("保存模型报错！", e);
         }
@@ -55,14 +55,14 @@ public class ModelController {
     }
 
     /**
-     * 修改模型
+     * 部署模型
      */
-    @PutMapping("/{id}")
-    public ReturnData<Void> update(@RequestBody ModelDto modelDto, @PathVariable String id) {
+    @PostMapping("/deploy")
+    public ReturnData<Void> deploy(@RequestBody ModelDto modelDto) {
         try {
-            return modelService.update(modelDto,id);
+            return modelService.deployModel(modelDto.getId());
         } catch (Exception e) {
-            log.error("保存模型报错！", e);
+            log.error("流程部署报错！", e);
         }
         return null;
     }
