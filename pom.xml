@@ -28,7 +28,8 @@
         <spring-cloud.version>2021.0.5</spring-cloud.version>
         <spring-cloud-alibaba.version>2021.0.5.0</spring-cloud-alibaba.version>
 
-        <mybatis-plus.version>3.5.3</mybatis-plus.version>
+        <mybatis-plus.version>3.5.3.1</mybatis-plus.version>
+        <jsqlparser.version>4.6</jsqlparser.version>
         <dynamic-ds.version>3.6.1</dynamic-ds.version>
         <fastjson.version>1.2.83</fastjson.version>
         <hutool.version>5.8.10</hutool.version>
@@ -98,6 +99,13 @@
                 <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>${mybatis-plus.version}</version>
             </dependency>
+            <!-- https://mvnrepository.com/artifact/com.github.jsqlparser/jsqlparser -->
+            <dependency>
+                <groupId>com.github.jsqlparser</groupId>
+                <artifactId>jsqlparser</artifactId>
+                <version>${jsqlparser.version}</version>
+            </dependency>
+
             <!-- https://mvnrepository.com/artifact/com.baomidou/dynamic-datasource-spring-boot-starter -->
             <dependency>
                 <groupId>com.baomidou</groupId>
