@@ -8,7 +8,7 @@ public class GenDto {
 
     private String dsName;
 
-    private String tableName;
+    private String[] tableName;
 
     private String serverName;
 }

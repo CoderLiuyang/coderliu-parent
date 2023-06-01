@@ -11,7 +11,7 @@ import java.util.*;
 
 public class GenUtils {
 
-    public static void gen(String tableName, String serverName, GenDatasourceConf genDatasourceConf) {
+    public static void gen(String[] tableName, String serverName, GenDatasourceConf genDatasourceConf) {
         String dir = System.getProperty("user.dir");
         FastAutoGenerator.create(genDatasourceConf.getUrl(), genDatasourceConf.getUsername(), genDatasourceConf.getPassword())
                 .globalConfig(builder -> {

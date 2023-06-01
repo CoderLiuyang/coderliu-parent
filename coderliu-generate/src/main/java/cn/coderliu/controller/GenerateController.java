@@ -4,8 +4,13 @@ import cn.coderliu.common.ReturnData;
 import cn.coderliu.dto.GenDto;
 import cn.coderliu.page.GenPage;
 import cn.coderliu.service.GeneratorService;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -26,7 +31,7 @@ public class GenerateController {
      * @return
      */
     @GetMapping("/page")
-    public ReturnData page(GenPage page) {
+    public ReturnData<IPage<List<Map<String, Object>>>> page(GenPage page) {
         return ReturnData.succeed(generatorService.getPage(page));
     }
 
@@ -37,7 +42,7 @@ public class GenerateController {
      * @return
      */
     @PostMapping("/genCodeReq")
-    public ReturnData genCodeReq(@RequestBody GenDto data) {
+    public ReturnData<Void> genCodeReq(@RequestBody GenDto data) {
         generatorService.generatorCode(data);
         return ReturnData.succeed();
     }
