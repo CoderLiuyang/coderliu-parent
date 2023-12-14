@@ -12,9 +12,9 @@ services:
       - ./sql:/opt/sql
     environment:
       - "MYSQL_ROOT_PASSWORD=123456"
-#      - "MYSQL_DATABASE=coderliu_admin"
-#      - "MYSQL_DATABASE=coderliu_workflow"
-#      - "MYSQL_DATABASE=coderliu_generate"
+      #      - "MYSQL_DATABASE=coderliu_admin"
+      #      - "MYSQL_DATABASE=coderliu_workflow"
+      #      - "MYSQL_DATABASE=coderliu_generate"
       - "TZ=Asia/Shanghai"
     ports:
       - 3306:3306
@@ -27,28 +27,42 @@ services:
     #    volumes:
     #      - ../volumes/data/redsidata:/data
     command: redis-server --port 6379 --requirepass 123456 --appendonly yes --protected-mode no
+  #  nacos:
+  #    image: nacos/nacos-server:v2.1.0
+  #    restart: always
+  #    container_name: nacos
+  #    environment:
+  #      # 支持主机名可以使用hostname,否则使用ip，默认ip
+  #      - PREFER_HOST_MODE=ip
+  #      # 单机模式
+  #      - MODE=standalone
+  #      # 数据源平台 支持mysql或不保存empty
+  #      #- SPRING_DATASOURCE_PLATFORM=mysql
+  #      # mysql配置，!!!attention必须是mysql所在主机IP
+  #      #- MYSQL_SERVICE_HOST=192.168.0.123
+  #      #- MYSQL_SERVICE_PORT=3306
+  #      #- MYSQL_SERVICE_USER=root
+  #      #- MYSQL_SERVICE_PASSWORD=123456
+  #      #- MYSQL_SERVICE_DB_NAME=nacos
+  ##    volumes:
+  ##      - ./logs:/home/nacos/logs
+  ##      - ./conf:/home/nacos/conf
+  #    ports:
+  #      - 8848:8848
   nacos:
     image: nacos/nacos-server:v2.1.0
-    restart: always
     container_name: nacos
     environment:
-      # 支持主机名可以使用hostname,否则使用ip，默认ip
       - PREFER_HOST_MODE=ip
-      # 单机模式
       - MODE=standalone
-      # 数据源平台 支持mysql或不保存empty
-      #- SPRING_DATASOURCE_PLATFORM=mysql
-      # mysql配置，!!!attention必须是mysql所在主机IP
-      #- MYSQL_SERVICE_HOST=192.168.0.123
-      #- MYSQL_SERVICE_PORT=3306
-      #- MYSQL_SERVICE_USER=root
-      #- MYSQL_SERVICE_PASSWORD=123456
-      #- MYSQL_SERVICE_DB_NAME=nacos
-#    volumes:
-#      - ./logs:/home/nacos/logs
-#      - ./conf:/home/nacos/conf
+      - NACOS_AUTH_IDENTITY_KEY=serverIdentity
+      - NACOS_AUTH_IDENTITY_VALUE=security
+      - NACOS_AUTH_TOKEN=SecretKey012345678901234567890123456789012345678901234567890123456789
+    #    volumes:
+    #      - ./standalone-logs/:/home/nacos/logs
     ports:
-      - 8848:8848
+      - "8848:8848"
+      - "9848:9848"
   minio:
     image: minio/minio:RELEASE.2023-12-13T23-28-55Z.fips
     restart: always
@@ -58,7 +72,7 @@ services:
     environment:
       - MINIO_ACCESS_KEY=admin
       - MINIO_SECRET_KEY=admin123
-#    volumes:
-#      - /home/docker/MinIO:/data
+    #    volumes:
+    #      - /home/docker/MinIO:/data
     command: server /data --console-address ":9090" -address ":9000"
 

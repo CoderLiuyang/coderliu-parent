@@ -6,13 +6,13 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 192.168.42.130:8848
+        server-addr: localhost:8848
   application:
     name: coderliu-auth
   datasource:
     username: root
     password: 123456
-    url: jdbc:mysql://localhost:3306/coderliu-admin?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://localhost:3306/coderliu_admin?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
     driver-class-name: com.mysql.cj.jdbc.Driver
   redis:
     host: localhost
