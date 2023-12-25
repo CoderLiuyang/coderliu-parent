@@ -39,6 +39,7 @@
         <mysql.version>8.0.32</mysql.version>
         <flowable.version>6.8.0</flowable.version>
         <aviator.version>5.3.3</aviator.version>
+        <minio.version>8.4.3</minio.version>
     </properties>
 
 
@@ -137,6 +138,12 @@
                 <groupId>com.googlecode.aviator</groupId>
                 <artifactId>aviator</artifactId>
                 <version>${aviator.version}</version>
+            </dependency>
+            <!--minio client-->
+            <dependency>
+                <groupId>io.minio</groupId>
+                <artifactId>minio</artifactId>
+                <version>${minio.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
