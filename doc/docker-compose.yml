@@ -26,7 +26,8 @@ services:
       - 6379:6379
     #    volumes:
     #      - ../volumes/data/redsidata:/data
-    command: redis-server --port 6379 --requirepass 123456 --appendonly yes --protected-mode no
+    #command: redis-server --port 6379 --requirepass 123456 --appendonly yes --protected-mode no
+    command: redis-server --port 6379
   #  nacos:
   #    image: nacos/nacos-server:v2.1.0
   #    restart: always
@@ -51,6 +52,7 @@ services:
   #      - 8848:8848
   nacos:
     image: nacos/nacos-server:v2.1.0
+    restart: always
     container_name: nacos
     environment:
       - PREFER_HOST_MODE=ip
