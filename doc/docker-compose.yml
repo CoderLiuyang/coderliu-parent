@@ -51,7 +51,7 @@ services:
   #    ports:
   #      - 8848:8848
   nacos:
-    image: nacos/nacos-server:v2.1.0
+    image: nacos/nacos-server:v2.2.0
     restart: always
     container_name: nacos
     environment:
