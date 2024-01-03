@@ -30,7 +30,7 @@ public class SysMenuController {
      * @return 当前用户的树形菜单
      */
     @GetMapping
-    public ReturnData getUserMenu(String parentId) {
+    public ReturnData<List<Tree<String>>> getUserMenu(String parentId) {
         // 获取符合条件的菜单
         Set<SysMenu> menuSet = SecurityUtils.getRoles().stream().map(sysMenuService::findMenuByRoleId)
                 .flatMap(Collection::stream).collect(Collectors.toSet());

@@ -49,7 +49,7 @@ public class GenDatasourceConfController {
      * 新增
      */
     @PostMapping
-    public ReturnData add(@RequestBody GenDatasourceConf genDatasourceConf) {
+    public ReturnData<Boolean> add(@RequestBody GenDatasourceConf genDatasourceConf) {
         return ReturnData.succeed(genDatasourceConfService.saveGenDatasourceConf(genDatasourceConf));
     }
 
@@ -57,7 +57,7 @@ public class GenDatasourceConfController {
      * 修改
      */
     @PutMapping
-    public ReturnData update(@RequestBody GenDatasourceConf genDatasourceConf) {
+    public ReturnData<Boolean> update(@RequestBody GenDatasourceConf genDatasourceConf) {
         return ReturnData.succeed(genDatasourceConfService.updateGenDatasourceConf(genDatasourceConf));
     }
 
@@ -65,7 +65,7 @@ public class GenDatasourceConfController {
      * 删除
      */
     @DeleteMapping("/{id}")
-    public ReturnData delete(@PathVariable String id) {
+    public ReturnData<Boolean> delete(@PathVariable String id) {
         return ReturnData.succeed(genDatasourceConfService.deleteGenDatasourceConf(id));
     }
 }

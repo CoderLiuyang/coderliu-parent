@@ -1,6 +1,5 @@
 package cn.coderliu.controller;
 
-import cn.coderliu.admin.vo.detail.RoleVo;
 import cn.coderliu.common.ReturnData;
 import cn.coderliu.dto.RoleMenusDto;
 import cn.coderliu.model.SysRole;
@@ -37,7 +36,7 @@ public class SysRoleController {
      * @return 分页对象
      */
     @GetMapping("/page")
-    public ReturnData<IPage<SysRole>> getRolePage(Page page) {
+    public ReturnData<IPage<SysRole>> getRolePage(Page<SysRole> page) {
         return ReturnData.succeed(sysRoleService.page(page, Wrappers.emptyWrapper()));
     }
 

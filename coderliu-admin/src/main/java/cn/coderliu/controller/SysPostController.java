@@ -51,7 +51,7 @@ public class SysPostController {
      */
     @PostMapping
     @PreAuthorize("@pms.hasPermission('sys_post_add')")
-    public ReturnData save(@RequestBody SysPost sysPost) {
+    public ReturnData<Boolean> save(@RequestBody SysPost sysPost) {
         return ReturnData.succeed(sysPostService.save(sysPost));
     }
 
@@ -76,7 +76,7 @@ public class SysPostController {
      */
     @DeleteMapping("/{postId}")
     @PreAuthorize("@pms.hasPermission('sys_post_del')")
-    public ReturnData removeById(@PathVariable String postId) {
+    public ReturnData<Boolean> removeById(@PathVariable String postId) {
         return ReturnData.succeed(sysPostService.removeById(postId));
     }
 

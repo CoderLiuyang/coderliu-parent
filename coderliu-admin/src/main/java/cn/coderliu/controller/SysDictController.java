@@ -94,7 +94,7 @@ public class SysDictController {
     //@SysLog("删除字典")
     @DeleteMapping("/{id}")
     @PreAuthorize("@pms.hasPermission('sys_dict_del')")
-    public ReturnData removeById(@PathVariable String id) {
+    public ReturnData<Void> removeById(@PathVariable String id) {
         sysDictService.removeById(id);
         return ReturnData.succeed();
     }
@@ -108,7 +108,7 @@ public class SysDictController {
     @PutMapping
     //@SysLog("修改字典")
     @PreAuthorize("@pms.hasPermission('sys_dict_edit')")
-    public ReturnData updateById(@Valid @RequestBody SysDict sysDict) {
+    public ReturnData<Void> updateById(@Valid @RequestBody SysDict sysDict) {
         sysDictService.updateById(sysDict);
         return ReturnData.succeed();
     }
@@ -157,7 +157,7 @@ public class SysDictController {
      */
     //@SysLog("修改字典项")
     @PutMapping("/item")
-    public ReturnData updateById(@RequestBody SysDictItem sysDictItem) {
+    public ReturnData<Void> updateById(@RequestBody SysDictItem sysDictItem) {
         sysDictItemService.updateById(sysDictItem);
         return ReturnData.succeed();
     }
@@ -170,7 +170,7 @@ public class SysDictController {
      */
     //@SysLog("删除字典项")
     @DeleteMapping("/item/{id}")
-    public ReturnData removeDictItemById(@PathVariable String id) {
+    public ReturnData<Void> removeDictItemById(@PathVariable String id) {
         sysDictItemService.removeById(id);
         return ReturnData.succeed();
     }
@@ -178,7 +178,7 @@ public class SysDictController {
     //@SysLog("清除字典缓存")
     @DeleteMapping("/cache")
     @PreAuthorize("@pms.hasPermission('sys_dict_del')")
-    public ReturnData clearDictCache() {
+    public ReturnData<Void> clearDictCache() {
         // sysDictService.clearDictCache();
         return ReturnData.succeed();
     }
