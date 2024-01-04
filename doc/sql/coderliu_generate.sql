@@ -39,8 +39,14 @@ CREATE TABLE `gen_datasource_conf`  (
 -- ----------------------------
 -- Records of gen_datasource_conf
 -- ----------------------------
-INSERT INTO `gen_datasource_conf` VALUES ('1', 'admin', 'jdbc:mysql://localhost/coderliu-admin?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&useSSL=false&serverTimezone=Asia/Shanghai', 'root', '123456', '0', '2023-01-29 15:09:50', NULL, '2023-01-30 15:26:12', 'admin', NULL);
-INSERT INTO `gen_datasource_conf` VALUES ('1622063656221229058', 'business', 'jdbc:mysql://localhost/coderliu-business?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&useSSL=false&serverTimezone=Asia/Shanghai', 'root', '123456', '0', '2023-02-05 10:44:47', 'admin', '2023-02-05 10:44:47', 'admin', NULL);
+INSERT INTO `gen_datasource_conf`
+VALUES ('1', 'admin',
+        'jdbc:mysql://localhost:3306/coderliu_admin?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&useSSL=false&serverTimezone=Asia/Shanghai',
+        'root', '123456', '0', '2023-01-29 15:09:50', NULL, '2023-01-30 15:26:12', 'admin', NULL);
+INSERT INTO `gen_datasource_conf`
+VALUES ('1622063656221229058', 'business',
+        'jdbc:mysql://localhost:3306/coderliu_business?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&useSSL=false&serverTimezone=Asia/Shanghai',
+        'root', '123456', '0', '2023-02-05 10:44:47', 'admin', '2023-02-05 10:44:47', 'admin', NULL);
 
 -- ----------------------------
 -- Table structure for gen_form_conf
