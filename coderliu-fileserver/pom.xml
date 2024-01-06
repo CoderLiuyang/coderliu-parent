@@ -24,6 +24,12 @@
             <groupId>io.minio</groupId>
             <artifactId>minio</artifactId>
         </dependency>
+        <dependency>
+            <groupId>cn.coderliu</groupId>
+            <artifactId>coderliu-common-db</artifactId>
+            <version>0.0.1</version>
+            <scope>compile</scope>
+        </dependency>
 
     </dependencies>
 
