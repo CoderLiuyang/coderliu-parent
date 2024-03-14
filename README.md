@@ -51,7 +51,7 @@ coderliu-parent 基于SpringCloud-Alibaba的微服务架构，提供整微服务
 
 ### 个人微信
 
-![image-20240107201608752](.\doc\img\2.png)
+![image-20240107201608752](doc\img\2.png)
 ### 技术交流群
 
-![image-20240107201608751](.\doc\img\1.png)
+![image-20240107201608751](doc\img\1.png)
