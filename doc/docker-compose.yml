@@ -6,10 +6,10 @@ services:
     container_name: mysql
     volumes:
       #      - ../volumes/data/mysqldata:/var/lib/mysql
-      #      - ./config/my.cnf:/etc/mysql/conf.d/my.cnf
       #      数据库还原目录 可将需要还原的sql文件放在这里
       - ./init:/docker-entrypoint-initdb.d
       - ./sql:/opt/sql
+      - ./conf/my.cnf:/etc/mysql/my.cnf
     environment:
       - "MYSQL_ROOT_PASSWORD=123456"
       #      - "MYSQL_DATABASE=coderliu_admin"
@@ -38,7 +38,7 @@ services:
   #      # 单机模式
   #      - MODE=standalone
   #      # 数据源平台 支持mysql或不保存empty
-  #      #- SPRING_DATASOURCE_PLATFORM=mysql
+  #      #- SPRING_DATASOURCE_PLATFORM=mysqllower_case_table_names
   #      # mysql配置，!!!attention必须是mysql所在主机IP
   #      #- MYSQL_SERVICE_HOST=192.168.0.123
   #      #- MYSQL_SERVICE_PORT=3306
