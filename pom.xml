@@ -51,6 +51,7 @@
         <module>coderliu-workflow</module>
         <module>coderliu-fileserver</module>
         <module>coderliu-generate</module>
+        <module>coderliu-chat</module>
     </modules>
 
 
