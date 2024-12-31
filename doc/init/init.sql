@@ -18,3 +18,11 @@ source /opt/sql/coderliu_fileserver.sql;
 create database coderliu_chat;
 use coderliu_chat;
 source /opt/sql/coderliu_chat.sql;
+
+
+create
+database coderliu_nacos;
+use
+coderliu_nacos;
+source
+/opt/sql/coderliu_nacos.sql;

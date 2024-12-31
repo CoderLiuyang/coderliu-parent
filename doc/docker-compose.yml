@@ -5,16 +5,11 @@ services:
     restart: always
     container_name: mysql
     volumes:
-      #      - ../volumes/data/mysqldata:/var/lib/mysql
-      #      数据库还原目录 可将需要还原的sql文件放在这里
       - ./init:/docker-entrypoint-initdb.d
       - ./sql:/opt/sql
       - ./conf/my.cnf:/etc/mysql/my.cnf
     environment:
       - "MYSQL_ROOT_PASSWORD=123456"
-      #      - "MYSQL_DATABASE=coderliu_admin"
-      #      - "MYSQL_DATABASE=coderliu_workflow"
-      #      - "MYSQL_DATABASE=coderliu_generate"
       - "TZ=Asia/Shanghai"
     ports:
       - 3306:3306
@@ -59,20 +54,19 @@ services:
       - SPRING_DATASOURCE_PLATFORM=mysql
       - MYSQL_SERVICE_HOST=192.168.1.125
       - MYSQL_SERVICE_PORT=3306
-      - MYSQL_SERVICE_DB_NAME=nacos
+      - MYSQL_SERVICE_DB_NAME=coderliu_nacos
       - MYSQL_SERVICE_USER=root
       - MYSQL_SERVICE_PASSWORD=123456
-      - MYSQL_SERVICE_DB_PARAM=characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useUnicode=true&useSSL=false&serverTimezone=GMT%2B8
+      - MYSQL_SERVICE_DB_PARAM=characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useUnicode=true&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
       - NACOS_AUTH_ENABLE=true
       - NACOS_AUTH_TOKEN=c2VydmVySWRlbnRpdHkxMjM0NTY3ODkwMTIzNDU2Nzg5MA==
       - NACOS_AUTH_IDENTITY_KEY=coderliuKey
       - NACOS_AUTH_IDENTITY_VALUE=coderliuValue
-
-    #    volumes:
-    #      - ./standalone-logs/:/home/nacos/logs
     ports:
       - "8848:8848"
       - "9848:9848"
+    depends_on:
+      - mysql
   minio:
     image: minio/minio:RELEASE.2023-12-13T23-28-55Z.fips
     #    restart: always
