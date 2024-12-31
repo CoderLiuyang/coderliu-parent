@@ -38,6 +38,7 @@
         <flowable.version>6.8.0</flowable.version>
         <aviator.version>5.3.3</aviator.version>
         <minio.version>8.4.3</minio.version>
+        <langchain4j.version>0.36.2</langchain4j.version>
     </properties>
     <description>coderliu和他的朋友们的架构</description>
 
@@ -69,6 +70,14 @@
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
                 <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>dev.langchain4j</groupId>
+                <artifactId>langchain4j-bom</artifactId>
+                <version>${langchain4j.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

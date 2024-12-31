@@ -51,15 +51,23 @@ services:
   #    ports:
   #      - 8848:8848
   nacos:
-    image: nacos/nacos-server:v2.2.0
+    image: nacos/nacos-server:v2.4.3-slim
     restart: always
     container_name: nacos
     environment:
-      - PREFER_HOST_MODE=ip
       - MODE=standalone
-      - NACOS_AUTH_IDENTITY_KEY=serverIdentity
-      - NACOS_AUTH_IDENTITY_VALUE=security
-      - NACOS_AUTH_TOKEN=SecretKey012345678901234567890123456789012345678901234567890123456789
+      - SPRING_DATASOURCE_PLATFORM=mysql
+      - MYSQL_SERVICE_HOST=192.168.1.125
+      - MYSQL_SERVICE_PORT=3306
+      - MYSQL_SERVICE_DB_NAME=nacos
+      - MYSQL_SERVICE_USER=root
+      - MYSQL_SERVICE_PASSWORD=123456
+      - MYSQL_SERVICE_DB_PARAM=characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useUnicode=true&useSSL=false&serverTimezone=GMT%2B8
+      - NACOS_AUTH_ENABLE=true
+      - NACOS_AUTH_TOKEN=c2VydmVySWRlbnRpdHkxMjM0NTY3ODkwMTIzNDU2Nzg5MA==
+      - NACOS_AUTH_IDENTITY_KEY=coderliuKey
+      - NACOS_AUTH_IDENTITY_VALUE=coderliuValue
+
     #    volumes:
     #      - ./standalone-logs/:/home/nacos/logs
     ports:
@@ -67,7 +75,7 @@ services:
       - "9848:9848"
   minio:
     image: minio/minio:RELEASE.2023-12-13T23-28-55Z.fips
-    restart: always
+    #    restart: always
     ports:
       - "9000:9000"
       - "9090:9090"
