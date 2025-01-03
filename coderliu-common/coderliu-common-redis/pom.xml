@@ -5,10 +5,10 @@
     <parent>
         <groupId>cn.coderliu</groupId>
         <artifactId>coderliu-common</artifactId>
-        <version>0.0.1</version>
+        <version>${revision}</version>
     </parent>
     <artifactId>coderliu-common-redis</artifactId>
-    <version>0.0.1</version>
+    <version>${revision}</version>
     <name>coderliu-common-redis</name>
     <description>redis构件</description>
 

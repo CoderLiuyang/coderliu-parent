@@ -5,10 +5,10 @@
     <parent>
         <groupId>cn.coderliu</groupId>
         <artifactId>coderliu-common</artifactId>
-        <version>0.0.1</version>
+        <version>${revision}</version>
     </parent>
     <artifactId>coderliu-common-security</artifactId>
-    <version>0.0.1</version>
+    <version>${revision}</version>
     <name>coderliu-common-security</name>
     <description>框架安全组件</description>
 

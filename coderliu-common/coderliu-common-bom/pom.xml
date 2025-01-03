@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>cn.coderliu</groupId>
     <artifactId>coderliu-common-bom</artifactId>
-    <version>0.0.1</version>
+    <version>${revision}</version>
     <name>coderliu-common-bom</name>
     <packaging>pom</packaging>
 
@@ -28,6 +28,44 @@
 
     <dependencyManagement>
         <dependencies>
+            <!--web基础功能包-->
+            <dependency>
+                <groupId>cn.coderliu</groupId>
+                <artifactId>coderliu-common-core</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <!--生成代码功能包-->
+            <dependency>
+                <groupId>cn.coderliu</groupId>
+                <artifactId>coderliu-common-generate</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <!--数据库功能包-->
+            <dependency>
+                <groupId>cn.coderliu</groupId>
+                <artifactId>coderliu-common-db</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <!--缓存包-->
+            <dependency>
+                <groupId>cn.coderliu</groupId>
+                <artifactId>coderliu-common-redis</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <!--服务间调用功能包-->
+            <dependency>
+                <groupId>cn.coderliu</groupId>
+                <artifactId>coderliu-api</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <!--鉴权包-->
+            <dependency>
+                <groupId>cn.coderliu</groupId>
+                <artifactId>coderliu-common-security</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+
             <dependency>
                 <groupId>com.mysql</groupId>
                 <artifactId>mysql-connector-j</artifactId>
@@ -49,6 +87,11 @@
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-generator</artifactId>
                 <version>${mybatis-plus.version}</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/com.github.jsqlparser/jsqlparser -->

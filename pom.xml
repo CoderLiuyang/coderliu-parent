@@ -6,16 +6,16 @@
 
     <groupId>cn.coderliu</groupId>
     <artifactId>coderliu-parent</artifactId>
-    <version>0.0.1</version>
-
+    <version>${revision}</version>
     <name>coderliu-parent</name>
-
     <packaging>pom</packaging>
 
 
     <properties>
         <revision>0.0.1</revision>
         <java.version>11</java.version>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
@@ -46,7 +46,7 @@
             <dependency>
                 <groupId>cn.coderliu</groupId>
                 <artifactId>coderliu-common-bom</artifactId>
-                <version>0.0.1</version>
+                <version>${revision}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

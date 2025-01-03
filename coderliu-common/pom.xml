@@ -5,12 +5,12 @@
     <parent>
         <groupId>cn.coderliu</groupId>
         <artifactId>coderliu-parent</artifactId>
-        <version>0.0.1</version>
+        <version>${revision}</version>
     </parent>
 
 
     <artifactId>coderliu-common</artifactId>
-    <version>0.0.1</version>
+    <version>${revision}</version>
     <description>common组件包</description>
     <packaging>pom</packaging>
 

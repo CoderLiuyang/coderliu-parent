@@ -5,12 +5,12 @@
     <parent>
         <groupId>cn.coderliu</groupId>
         <artifactId>coderliu-parent</artifactId>
-        <version>0.0.1</version>
+        <version>${revision}</version>
     </parent>
 
 
     <artifactId>coderliu-gateway</artifactId>
-    <version>0.0.1</version>
+    <version>${revision}</version>
     <name>coderliu-gateway</name>
     <description>coderliu和他的朋友们的网关服务</description>
 

@@ -5,12 +5,11 @@
     <parent>
         <groupId>cn.coderliu</groupId>
         <artifactId>coderliu-common</artifactId>
-        <version>0.0.1</version>
+        <version>${revision}</version>
     </parent>
 
-
     <artifactId>coderliu-common-core</artifactId>
-    <version>0.0.1</version>
+    <version>${revision}</version>
     <packaging>jar</packaging>
     <name>coderliu-common-core</name>
     <description>整体架构核心包，每个服务都需要引用的一些东西</description>

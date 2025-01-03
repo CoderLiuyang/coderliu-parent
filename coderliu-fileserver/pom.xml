@@ -5,12 +5,12 @@
     <parent>
         <groupId>cn.coderliu</groupId>
         <artifactId>coderliu-parent</artifactId>
-        <version>0.0.1</version>
+        <version>${revision}</version>
     </parent>
 
 
     <artifactId>coderliu-fileserver</artifactId>
-    <version>0.0.1</version>
+    <version>${revision}</version>
     <name>coderliu-fileserver</name>
     <description>coderliu-fileserver</description>
 
@@ -18,13 +18,11 @@
         <dependency>
             <groupId>cn.coderliu</groupId>
             <artifactId>coderliu-common-core</artifactId>
-            <version>0.0.1</version>
         </dependency>
 
         <dependency>
             <groupId>cn.coderliu</groupId>
             <artifactId>coderliu-common-db</artifactId>
-            <version>0.0.1</version>
         </dependency>
 
         <dependency>

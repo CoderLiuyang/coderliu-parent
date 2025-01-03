@@ -5,12 +5,14 @@
     <parent>
         <groupId>cn.coderliu</groupId>
         <artifactId>coderliu-common</artifactId>
-        <version>0.0.1</version>
+        <version>${revision}</version>
     </parent>
     <artifactId>coderliu-common-generate</artifactId>
-    <version>0.0.1</version>
+    <version>${revision}</version>
     <name>coderliu-common-generate</name>
     <description>coderliu-common-generate</description>
+
+
     <dependencies>
         <dependency>
             <groupId>org.freemarker</groupId>
@@ -19,7 +21,6 @@
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-generator</artifactId>
-            <version>3.5.3.1</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
         <dependency>

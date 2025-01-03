@@ -5,11 +5,11 @@
     <parent>
         <groupId>cn.coderliu</groupId>
         <artifactId>coderliu-parent</artifactId>
-        <version>0.0.1</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>coderliu-generate</artifactId>
-    <version>0.0.1</version>
+    <version>${revision}</version>
     <name>coderliu-generate</name>
     <description>coderliu-generate</description>
 
@@ -19,17 +19,14 @@
         <dependency>
             <groupId>cn.coderliu</groupId>
             <artifactId>coderliu-common-core</artifactId>
-            <version>0.0.1</version>
         </dependency>
         <dependency>
             <groupId>cn.coderliu</groupId>
             <artifactId>coderliu-common-generate</artifactId>
-            <version>0.0.1</version>
         </dependency>
         <dependency>
             <groupId>cn.coderliu</groupId>
             <artifactId>coderliu-common-db</artifactId>
-            <version>0.0.1</version>
         </dependency>
         <dependency>
             <groupId>com.baomidou</groupId>
@@ -39,7 +36,6 @@
         <dependency>
             <groupId>cn.coderliu</groupId>
             <artifactId>coderliu-common-security</artifactId>
-            <version>0.0.1</version>
         </dependency>
     </dependencies>
 
