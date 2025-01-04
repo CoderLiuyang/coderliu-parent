@@ -11,7 +11,7 @@
     <description>版本依赖</description>
     <properties>
         <revision>0.0.1</revision>
-        <mybatis-plus.version>3.5.3.1</mybatis-plus.version>
+        <mybatis-plus.version>3.5.9</mybatis-plus.version>
         <jsqlparser.version>4.6</jsqlparser.version>
         <dynamic-ds.version>3.6.1</dynamic-ds.version>
         <fastjson.version>1.2.83</fastjson.version>
@@ -84,22 +84,32 @@
                 <version>${fastjson.version}</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/com.baomidou/mybatis-plus-boot-starter -->
+<!--            <dependency>-->
+<!--                <groupId>com.baomidou</groupId>-->
+<!--                <artifactId>mybatis-plus-boot-starter</artifactId>-->
+<!--                <version>${mybatis-plus.version}</version>-->
+<!--            </dependency>-->
+             <!-- orm 模块-->
+             <!--orm 相关-->
             <dependency>
                 <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <artifactId>mybatis-plus-bom</artifactId>
                 <version>${mybatis-plus.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
-            <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-generator</artifactId>
-                <version>${mybatis-plus.version}</version>
-            </dependency>
+
+<!--            <dependency>-->
+<!--                <groupId>com.baomidou</groupId>-->
+<!--                <artifactId>mybatis-plus-generator</artifactId>-->
+<!--                <version>${mybatis-plus.version}</version>-->
+<!--            </dependency>-->
             <!-- https://mvnrepository.com/artifact/com.github.jsqlparser/jsqlparser -->
-            <dependency>
-                <groupId>com.github.jsqlparser</groupId>
-                <artifactId>jsqlparser</artifactId>
-                <version>${jsqlparser.version}</version>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>com.github.jsqlparser</groupId>-->
+<!--                <artifactId>jsqlparser</artifactId>-->
+<!--                <version>${jsqlparser.version}</version>-->
+<!--            </dependency>-->
 
             <!-- https://mvnrepository.com/artifact/com.baomidou/dynamic-datasource-spring-boot-starter -->
             <dependency>
