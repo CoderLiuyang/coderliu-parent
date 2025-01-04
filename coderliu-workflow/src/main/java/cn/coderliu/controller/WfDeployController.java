@@ -1,7 +1,6 @@
 package cn.coderliu.controller;
 
 import cn.coderliu.common.ReturnData;
-import cn.coderliu.common.core.domain.ProcessQuery;
 import cn.coderliu.model.page.ProcessKeyPage;
 import cn.coderliu.model.page.ProcessQueryPage;
 import cn.coderliu.model.vo.WfDeployVo;
@@ -10,12 +9,9 @@ import cn.coderliu.service.IWfDeployService;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.*;
-
-import javax.validation.constraints.NotEmpty;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.Objects;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 流程部署

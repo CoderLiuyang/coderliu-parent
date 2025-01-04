@@ -8,11 +8,11 @@ import cn.coderliu.model.vo.WfFormVo;
 import cn.coderliu.service.IWfDeployFormService;
 import cn.coderliu.service.IWfFormService;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.util.Arrays;
 
 /**

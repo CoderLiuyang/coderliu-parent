@@ -1,15 +1,9 @@
 package cn.coderliu.model.page;
 
-import cn.coderliu.model.BaseModel;
 import cn.coderliu.model.WfCategory;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-import javax.validation.constraints.NotBlank;
 
 /**
  * 流程分类对象 wf_category

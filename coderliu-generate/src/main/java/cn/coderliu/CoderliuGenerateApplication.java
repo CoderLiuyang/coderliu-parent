@@ -1,13 +1,12 @@
 package cn.coderliu;
 
-import cn.coderliu.annotation.EnableResourceServer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 
 @EnableFeignClients
-@EnableResourceServer
+//@EnableResourceServer
 @SpringBootApplication
 public class CoderliuGenerateApplication {
 

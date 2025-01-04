@@ -6,12 +6,12 @@ import cn.coderliu.model.page.WfCategoryPage;
 import cn.coderliu.model.vo.WfCategoryVo;
 import cn.coderliu.service.IWfCategoryService;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.util.Arrays;
 import java.util.List;
 

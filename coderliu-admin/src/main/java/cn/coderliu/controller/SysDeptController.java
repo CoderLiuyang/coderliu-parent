@@ -4,11 +4,11 @@ import cn.coderliu.common.ReturnData;
 import cn.coderliu.model.SysDept;
 import cn.coderliu.service.SysDeptService;
 import cn.hutool.core.lang.tree.Tree;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 /**

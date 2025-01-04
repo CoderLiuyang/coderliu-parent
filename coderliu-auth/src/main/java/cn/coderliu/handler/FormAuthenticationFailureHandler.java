@@ -1,17 +1,16 @@
- 
+
 
 package cn.coderliu.handler;
 
 import cn.coderliu.utils.WebUtils;
 import cn.hutool.core.util.CharsetUtil;
 import cn.hutool.http.HttpUtil;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * 表单登录失败处理逻辑

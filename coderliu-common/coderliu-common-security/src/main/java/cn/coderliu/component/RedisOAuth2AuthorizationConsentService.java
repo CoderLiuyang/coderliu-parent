@@ -1,11 +1,11 @@
 package cn.coderliu.component;
 
+import jakarta.annotation.Resource;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationConsent;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationConsentService;
 import org.springframework.util.Assert;
 
-import javax.annotation.Resource;
 import java.util.concurrent.TimeUnit;
 
 public class RedisOAuth2AuthorizationConsentService implements OAuth2AuthorizationConsentService {

@@ -33,10 +33,10 @@
             <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
         </dependency>
         <!--鉴权包-->
-        <dependency>
-            <groupId>cn.coderliu</groupId>
-            <artifactId>coderliu-common-security</artifactId>
-        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>cn.coderliu</groupId>-->
+        <!--            <artifactId>coderliu-common-security</artifactId>-->
+        <!--        </dependency>-->
     </dependencies>
 
     <build>

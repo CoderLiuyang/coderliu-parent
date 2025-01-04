@@ -1,5 +1,3 @@
- 
-
 package cn.coderliu.exception;
 
 import lombok.NoArgsConstructor;

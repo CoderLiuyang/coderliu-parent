@@ -1,5 +1,6 @@
 package cn.coderliu.component;
 
+import jakarta.annotation.Resource;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.lang.Nullable;
@@ -12,7 +13,6 @@ import org.springframework.security.oauth2.server.authorization.OAuth2Authorizat
 import org.springframework.security.oauth2.server.authorization.OAuth2TokenType;
 import org.springframework.util.Assert;
 
-import javax.annotation.Resource;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;

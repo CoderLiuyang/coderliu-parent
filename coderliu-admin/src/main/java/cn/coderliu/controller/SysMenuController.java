@@ -6,11 +6,11 @@ import cn.coderliu.model.SysMenu;
 import cn.coderliu.service.SysMenuService;
 import cn.coderliu.utils.SecurityUtils;
 import cn.hutool.core.lang.tree.Tree;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;

@@ -1,10 +1,11 @@
- 
+
 
 package cn.coderliu.aspectj;
 
 import cn.coderliu.annotation.Inner;
 import cn.coderliu.constants.SecurityConstants;
 import cn.hutool.core.util.StrUtil;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -14,8 +15,6 @@ import org.aspectj.lang.annotation.Aspect;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.security.access.AccessDeniedException;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  *
