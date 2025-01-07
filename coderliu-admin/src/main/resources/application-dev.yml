@@ -3,8 +3,8 @@ spring:
     nacos:
       discovery:
         server-addr: localhost:8848
-        username: admin
-        password: admin123
+        username: nacos
+        password: nacos
   application:
     name: coderliu-admin
   datasource:

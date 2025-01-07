@@ -32,7 +32,8 @@ public class RequestGlobalFilter implements GlobalFilter, Ordered {
         ServerHttpRequest request = exchange.getRequest();
         URI URIPath = request.getURI();
         String path = request.getPath().value();
-        String method = request.getMethodValue();
+        //String method = request.getMethodValue();
+        String method = request.getMethod().name();
         HttpHeaders header = request.getHeaders();
         log.info("");
         log.info("***********************************请求开始**********************************");

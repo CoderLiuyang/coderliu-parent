@@ -12,7 +12,7 @@ public class SecurityConstants {
      * 协议字段
      */
     public static String DETAILS_LICENSE = "license";
-    public static String PROJECT_LICENSE = "https://www.qijin.net/";
+    public static String PROJECT_LICENSE = "https://www.coderliu.cn";
 
     /**
      * 客户端ID
@@ -30,7 +30,7 @@ public class SecurityConstants {
      * {bcrypt} 加密的特征码
      */
     public static String BCRYPT = "{bcrypt}";
-    
+
 
     /**
      * {noop} 加密的特征码

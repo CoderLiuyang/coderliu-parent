@@ -26,9 +26,8 @@ public class ResourceServerConfiguration {
 
     private final OpaqueTokenIntrospector customOpaqueTokenIntrospector;
 
-    @Bean
-    @Order(Ordered.HIGHEST_PRECEDENCE)
-//    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
+    //    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 //
 //        http.authorizeRequests(authorizeRequests -> authorizeRequests
 //                        .antMatchers(ArrayUtil.toArray(permitAllUrl.getUrls(), String.class))
@@ -42,6 +41,8 @@ public class ResourceServerConfiguration {
 //
 //        return http.build();
 //    }
+    @Bean
+    @Order(Ordered.HIGHEST_PRECEDENCE)
     SecurityFilterChain resourceServer(HttpSecurity http) throws Exception {
         AntPathRequestMatcher[] permitMatchers = permitAllUrl.getUrls()
                 .stream()
@@ -59,7 +60,6 @@ public class ResourceServerConfiguration {
                                 .bearerTokenResolver(customBearerTokenExtractor))
                 .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
                 .csrf(AbstractHttpConfigurer::disable);
-
         return http.build();
     }
 }

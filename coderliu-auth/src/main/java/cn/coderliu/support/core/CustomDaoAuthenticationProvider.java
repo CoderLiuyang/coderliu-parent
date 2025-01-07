@@ -94,9 +94,13 @@ public class CustomDaoAuthenticationProvider extends AbstractUserDetailsAuthenti
         HttpServletRequest request = WebUtils.getRequest().orElseThrow(
                 (Supplier<Throwable>) () -> new InternalAuthenticationServiceException("web request is empty"));
 
-        Map<String, String> paramMap = ServletUtil.getParamMap(request);
-        String grantType = paramMap.get(OAuth2ParameterNames.GRANT_TYPE);
-        String clientId = paramMap.get(OAuth2ParameterNames.CLIENT_ID);
+        //  Map<String, String> paramMap = ServletUtil.getParamMap(request);
+        //  String grantType = paramMap.get(OAuth2ParameterNames.GRANT_TYPE);
+        //  String clientId = paramMap.get(OAuth2ParameterNames.CLIENT_ID);
+
+        String grantType = WebUtils.getRequest().get().getParameter(OAuth2ParameterNames.GRANT_TYPE);
+        String clientId = WebUtils.getRequest().get().getParameter(OAuth2ParameterNames.CLIENT_ID);
+
 
         if (StrUtil.isBlank(clientId)) {
             clientId = basicConvert.convert(request).getName();

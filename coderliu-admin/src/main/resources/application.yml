@@ -4,4 +4,4 @@ spring:
   profiles:
     active: dev
 server:
-  port: 10050
+  port: 10060

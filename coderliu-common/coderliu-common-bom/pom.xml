@@ -16,7 +16,7 @@
         <dynamic-ds.version>3.6.1</dynamic-ds.version>
         <fastjson.version>1.2.83</fastjson.version>
         <hutool.version>5.8.18</hutool.version>
-        <authorization-server.version>0.4.0</authorization-server.version>
+        <authorization-server.version>1.4.1</authorization-server.version>
         <activiti.version>7.1.0-M17</activiti.version>
         <jasypt.version>3.0.5</jasypt.version>
         <mysql.version>8.0.32</mysql.version>

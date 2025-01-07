@@ -9,6 +9,7 @@ import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferFactory;
 import org.springframework.core.io.buffer.DataBufferUtils;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.http.server.reactive.ServerHttpResponseDecorator;
 import org.springframework.stereotype.Component;
@@ -29,9 +30,8 @@ public class ResponseGlobalFilter implements GlobalFilter, Ordered {
             ServerHttpResponse originalResponse = exchange.getResponse();
             DataBufferFactory bufferFactory = originalResponse.bufferFactory();
 
-            HttpStatus statusCode = originalResponse.getStatusCode();
-
-            if(statusCode == HttpStatus.OK){
+            HttpStatusCode statusCode = originalResponse.getStatusCode();
+            if (statusCode == HttpStatus.OK) {
                 ServerHttpResponseDecorator decoratedResponse = new ServerHttpResponseDecorator(originalResponse) {
 
                     @Override
@@ -65,7 +65,7 @@ public class ResponseGlobalFilter implements GlobalFilter, Ordered {
                 return chain.filter(exchange.mutate().response(decoratedResponse).build());
             }
             return chain.filter(exchange);//降级处理返回数据
-        }catch (Exception e){
+        } catch (Exception e) {
             log.error("gateway log exception.\n" + e);
             return chain.filter(exchange);
         }
