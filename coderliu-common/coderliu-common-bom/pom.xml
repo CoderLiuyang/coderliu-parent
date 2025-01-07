@@ -22,7 +22,7 @@
         <mysql.version>8.0.32</mysql.version>
         <flowable.version>6.8.0</flowable.version>
         <aviator.version>5.3.3</aviator.version>
-        <minio.version>8.4.3</minio.version>
+        <minio.version>8.5.11</minio.version>
     </properties>
 
 
@@ -84,13 +84,13 @@
                 <version>${fastjson.version}</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/com.baomidou/mybatis-plus-boot-starter -->
-<!--            <dependency>-->
-<!--                <groupId>com.baomidou</groupId>-->
-<!--                <artifactId>mybatis-plus-boot-starter</artifactId>-->
-<!--                <version>${mybatis-plus.version}</version>-->
-<!--            </dependency>-->
-             <!-- orm 模块-->
-             <!--orm 相关-->
+            <!--            <dependency>-->
+            <!--                <groupId>com.baomidou</groupId>-->
+            <!--                <artifactId>mybatis-plus-boot-starter</artifactId>-->
+            <!--                <version>${mybatis-plus.version}</version>-->
+            <!--            </dependency>-->
+            <!-- orm 模块-->
+            <!--orm 相关-->
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-bom</artifactId>
@@ -99,17 +99,17 @@
                 <scope>import</scope>
             </dependency>
 
-<!--            <dependency>-->
-<!--                <groupId>com.baomidou</groupId>-->
-<!--                <artifactId>mybatis-plus-generator</artifactId>-->
-<!--                <version>${mybatis-plus.version}</version>-->
-<!--            </dependency>-->
+            <!--            <dependency>-->
+            <!--                <groupId>com.baomidou</groupId>-->
+            <!--                <artifactId>mybatis-plus-generator</artifactId>-->
+            <!--                <version>${mybatis-plus.version}</version>-->
+            <!--            </dependency>-->
             <!-- https://mvnrepository.com/artifact/com.github.jsqlparser/jsqlparser -->
-<!--            <dependency>-->
-<!--                <groupId>com.github.jsqlparser</groupId>-->
-<!--                <artifactId>jsqlparser</artifactId>-->
-<!--                <version>${jsqlparser.version}</version>-->
-<!--            </dependency>-->
+            <!--            <dependency>-->
+            <!--                <groupId>com.github.jsqlparser</groupId>-->
+            <!--                <artifactId>jsqlparser</artifactId>-->
+            <!--                <version>${jsqlparser.version}</version>-->
+            <!--            </dependency>-->
 
             <!-- https://mvnrepository.com/artifact/com.baomidou/dynamic-datasource-spring-boot-starter -->
             <dependency>
@@ -147,7 +147,7 @@
             <dependency>
                 <groupId>io.minio</groupId>
                 <artifactId>minio</artifactId>
-                <version>${minio.version}</version>
+                <version>8.5.14</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
